@@ -56,8 +56,8 @@ canvas {
 
 .logo__header {
     color:rgb(0, 0, 0);
-    font-family: 'Roboto Mono';
-    font-size:90px;
+    font-family: 'PT Mono', monospace;
+    font-size: 80px;
     font-weight: 400;
     margin-left: 75px;
 }
@@ -69,7 +69,7 @@ canvas {
 }
 
 .logo__subtitle {
-    font-family: 'Roboto Mono';
+    font-family: 'PT Mono', monospace;
     font-size: 40px;
     color:gray;
     margin-left: 75px;
@@ -253,7 +253,7 @@ canvas {
 .text--copy {
     width: 50%;
     font-size: 40px;
-    font-family: 'Ubuntu Condensed', sans-serif;
+    font-family: 'PT Mono', monospace;
 }
 
 .text--kenny {
