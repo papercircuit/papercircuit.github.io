@@ -1,7 +1,7 @@
 * {
     box-sizing: border-box;
     margin: 0;
-    background-color: #101010;
+    background-color: #ffffff;
 }
 
 .wrapper {
@@ -39,7 +39,7 @@
 }
 
 .logo__header {
-    color:whitesmoke;
+    color:rgb(0, 0, 0);
     font-family: 'Roboto Mono';
     font-size:90px;
     font-weight: 400;
@@ -221,8 +221,8 @@
     display: flex;
     justify-content: flex-end;
     align-items: center;
-    color: whitesmoke;
-    background-color: #101010;
+    color: rgb(0, 0, 0);
+    background-color: #ffffff;
     animation-delay: 1s;
     animation-duration: 3s;
     padding: 50px;
