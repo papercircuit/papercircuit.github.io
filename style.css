@@ -64,7 +64,7 @@ canvas {
 
 .logo__header:before {
     position: absolute;
-    content: ">";
+    content: "/";
     left: 50px;
 }
 
