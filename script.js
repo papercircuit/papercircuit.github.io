@@ -1,8 +1,8 @@
 const projectsContainer = document.querySelector('.projects-container');
-const jeffContainer = document.querySelector('.jeff-container');
+const kennyContainer = document.querySelector('.kenny-container');
 const textContainer = document.querySelector('.text-container');
 const reveal = document.querySelector('.text--reveal');
-const jeff = document.querySelector('.text--kenny');
+const kenny = document.querySelector('.text--kenny');
 const cursor = document.querySelector('.name__cursor');
 const project = document.querySelector('.project');
 
@@ -19,12 +19,12 @@ reveal.onclick = function(){
     open = !open;
 }
 
-jeff.onclick = function(){
-    jeffContainer.classList.remove('move-left');
-    jeffContainer.classList.add('move-right');
+kenny.onclick = function(){
+    kennyContainer.classList.remove('move-left');
+    kennyContainer.classList.add('move-right');
     setTimeout(function(){
-        jeffContainer.classList.add('move-left');
-        jeffContainer.classList.remove('move-right');
+        kennyContainer.classList.add('move-left');
+        kennyContainer.classList.remove('move-right');
     },2000);
 }
 
