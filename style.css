@@ -14,6 +14,7 @@ canvas {
     top: 0;
     left:0;
     z-index: -1;
+    pointer-events: none;
 }
 
 .wrapper {
@@ -266,12 +267,10 @@ canvas {
     text-decoration: underline;
     text-decoration-color: tomato;
     -webkit-text-decoration-color: tomato;
-    
 }
 
 .text--kenny:hover {
     color: gray;
-    
 }
 
 .text--reveal {
@@ -279,12 +278,10 @@ canvas {
     text-decoration: underline;
     text-decoration-color: orange;
     -webkit-text-decoration-color: orange;
-    
+}
 
 .text--reveal:hover {
     color: gray;
-    
-    
 }
 
 .text--together {
