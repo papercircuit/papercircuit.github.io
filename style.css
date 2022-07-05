@@ -136,7 +136,7 @@ canvas {
     align-items: center;
     justify-content: center;
     text-align: center;
-    background-color: whitesmoke;
+    background-color: rgb(128, 15, 15);
     font-size: 35px;
     font-family: 'Ubuntu Condensed', sans-serif;
     color: transparent;
@@ -149,6 +149,7 @@ canvas {
     -moz-transition: all .3s;
     -ms-transition: all .3s;
     -o-transition: all .3s;
+    z-index: 1;
 }
 
 .project span {
