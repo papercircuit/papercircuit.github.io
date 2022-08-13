@@ -51,29 +51,29 @@ header {
 
 }
 
-.main-nav li a {
-  text-decoration: none;
-  padding: 10px;
-  display: block;
-}
+
 
 .main-nav li {
   flex: 1;
   list-style: none;
   border: 0px solid hsla(59, 94%, 57%, 1);
   padding: .5em 2em 0 2em;
-  transition: all .2s ease-out;
+  transition: all .5s ease-out;
   height: 3em;
   text-align: center;
- 
 }
 
-.main-nav li:hover {
+.main-nav li a {
+  text-decoration: none;
+  padding: 10px;
+  display: block;
+}
+
+.main-nav li a:hover {
   flex: 1;
   list-style: none;
-  border: 3px solid rgba(175, 72, 193, 0.815);
-  border-top: none;
-  padding: .5em 2em 0 .5em;
+  color: rgba(175, 72, 193, 0.815);
+  border-bottom: 3px solid rgba(175, 72, 193, 0.815);
   transition: all .5s ease;
   height: 3em;
 }
@@ -81,6 +81,7 @@ header {
 
 /* ----- MAIN ----- */
 main {
+  margin: 1em;
   min-height: 1080px;
   color: white;
   display: flex;
@@ -120,26 +121,20 @@ main {
 /* ----- COFFEE -----  */
 
 .coffee-container {
-  width: 100%;
   position: relative;
+  padding-top: 1em;
+  width: 100%;
   min-width: 20em;
   min-height: 45em;
+
 }
 
 .coffee-text-container {
-  position: relative;
-  text-decoration: none;
   text-align: left;
-  height: 100%;
-  width: 100%;
   margin: 4em;
-  top: 7em;
-  left: 1em;
 }
 
 .coffee-container a {
-  position: relative;
-  top: -1em;
   text-decoration: none;
   display: flex;
   justify-content: center;
@@ -170,7 +165,7 @@ footer {
   position: relative;
   justify-content: flex-end;
 
-  
+
   height: 4em;
   width: 100%;
   text-align: center;
@@ -181,6 +176,24 @@ footer {
 /* ----- MEDIA RULES ----- */
 
 @media (max-width: 500px) {
+  .nav-list {
+    display: block;
+  }
+
+  .name-logo {
+    font-size: 2.2em;
+    padding: .2em;
+    top: 1em;
+   
+    border-radius: .4em;
+    transform: rotate(-10deg);
+  }
+
+  .coffee-container {
+    padding: 1em;
+    position: relative;
+  }
+
   .material-icons.md-48 {
     font-size: 17em;
     color: rgba(248, 245, 42, 0.242);
@@ -191,27 +204,4 @@ footer {
     color: rgba(175, 72, 193, 0.815);
     transition: all 1s ease;
   }
-
-  .nav-list {
-    display: block;
-  }
-
-  .coffee-container {
-    padding: 1em;
-    position: relative;
-  }
-
-  .name-logo {
-    font-size: 2em;
-    padding: .2em;
-    display: flex;
-    position: absolute;
-    top: 1em;
-    margin: auto;
-    border-bottom: .7em groove hsla(59, 94%, 57%, 1);
-    border-radius: .3em;
-    transform: rotate(-10deg);
-    z-index: 3;
-  }
 }
-
