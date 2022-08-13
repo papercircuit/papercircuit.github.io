@@ -36,7 +36,7 @@ CSS HSL
 }
 
 .port-title {
-  
+
   position: relative;
   left: 1.6em;
   top: 1em;
@@ -45,10 +45,10 @@ CSS HSL
 .port-text-wrapper {
   width: 80vw;
 
-  margin: auto;
+  margin: 1em;
   position: relative;
   display: block;
-  top: 4em;
+  top: 6em;
 }
 
 .port-text {
