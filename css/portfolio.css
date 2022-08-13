@@ -11,10 +11,9 @@ CSS HSL
 .port-wrapper {
   position: relative;
   top: 12em;
-  width: 90vw;
-  height: 100vh;
   background: rgba(199, 113, 214, 0.588);
-  margin: auto;
+  margin-left: auto;
+  margin-right: auto;
   z-index: 1;
   border-radius: 70px;
 }
@@ -36,8 +35,11 @@ CSS HSL
   top: 2em;
 }
 
-.port-title {
-  top: -5em;
+.port-title h2 {
+  position: relative;
+  top: 5em;
+  left: 5em;
+  text-decoration: underline;
 }
 
 .port-text-wrapper {

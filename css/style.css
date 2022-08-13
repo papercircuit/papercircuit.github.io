@@ -5,7 +5,7 @@ CSS HSL
 --maximum-yellow: hsla(59, 94%, 57%, 1);
 --gold-fusion: hsla(45, 16%, 39%, 1);
 --dodger-blue: hsla(206, 88%, 55%, 1); 
---purple: rgba(175, 72, 193, 0.815)
+--purple: rgba(175, 72, 193, 0.815);
 */
 
 * {
@@ -17,8 +17,7 @@ CSS HSL
 
 body {
   display: flex;
-  min-height: 1000px;
-  min-width: 375px;
+  min-width: 300px;
   flex-direction: column;
   background: rgb(30, 138, 216);
   font-family: 'Source Code Pro', monospace;
@@ -29,13 +28,11 @@ body a {
   color: hsla(59, 94%, 57%, 1);
 }
 
-
 main {
-  min-height: 100%;
-  display: flex;
+  min-height: 1000px;
+  height: 100%;
   flex-direction: column;
   justify-content: center;
-
 }
 
 /* ----- NAV HEADER ----- */
@@ -44,7 +41,7 @@ header {
   height: 4em;
 }
 
-.horizontal.nav-list {
+.nav-list {
   display: flex;
   flex-direction: row;
   flex-grow: 1;
@@ -53,7 +50,7 @@ header {
 
 }
 
-.main-nav a {
+.main-nav li a {
   text-decoration: none;
   padding: 10px;
   display: block;
@@ -63,11 +60,11 @@ header {
   flex: 1;
   list-style: none;
   border: 0px solid hsla(59, 94%, 57%, 1);
-  padding: .5em 2em 0 .5em;
+  padding: .5em 2em 0 2em;
   transition: all .2s ease-out;
   height: 3em;
   text-align: center;
-  justify-content: center;
+ 
 }
 
 .main-nav li:hover {
@@ -83,7 +80,9 @@ header {
 
 /* ----- MAIN ----- */
 main {
+  color: white;
   display: flex;
+  justify-content: flex-start;
   align-items: center;
   position: relative;
   height: 100%;
@@ -92,19 +91,17 @@ main {
 /* ----- NAME LOGO -----*/
 
 .name-logo {
+  max-width: 400px;
   min-width: 200px;
   font-size: 3em;
   white-space: nowrap;
   padding: .5em;
   display: flex;
   position: relative;
-  top: 1em;
-  margin: auto;
   color: white;
   border-bottom: .7em groove hsla(59, 94%, 57%, 1);
   border-radius: .3em;
   transform: rotate(-6deg);
-  z-index: 100;
   transition: all .8s ease-out;
 }
 
@@ -148,7 +145,7 @@ main {
 
 .material-icons.md-48 {
   font-size: 30em;
-  color: hsla(59, 94%, 57%, .1);
+  color: rgba(248, 245, 42, 0.242);
   border: 0;
   transition: all 1s ease-out;
   margin: auto;
@@ -157,8 +154,8 @@ main {
 .material-icons.md-48:hover {
   margin: auto;
   font-size: 31em;
-  color: hsla(59, 94%, 57%, 1);
-  transition: all 1s ease;
+  color: rgba(175, 72, 193, 0.815);
+  transition: all 2s ease;
 }
 
 
@@ -168,12 +165,11 @@ footer {
   border-top: .7em groove hsla(59, 94%, 57%, 1);
   position: relative;
   justify-content: end;
-  margin-bottom: 1em;
+
   padding: 2em;
   height: 3em;
   width: 100%;
   text-align: center;
-
   bottom: 0;
   left: 0;
 }
@@ -192,7 +188,7 @@ footer {
     transition: all 1s ease;
   }
 
-  .horizontal.nav-list {
+  .nav-list {
     display: block;
   }
 
@@ -207,7 +203,7 @@ footer {
     padding: .2em;
     display: flex;
     position: absolute;
-    top: 3em;
+    top: 4em;
     margin: auto;
     border-bottom: .7em groove hsla(59, 94%, 57%, 1);
     border-radius: .3em;
@@ -215,3 +211,4 @@ footer {
     z-index: 3;
   }
 }
+
