@@ -10,6 +10,7 @@ CSS HSL
 
 
 .about-wrapper {
+    height: 100%;
     position: relative;
     top: 12em;
     min-width: 30em;

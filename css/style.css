@@ -16,10 +16,11 @@ CSS HSL
 }
 
 body {
+  height: auto;
   display: flex;
   min-width: 300px;
   flex-direction: column;
-  background: rgb(66, 21, 129);
+  background: rgba(0, 129, 210, 0.925);
   font-family: 'Source Code Pro', monospace;
   color: hsla(59, 94%, 57%, 1);
 }
@@ -29,7 +30,7 @@ body a {
 }
 
 main {
-  min-height: 1000px;
+  min-height: 35em;
   height: 100%;
   flex-direction: column;
   justify-content: center;
@@ -38,7 +39,7 @@ main {
 /* ----- NAV HEADER ----- */
 
 header {
-  height: 4em;
+  height: 100%;
 }
 
 .nav-list {
@@ -85,7 +86,6 @@ main {
   justify-content: flex-start;
   align-items: center;
   position: relative;
-  height: 100%;
 }
 
 /* ----- NAME LOGO -----*/
@@ -96,7 +96,6 @@ main {
   font-size: 3em;
   white-space: nowrap;
   padding: .5em;
-  display: flex;
   position: relative;
   color: rgb(250, 248, 140);
   border-bottom: .7em groove hsla(206, 88%, 55%, 1);
@@ -109,6 +108,10 @@ main {
 .name-logo:hover {
   transition: all 1s ease;
   border-bottom: .8em groove rgba(175, 72, 193, 0.815);
+}
+
+.name-logo a {
+  display: block;
 }
 
 /* ----- COFFEE -----  */
@@ -180,12 +183,12 @@ footer {
 @media (max-width: 500px) {
   .material-icons.md-48 {
     font-size: 15em;
-    color: rgb(248, 245, 42);
+    color: rgba(248, 245, 42, 0.242);
   }
 
   .material-icons.md-48:hover {
     font-size: 18em;
-    color: hsla(59, 94%, 57%, 1);
+    color: rgba(175, 72, 193, 0.815);
     transition: all 1s ease;
   }
 
@@ -200,11 +203,11 @@ footer {
   }
 
   .name-logo {
-    font-size: 1.5em;
+    font-size: 2em;
     padding: .2em;
     display: flex;
     position: absolute;
-    top: 4em;
+    top: 1em;
     margin: auto;
     border-bottom: .7em groove hsla(59, 94%, 57%, 1);
     border-radius: .3em;
