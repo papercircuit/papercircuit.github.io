@@ -32,8 +32,11 @@ main {
   min-height: 56em;
   height: 100%;
   flex-direction: column;
-
   justify-content: center;
+}
+
+main p {
+  font-size: .9em;
 }
 
 /* ----- NAV HEADER ----- */
@@ -91,13 +94,14 @@ main {
   white-space: nowrap;
   padding: .5em;
   position: relative;
-  color: rgb(250, 248, 140);
+  color: white;
   border-bottom: .7em groove hsla(206, 88%, 55%, 1);
   border-radius: .3em;
-  text-shadow: 2px 2px #ff0000;
+ 
   text-align: center;
   transform: rotate(-6deg);
   transition: all .8s ease-out;
+  margin-bottom: 1em;
 }
 
 .name-logo:hover {
@@ -108,6 +112,7 @@ main {
 .name-logo a {
   display: block;
   text-decoration: none;
+  color: white;
 }
 
 /* ----- COFFEE -----  */
@@ -145,7 +150,7 @@ main {
 .material-icons.md-48:hover {
   margin: auto;
   font-size: 31em;
-  color: rgba(175, 72, 193, 0.815);
+  color: rgb(70, 31, 2);
   transition: all 2s ease;
 }
 
