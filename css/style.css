@@ -38,20 +38,13 @@ main {
 
 /* ----- NAV HEADER ----- */
 
-header {
-  height: 100%;
-}
-
 .nav-list {
+  padding-bottom: .7em;
   display: flex;
   flex-direction: row;
-  flex-grow: 1;
   align-items: stretch;
-  width: 100%;
-
+  border-bottom: .3em groove hsla(206, 88%, 55%, 1);
 }
-
-
 
 .main-nav li {
   flex: 1;
