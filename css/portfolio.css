@@ -35,11 +35,11 @@ CSS HSL
   top: 2em;
 }
 
-.port-title h2 {
+.port-title {
+  
   position: relative;
-  top: 5em;
-  left: 5em;
-  text-decoration: underline;
+  left: 1.6em;
+  top: 1em;
 }
 
 .port-text-wrapper {
@@ -55,4 +55,10 @@ CSS HSL
   color: white;
   overflow-wrap: break-word;
   /* https://developer.mozilla.org/en-US/docs/Web/CSS/CSS_Text/Wrapping_Text */
+}  
+
+@media (max-width: 500px) {
+  .port-wrapper {
+    min-height: 500px;
+  }
 }

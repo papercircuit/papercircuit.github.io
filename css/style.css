@@ -19,7 +19,7 @@ body {
   display: flex;
   min-width: 300px;
   flex-direction: column;
-  background: rgb(30, 138, 216);
+  background: rgb(66, 21, 129);
   font-family: 'Source Code Pro', monospace;
   color: hsla(59, 94%, 57%, 1);
 }
@@ -98,9 +98,10 @@ main {
   padding: .5em;
   display: flex;
   position: relative;
-  color: white;
-  border-bottom: .7em groove hsla(59, 94%, 57%, 1);
+  color: rgb(250, 248, 140);
+  border-bottom: .7em groove hsla(206, 88%, 55%, 1);
   border-radius: .3em;
+  text-shadow: 2px 2px #ff0000;
   transform: rotate(-6deg);
   transition: all .8s ease-out;
 }
@@ -162,7 +163,7 @@ main {
 /* ----- FOOTER ----- */
 
 footer {
-  border-top: .7em groove hsla(59, 94%, 57%, 1);
+  border-top: .7em groove hsla(206, 88%, 55%, 1);
   position: relative;
   justify-content: end;
 
