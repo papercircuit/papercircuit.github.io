@@ -13,7 +13,8 @@ CSS HSL
   min-width: 280px;
   max-width: 500px;
   top: 12em;
-  background: rgba(199, 113, 214, 0.588);
+  background: rgba(199, 113, 214, 0.402);
+  border: 1px solid rgb(199, 113, 214);
   margin: 2em auto;
   z-index: 1;
   border-radius: 70px;
@@ -27,6 +28,7 @@ CSS HSL
   width: 300px;
   z-index: 3;
   border-radius: 10px;
+  border: 1px solid rgb(199, 113, 214);
   /* Credit to https://shadows.brumm.af/ for this layered box shadow  */
   box-shadow:
     1.8px 1.7px 0.4px -10px rgba(0, 0, 0, 0.067),
