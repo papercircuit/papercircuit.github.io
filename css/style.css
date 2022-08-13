@@ -16,7 +16,6 @@ CSS HSL
 }
 
 body {
-  height: auto;
   display: flex;
   min-width: 300px;
   flex-direction: column;
@@ -30,9 +29,10 @@ body a {
 }
 
 main {
-  min-height: 35em;
+  min-height: 56em;
   height: 100%;
   flex-direction: column;
+
   justify-content: center;
 }
 

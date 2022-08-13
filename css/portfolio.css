@@ -9,13 +9,15 @@ CSS HSL
 */
 
 .port-wrapper {
-  position: relative;
+  min-height: 700px;
+  min-width: 280px;
+  max-width: 500px;
   top: 12em;
   background: rgba(199, 113, 214, 0.588);
-  margin-left: auto;
-  margin-right: auto;
+  margin: 2em auto;
   z-index: 1;
   border-radius: 70px;
+  padding: 1.5em;
 }
 
 .port-img {
@@ -36,17 +38,14 @@ CSS HSL
 }
 
 .port-title {
-
-  position: relative;
   left: 1.6em;
   top: 1em;
 }
 
 .port-text-wrapper {
   width: 80vw;
-
+  flex-direction: row;
   margin: 1em;
-  position: relative;
   display: block;
   top: 6em;
 }
@@ -57,8 +56,3 @@ CSS HSL
   /* https://developer.mozilla.org/en-US/docs/Web/CSS/CSS_Text/Wrapping_Text */
 }  
 
-@media (max-width: 500px) {
-  .port-wrapper {
-    min-height: 500px;
-  }
-}
