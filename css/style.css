@@ -93,9 +93,8 @@ main {
 /* ----- NAME LOGO -----*/
 
 .name-logo {
-  max-width: 400px;
   min-width: 200px;
-  font-size: 3em;
+  font-size: 4em;
   white-space: nowrap;
   padding: .5em;
   position: relative;
