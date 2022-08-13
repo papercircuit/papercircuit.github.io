@@ -81,6 +81,7 @@ header {
 
 /* ----- MAIN ----- */
 main {
+  min-height: 1080px;
   color: white;
   display: flex;
   justify-content: flex-start;
@@ -101,6 +102,7 @@ main {
   border-bottom: .7em groove hsla(206, 88%, 55%, 1);
   border-radius: .3em;
   text-shadow: 2px 2px #ff0000;
+  text-align: center;
   transform: rotate(-6deg);
   transition: all .8s ease-out;
 }
@@ -112,6 +114,7 @@ main {
 
 .name-logo a {
   display: block;
+  text-decoration: none;
 }
 
 /* ----- COFFEE -----  */
@@ -119,17 +122,14 @@ main {
 .coffee-container {
   width: 100%;
   position: relative;
-  top: 4em;
-  min-width: 30em;
+  min-width: 20em;
   min-height: 45em;
-  padding-right: 4em;
-
 }
 
 .coffee-text-container {
   position: relative;
   text-decoration: none;
-  text-align: center;
+  text-align: left;
   height: 100%;
   width: 100%;
   margin: 4em;
@@ -168,7 +168,7 @@ main {
 footer {
   border-top: .7em groove hsla(206, 88%, 55%, 1);
   position: relative;
-  justify-content: end;
+  justify-content: flex-end;
 
   padding: 2em;
   height: 3em;
@@ -182,7 +182,7 @@ footer {
 
 @media (max-width: 500px) {
   .material-icons.md-48 {
-    font-size: 15em;
+    font-size: 17em;
     color: rgba(248, 245, 42, 0.242);
   }
 
@@ -197,9 +197,8 @@ footer {
   }
 
   .coffee-container {
-    width: 100%;
+    padding: 1em;
     position: relative;
-    top: 10em;
   }
 
   .name-logo {
