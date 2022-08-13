@@ -90,6 +90,7 @@ main {
 
 .name-logo {
   min-width: 200px;
+  font-weight: 400;
   font-size: 4em;
   white-space: nowrap;
   padding: .5em;
@@ -113,6 +114,11 @@ main {
   display: block;
   text-decoration: none;
   color: white;
+}
+
+.sub-heading {
+  margin-top: 2em;
+  font-weight: 100;
 }
 
 /* ----- COFFEE -----  */
@@ -150,7 +156,7 @@ main {
 .material-icons.md-48:hover {
   margin: auto;
   font-size: 31em;
-  color: rgb(70, 31, 2);
+  color: rgb(54, 24, 2);
   transition: all 2s ease;
 }
 
@@ -198,7 +204,7 @@ footer {
 
   .material-icons.md-48:hover {
     font-size: 18em;
-    color: rgba(175, 72, 193, 0.815);
+    color: rgb(54, 24, 2);
     transition: all 1s ease;
   }
 }
