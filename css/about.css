@@ -10,10 +10,10 @@ CSS HSL
 
 
 .about-wrapper {
-    height: 100%;
-    position: relative;
-    top: 12em;
+    min-height: 500px;
     min-width: 30em;
+    position: relative;
+    top: 2em;
     background: rgba(175, 72, 193, 0.815);
     z-index: 1;
     border-radius: 70px;
@@ -49,7 +49,7 @@ CSS HSL
         20.6px 19.8px 4.5px -10px rgba(0, 0, 0, 0.163),
         36.1px 34.7px 7.9px -10px rgba(0, 0, 0, 0.193),
         78px 75px 17px -10px rgba(0, 0, 0, 0.26);
-        
+
     transform: rotate(5deg);
     z-index: 2;
 }
