@@ -2,14 +2,12 @@
 Colors from coolors.co 
 
 CSS HSL 
---maximum-yellow: hsla(59, 94%, 57%, 1);
---gold-fusion: hsla(45, 16%, 39%, 1);
 --dodger-blue: hsla(206, 88%, 55%, 1); 
 --purple: rgba(175, 72, 193, 0.815)
 */
 
 .port-wrapper {
-  
+
   height: fit-content;
   min-width: 280px;
   max-width: 500px;
@@ -45,7 +43,7 @@ CSS HSL
 }
 
 .port-text-wrapper {
-  
+
   flex-direction: row;
   margin: 1em;
   margin-top: 4em;
@@ -62,6 +60,7 @@ CSS HSL
   .port-wrapper {
     margin-top: 5em;
   }
+
   .port-text-wrapper {
     margin-top: 4em;
   }

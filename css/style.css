@@ -2,8 +2,6 @@
 Colors from coolors.co 
 
 CSS HSL 
---maximum-yellow: hsla(59, 94%, 57%, 1);
---gold-fusion: hsla(45, 16%, 39%, 1);
 --dodger-blue: hsla(206, 88%, 55%, 1); 
 --purple: rgba(175, 72, 193, 0.815);
 */
@@ -98,7 +96,7 @@ main {
   color: white;
   border-bottom: .7em groove hsla(206, 88%, 55%, 1);
   border-radius: .3em;
- 
+
   text-align: center;
   transform: rotate(-6deg);
   transition: all .8s ease-out;

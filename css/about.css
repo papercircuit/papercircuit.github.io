@@ -2,8 +2,6 @@
 Colors from coolors.co 
 
 CSS HSL 
---maximum-yellow: hsla(59, 94%, 57%, 1);
---gold-fusion: hsla(45, 16%, 39%, 1);
 --dodger-blue: hsla(206, 88%, 55%, 1); 
 --purple: rgba(175, 72, 193, 0.815)
 */
@@ -48,7 +46,8 @@ CSS HSL
     display: block;
     margin: auto;
     width: 26em;
-    transform: rotate(-5deg);/* Rotate image back to compensate for parent rotation */
+    transform: rotate(-5deg);
+    /* Rotate image back to compensate for parent rotation */
     z-index: 3;
     border-radius: 7px;
     border: 2px solid rgba(255, 255, 255, 0.319);
