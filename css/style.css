@@ -30,7 +30,7 @@ body a {
 
 main {
   min-height: 56em;
-  height: 100%;
+  height: fit-content;
   flex-direction: column;
   justify-content: center;
 }
