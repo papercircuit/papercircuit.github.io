@@ -143,7 +143,7 @@ main {
 }
 
 
-
+Material Icons from goo
 .material-icons.md-48 {
   font-size: 30em;
   color: rgba(248, 245, 42, 0.242);
@@ -164,15 +164,7 @@ main {
 
 footer {
   border-top: .7em groove hsla(206, 88%, 55%, 1);
-  position: relative;
-  justify-content: flex-end;
-
-
-  height: 4em;
-  width: 100%;
   text-align: center;
-  bottom: 0;
-  left: 0;
 }
 
 /* ----- MEDIA RULES ----- */
