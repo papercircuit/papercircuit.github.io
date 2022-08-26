@@ -1,0 +1,74 @@
+* {
+    box-sizing: border-box;
+    text-align: center;
+}
+
+body {
+
+}
+
+.wrapper {
+    margin: 12em;
+    padding: 2em;
+    border: 2px solid black;
+    border-radius: 5%;
+    box-shadow: 5px 10px 5px;
+    width: 25em;
+}
+
+.count {
+    box-sizing: border-box;
+    border: 1px solid black;
+    margin: 50px 30px 40px 30px;
+    
+}
+
+.title {
+    font-family: 'Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif;
+}
+
+.subtitle {
+    text-decoration-line: underline;
+}
+
+.guess-input {
+
+}
+
+.guess-button {
+
+}
+
+.feedback {
+
+}
+
+.guess-list {
+
+}
+ 
+.counter-title {
+
+}
+
+.reset-button {
+    
+}
+
+.you-lose{
+    /* width: 200px;
+    height: 200px; */
+    /* visibility: hidden; */
+    background-image: url(baldman.png);
+}
+
+/* Material Icons */
+
+
+.material-symbols-outlined {
+  font-variation-settings:
+  'FILL' 1,
+  'wght' 700,
+  'GRAD' 0,
+  'opsz' 48
+}

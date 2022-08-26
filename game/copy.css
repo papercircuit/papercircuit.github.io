@@ -1,0 +1,141 @@
+body {
+    font-family:'Poppins', sans-serif;;
+    font-weight: bold;
+    letter-spacing: 2px;
+    margin-top: 45px;
+    color: white;
+  
+  }
+  
+  h1 {
+    font-size: 45px;
+  }
+  
+  h3{
+    font-size: 17px;
+    padding-top: 10px;
+  }
+  
+  .overlay{
+     background-color: rgba(0, 0, 0, 0.3);
+     padding-top: 20px;
+  }
+  
+  .center {
+    text-align: center;
+  }
+  
+  ul {
+      list-style: none;
+      padding: 0;
+  }
+  img {
+      display: inline;
+      width: 200px;
+      height: auto;
+  }
+  
+  #copyright {
+    width:auto;
+    max-width:3%;
+    height:auto;
+  }
+  
+  #github {
+    width:auto;
+    max-width:4%;
+    height:auto;
+  }
+  
+  #footer {
+    color: black;
+    width: 100%;
+    border-top: solid 2px white;
+    background-color: white;
+    position: fixed;
+    bottom: 0;
+  }
+  
+  
+  /*****************BUTTONS AND INPUT*************/
+  
+  a:hover {
+    text-decoration: none;
+    color: #4c5b56;
+  }
+  
+  .btn:hover {
+    background-color: #F8F8FF;
+    color: #4c5b56;
+  }
+  
+  .guess {
+    display: inline;
+    font-size: 20px;
+    border: 2px solid white;
+    border-radius: 10%;
+    padding: 5px 15px;
+    margin: 0 10px;
+  }
+  
+  #guesses {
+    margin-bottom: 35px;
+  }
+  
+  #input-parent {
+    width: 160px;
+    margin: 35px auto 50px;
+    position: relative;
+  }
+  
+  #menu-btns {
+    margin-bottom: 30px;
+  }
+  
+  #menu-btns {
+    padding-bottom: 20px;
+  }
+  .my-btn {
+    margin-left: 6px;
+    margin-right: 6px;
+  }
+  
+  #players-input {
+    opacity: .85;
+    color: #4c5b56;
+    border: 2px solid white;
+    border-radius: 50%;
+    width: 145px;
+    height: 145px;
+    font-size: 15px;
+  }
+  
+  #prjname {
+    color: #4c5b56;
+    font-size: 15px;
+    padding-top: 20px;
+    padding-bottom: 20px;
+  }
+  
+  #submit {
+    border-radius: 50%;
+    width: 60px;
+    height: 60px;
+    position: absolute;
+    top: 90px;
+    left: 110px;
+  }
+  
+  .show-option {
+    color: #F8F8FF;
+  }
+  
+  .my-btn,
+  #submit,
+  #players-input,
+  .guess {
+    -webkit-box-shadow: 0px 7px 10px -4px rgba(0,0,0,0.62);
+    -moz-box-shadow: 0px 7px 10px -4px rgba(0,0,0,0.62);
+    box-shadow: 0px 7px 10px -4px rgba(0,0,0,0.62);
+  }
+  
