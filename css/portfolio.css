@@ -9,8 +9,8 @@ CSS HSL
 .port-wrapper {
 
   height: fit-content;
-  min-width: 280px;
-  max-width: 500px;
+  min-width: 600px;
+  max-width: 600px;
   background: rgba(199, 113, 214, 0.402);
   border: 1px solid rgb(199, 113, 214);
   margin: 3em 0;
