@@ -15,6 +15,10 @@ body {
 
 }
 
+img {
+    -webkit-user-drag: none;
+}
+
 .main-wrapper {
     color: antiquewhite;
     display: flex;
