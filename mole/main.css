@@ -1,0 +1,122 @@
+* {
+    font-family: 'Rubik Dirt', cursive
+}
+
+body {
+    height: 100vh;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    position: relative;
+    background-image: url(images/mole-bg.jpeg);
+    background-repeat: no-repeat;
+    background-position: center;
+    background-size: cover;
+
+}
+
+.main-wrapper {
+    color: antiquewhite;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    border: .2em solid rgba(3, 123, 3, 0.298);
+    border-radius: 3em;
+    box-shadow: 0 0 10px #c4e2fb;
+    background-color: rgba(68, 33, 10, 0.756);
+    padding: 1em;
+    min-width: 500px;
+    min-height: 700px;
+}
+
+.main-title {
+    font-size: 3em;
+}
+
+.start-button {
+    border-radius: 1em;
+    font-size: 1.8em;
+    width: 9em;
+}
+
+#countdown {
+    font-size: 1.5em;
+}
+
+.reset-button {
+    border-radius: 1em;
+    width: 6em;
+}
+
+button {
+    background-color: antiquewhite;
+}
+
+th {
+    font-size: 1.3em;
+}
+
+td {
+    background-color: antiquewhite;
+    background-image: url(images/hole.png);
+    background-size: 140%;
+    background-position: center;
+    background-repeat: no-repeat;
+    border: 1px solid;
+    padding: 1em;
+    /* overlow hidden to allow mole to be hidden */
+    overflow: hidden;
+    position: relative;
+    width: 100px;
+    height: 100px;
+    z-index: 0;
+
+}
+
+
+.hole {
+    /* Allow moles to be stacked on top of holes using */
+    position: relative;
+    display: flex;
+    justify-content: center;
+    z-index: 1;
+}
+
+.mole {
+    pointer-events: none;
+    position: absolute;
+    z-index: 2;
+    /* Move mole down to make it invisible initially using transform */
+    transform: translate(0, 100%);
+    transition: all .3s ease-in-out;
+
+}
+
+.mole-up {
+    pointer-events: auto;
+    position: absolute;
+    z-index: 2;
+    /* Move mole down to make it invisible initially using transform */
+    transform: translate(0, -10%);
+    transition: all .7s ease-in-out;
+}
+
+
+.mole-up>img {
+    width: 100px;
+
+}
+
+.mole>img {
+    width: 90px;
+}
+
+/* Material Icons */
+
+.material-symbols-outlined {
+    font-variation-settings:
+        'FILL' 1,
+        'wght' 700,
+        'GRAD' 0,
+        'opsz' 48
+}
