@@ -1,23 +1,24 @@
 const randomNum = Math.floor(Math.random() * 100) + 1;
 const body = document.querySelector("body");
 const button = document.querySelector(".start-button");
-let countdown = document.getElementById("countdown");
-let scoreBoard = document.querySelector(".score-board");
+const countdown = document.getElementById("countdown");
+const scoreBoard = document.querySelector(".score-board");
+
 let timeUp = false;
 let lastMole;
 let score = 0;
 let timeleft = 10;
 
 
-// Get an array of mole elements
+// Get an array of all mole elements
 let moles = document.querySelectorAll(".mole")
-// Get an arry of hole elements
+
+// Get an arry of all hole elements
 const holes = document.querySelectorAll(".hole")
 
 // Set initial states for scoreboard and countdown
 scoreBoard.textContent = score;
 countdown.textContent = timeleft + " seconds remaining";
-
 
 // A function to create a random amount of time that the mole will peep. (in milliseconds)
 function randomTime(min, max) {
@@ -89,8 +90,20 @@ function startGame() {
 function whack() {
     //Increase score by 1 per whack 
     score = score + .5; // <-- NOT AN IDEAL FIX. whack() is running twice per click. .5 twice equals one point.
+
+    // Play sound
+    playSound();
+    // Remove class mole-up to hide mole element
     lastMole.classList.remove('mole-up');
+    // Update scoreboard
     scoreBoard.textContent = score;
+}
+
+// Function to play sounds when whack() is called. Not sure how to get this to work :(
+
+function playSound() {
+    let sound = new Audio('sounds/mole.mp3');
+    sound.play();
 }
 
 // Function to display 10 second countdown on game start
@@ -98,19 +111,28 @@ function whack() {
 function countDown() {
 
     let timer = setInterval(function () {
+
         // Set game over state
         if (timeleft <= 0) {
+
+            // If moles whacked is less than 5, you lose
+            if(score<5){
             clearInterval(timer);
-            countdown.textContent = "Game Over";
-            moleExplosion();
+            countdown.textContent = "Moles win this round.";
+            }
+            // If moles whackd is greater than 5, you win
+            else{
+                clearInterval(timer);
+            countdown.textContent = "You win! Take that moles.";
+            }
             // Set game in progress state
         } else {
             countdown.textContent = timeleft + " seconds remaining";
         }
+
         timeleft -= 1;
     }, 1000);
 }
 
-
-
+// Add eventListener for every available mole element
 moles.forEach(mole => mole.addEventListener('click', whack));
