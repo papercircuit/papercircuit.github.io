@@ -56,6 +56,10 @@ button {
     background-color: antiquewhite;
 }
 
+button:hover {
+    background-color: #FFFFFF;
+}
+
 th {
     font-size: 1.3em;
 }
@@ -93,6 +97,7 @@ td {
     /* Move mole down to make it invisible initially using transform */
     transform: translate(0, 100%);
     transition: all .3s ease-in-out;
+    
 
 }
 
@@ -113,6 +118,11 @@ td {
 
 .mole>img {
     width: 90px;
+}
+
+.mole > img:hover {
+    box-shadow: 0 0 20px #ffffff;
+    border-radius: 100%;
 }
 
 /* Material Icons */

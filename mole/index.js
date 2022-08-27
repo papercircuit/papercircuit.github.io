@@ -20,13 +20,13 @@ const holes = document.querySelectorAll(".hole")
 scoreBoard.textContent = score;
 countdown.textContent = timeleft + " seconds remaining";
 
-// A function to create a random amount of time that the mole will peep. (in milliseconds)
+// Create a random amount of time that the mole will peep. (in milliseconds)
 function randomTime(min, max) {
     return Math.round(Math.random() * (max - min) + min);
 }
 
 
-// A function to choose the random mole that will popUp. Returns a random hole element.
+// Choose the random mole that will popUp. Returns a random hole element.
 
 function randomMole(moles) {
     // Pick a random number beween 0 and length of the holes array. Assign that number to hole.
@@ -41,7 +41,7 @@ function randomMole(moles) {
     return mole;
 }
 
-// A function to make the mole pop from the random hole using the two above functions randomTime and randomHole.
+// Make the mole pop from the random hole using the two above functions randomTime and randomHole.
 
 function popUp() {
     // Assign a random time between to values in milliseconds.
@@ -60,38 +60,31 @@ function popUp() {
     }, time)
 }
 
-
-
-function getTimeLeft(timeout) {
-    return Math.ceil((timeout._idleStart + timeout._idleTimeout - Date.now()) / 1000);
-}
-
-// A function to start the game. Triggered by Let's Whack button.
+// Start the game. Triggered by Let's Whack button.
 
 function startGame() {
-    if (scoreBoard != null) {
-        //Start countdown
-        countDown();
-        scoreBoard.textContent = 0;
-        // Reset timeUp to false.
-        timeUp = false;
-        // Reset score to 0.
-        score = 0;
-        popUp();
-        // Set timeUp to true when time === 10000 (10seconds)
-        setTimeout(() => timeUp = true, 10000)
-        scoreBoard.textContent = score;
 
-    }
+    countDown();
+    // Set scoreboard to 0.
+    scoreBoard.textContent = 0;
+    // Set timeUp to false.
+    timeUp = false;
+    // Set score to 0.
+    score = 0;
+    popUp();
+    // Set timeUp to true when time === 10000 (10seconds)
+    setTimeout(() => timeUp = true, 10000)
+    scoreBoard.textContent = score;
+
 }
 
-// Function to increase score by 1 when mole image is clicked. Then remove the mole-up class to hide mole again.
+// whack() runs when class .mole is clicked.
 
 function whack() {
     //Increase score by 1 per whack 
-    score = score + .5; // <-- NOT AN IDEAL FIX. whack() is running twice per click. .5 twice equals one point.
+    score = score + .5; // <-- NOT AN IDEAL FIX. whack() is running twice per click. (.5 twice equals one point.)
 
-    // Play sound
+    // Play sound. NOT WORKING
     playSound();
     // Remove class mole-up to hide mole element
     lastMole.classList.remove('mole-up');
@@ -116,14 +109,14 @@ function countDown() {
         if (timeleft <= 0) {
 
             // If moles whacked is less than 5, you lose
-            if(score<5){
-            clearInterval(timer);
-            countdown.textContent = "Moles win this round.";
+            if (score < 5) {
+                clearInterval(timer);
+                countdown.textContent = "Moles win this round.";
             }
             // If moles whackd is greater than 5, you win
-            else{
+            else {
                 clearInterval(timer);
-            countdown.textContent = "You win! Take that moles.";
+                countdown.textContent = "You win! Take that moles.";
             }
             // Set game in progress state
         } else {
