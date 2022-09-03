@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Bookshelf</title>
+    <link rel="stylesheet" href="main2.css">
+</head>
+
+<body>
+    <!-- Only able to drag one book element in at a time. Couldn't get more to work. -->
+    <div class="dropzone" ondragover="onDragOver(event);" ondrop="onDrop(event)">
+        Drag a book into your "backpack"
+    </div> 
+
+
+    <main id="bookshelf">
+
+
+    </main>
+    <script src="js2/book-data.js"></script>
+    <script src="js2/book.js"></script>
+    <script src="js2/bookshelf.js"></script>
+    <script src="js2/index.js"></script>
+    <script src="js2/search.js"></script>
+    <script src="js2/draggable.js"></script>
+</body>
+
+</html>
