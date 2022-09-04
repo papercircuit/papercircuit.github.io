@@ -85,6 +85,19 @@ main {
 }
 
 /* ----- NAME LOGO -----*/
+.slide-anim{
+  animation:  2s ease-out;
+  transition: transfrom 2s ease;
+}
+
+@keyframes slide{
+  0%{
+    transform: translatex(-50px);
+    }
+  100%{
+    transform: translatex(0px);
+    }
+  }
 
 .name-logo {
   min-width: 200px;
@@ -101,10 +114,12 @@ main {
   transform: rotate(-6deg);
   transition: all .8s ease-out;
   margin-bottom: 1em;
+  transition: all 1s ease-in;
 }
 
 .name-logo:hover {
-  transition: all 1s ease;
+  transition: all 1s ease-in;
+  transform: rotate(-0deg);
   border-bottom: .8em groove rgba(175, 72, 193, 0.815);
 }
 
