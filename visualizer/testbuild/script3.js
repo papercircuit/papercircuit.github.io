@@ -353,15 +353,18 @@ function convertKmToPx(km) {
         height: 800,
         width: 800,
 
-        // allowMutatingData: false,
-        // animation: true,
-        // events: {
-        //   load: function () {
-        //     // set up the updating of the chart each second
-        //     // let series = this.series[0];
-        //     setInterval(function () { }, 1000);
-        //   }
-        // },
+        allowMutatingData: false,
+        animation: true,
+        events: {
+          load() {
+            const chart = this;
+            chart.showLoading('Fetching data from NASA...');
+            setTimeout(function() {
+              chart.hideLoading();
+              chart.series[0].setData()
+            }, 1700);
+          }
+        },
         options3d: {
     
           enabled: true,
@@ -433,13 +436,23 @@ function convertKmToPx(km) {
 
       yAxis: {
         min: -300000,
+        floor: -300000,
         max: 300000,
         title: {
           text: 'GSE Z-axis'
         },
         opposite: true,
+        labels: {
+          skew3d: true,
+          style: {
+            color: 'rgba(200,200,200, 0.8)'
+           }
+         
+        }
+        
       },
       xAxis: {
+        floor: 0,
         // min: 0,
         // max: 160000000,
         gridLineWidth: 1,
@@ -447,15 +460,31 @@ function convertKmToPx(km) {
           text: 'GSE X-axis'
         },
         opposite: false,
+        labels: {
+          skew3d: true,
+          style: {
+            color: 'rgba(200,200,200, 0.8)'
+           }
+          
+        }
+        
       },
       zAxis: {
         min: -300000,
+        floor:-300000,
         max: 300000,
         title: {
           // SUN EARTH LINE
           text: 'GSE Y-axis'
         },
         opposite: false,
+        labels: {
+          skew3d: true,
+         style: {
+          color: 'rgba(200,200,200, 0.8)'
+         }
+        }
+        
       },
       legend: {
         enabled: true,
@@ -548,7 +577,7 @@ function convertKmToPx(km) {
             fillColor: 'yellow',
             symbol: 'circle',
             // symbol: 'url(imgs/sun.jpeg)', NEED TO CENTER
-            radius: 7,
+            radius: 8,
           }
 
         },
