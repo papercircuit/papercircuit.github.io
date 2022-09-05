@@ -146,10 +146,10 @@ function fetchData(positionData) {
   // "animate" the drawing of the orbit path
 
 
-  for (let i = 0; i < aceData3d.length; i++) {
-    aceAnim.push(aceData3d[i]);
-    chart.series[0].setData(aceAnim);
-  }
+  // for (let i = 0; i < aceData3d.length; i++) {
+  //   aceAnim.push(aceData3d[i]);
+  //   chart.series[0].setData(aceAnim);
+  // }
 
  
 
@@ -335,9 +335,10 @@ function convertKmToPx(km) {
     // Set up the chart
     chart = new Highcharts.Chart({
       chart: {
-        renderTo: 'container',
-        fitToPlot: 'true',
         type: 'scatter3d',
+        renderTo: 'container', // Target element id
+
+        fitToPlot: 'true',
         reflow: 'false',
         // Spacing effects titles and legend only.
         spacingTop: 10,
@@ -413,10 +414,11 @@ function convertKmToPx(km) {
 
           },
           tooltip: {
+            crosshairs: [true, true],
             shared: true,
             useHTML: true,
             headerFormat: '<table><tr><th colspan="2">{tooltip.xDateFormat}</th></tr>',
-            pointFormat: '<tr><td style="color: {series.color}">{series.name} </td>' +
+            pointFormat: '<tr><td style="color: {series.color}">{series.name} </td>' + 
             '<td style="text-align: right"><b>{point.y} GSE</b></td></tr>',
             footerFormat: '</table>',
             valueDecimals: 2
