@@ -280,12 +280,12 @@ function convertKmToPx(km) {
           radialGradient: [0, 0, 5, 5],
           stops: [
             [0, 'rgb(0, 0, 0)'],
-            [.25, 'rgb(5, 5, 5)'],
-            [.5, 'rgb(7, 7, 7)'],
-            [.6, 'rgb(10, 10, 10)'],
-            [.75, 'rgb(15, 15, 15)'],
-            [.9, 'rgb(20, 20, 20)'],
-            [1, 'rgb(23, 23, 23)']
+            [.25, 'rgb(3, 3, 3)'],
+            [.5, 'rgb(6, 6, 6)'],
+          
+            [.75, 'rgb(7, 7, 7)'],
+            [.9, 'rgb(9, 9, 9)'],
+            [1, 'rgb(11, 11, 11)']
           ]
 
         },
@@ -406,23 +406,23 @@ function convertKmToPx(km) {
         text: 'Click and drag the plot area to rotate in space'
       },
       plotOptions: {
-
         scatter3d: {
           label: {
             connectorAllowed: true,
             connectorNeighbourDistance: 40,
-
           },
-          tooltip: {
-            crosshairs: [true, true],
-            shared: true,
-            useHTML: true,
-            headerFormat: '<table><tr><th colspan="2">{tooltip.xDateFormat}</th></tr>',
-            pointFormat: '<tr><td style="color: {series.color}">{series.name} </td>' + 
-            '<td style="text-align: right"><b>{point.y} GSE</b></td></tr>',
-            footerFormat: '</table>',
-            valueDecimals: 2
-        },
+        //   tooltip: {
+        //     shared: true,
+        //     useHTML: true,
+        //     headerFormat: '<table><tr><th colspan="2">{tooltip.xDateFormat}</th></tr>',
+        //     pointFormat: '<tr><td style="color: {series.color}">{series.name} </td>' + 
+        //     '<tr><td style="text-align: right"><b>{point.x} GSE</b></td></tr>' +
+        //     '<tr><td style="text-align: right"><b>{point.y} GSE</b></td></tr>' +
+        //     '<tr><td style="text-align: right"><b>{point.z} GSE</b></td></tr>' +
+        //     '<tr><td style="text-align: right"><b>{point.time} GSE</b></td></tr>',
+        //     footerFormat: '</table>',
+        //     valueDecimals: 2
+        // },
         }
       },
 
