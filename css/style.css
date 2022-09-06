@@ -4,6 +4,7 @@ Colors from coolors.co
 CSS HSL 
 --dodger-blue: hsla(206, 88%, 55%, 1); 
 --purple: rgba(175, 72, 193, 0.815);
+
 */
 
 * {
@@ -17,7 +18,7 @@ body {
   display: flex;
   min-width: 300px;
   flex-direction: column;
-  background: rgba(0, 129, 210, 0.925);
+  background: rgb(7, 141, 224);
   font-family: 'Source Code Pro', monospace;
   color: white;
 }

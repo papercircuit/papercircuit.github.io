@@ -47,9 +47,6 @@ function buildCircle(radius, x) {
   return circleData;
 }
 
-console.log("buildCircle ", buildCircle(100000, l1));
-
-
 
 function toRadians(angle) {
   return angle * (Math.PI / 180);
@@ -93,6 +90,7 @@ $.get(sscUrl, fetchData, 'json');
 function fetchData(positionData) {
 
   let ace = {};
+  // Use the length of the time array to determine the number of points
   let ACEsize = positionData.Result.Data[1][0].Time[1].length;
   // reference the arrays of each field
   ace.time_tag = positionData.Result.Data[1][0].Time[1];
@@ -100,6 +98,8 @@ function fetchData(positionData) {
   ace.x_gse = positionData.Result.Data[1][0].Coordinates[1][0].X[1];
   ace.y_gse = positionData.Result.Data[1][0].Coordinates[1][0].Y[1];
   ace.z_gse = positionData.Result.Data[1][0].Coordinates[1][0].Z[1];
+
+
 
   // Put all properties together into aceData object which contains arrays
 
@@ -111,12 +111,11 @@ function fetchData(positionData) {
   console.log("ace.time_tag ", ace.time_tag[0][1]);
 
 
-  // Object
 
-  // Array(21840)
 
   let dscovr = {};
-  let DSCOVRsize = positionData.Result.Data[1][0].Time[1].length;
+  // Use the length of the time array to determine the number of points
+  let DSCOVRsize = positionData.Result.Data[1][1].Time[1].length;
   dscovr.time_tag = positionData.Result.Data[1][1].Time[1];
   dscovr.x_gse = positionData.Result.Data[1][1].Coordinates[1][0].X[1];
   dscovr.y_gse = positionData.Result.Data[1][1].Coordinates[1][0].Y[1];
@@ -125,10 +124,10 @@ function fetchData(positionData) {
   // Swap Y GSE for Z to convert from GSE to local
 
   for (let i = 0; i < DSCOVRsize; i++) {
-    dscovrData.push({ source: 'dscovr', time: dscovr.time_tag[i], x_gse: dscovr.x_gse[i], y_gse: dscovr.z_gse[i], z_gse: dscovr.y_gse[i] });
+    dscovrData.push({ source: 'dscovr', time: dscovr.time_tag[i][1], x_gse: dscovr.x_gse[i], y_gse: dscovr.z_gse[i], z_gse: dscovr.y_gse[i] });
   }
-  console.log("dscovr.time_tag ", dscovr.time_tag[0]);
-
+  console.log("dscovr.time_tag ", dscovr.time_tag[0][1]);
+  console.log("dscovrData[0] ", dscovrData[0]);
   // clean up the data and reverse the time order      
   let tempAce = skipDuplicates(aceData);
   let tempDscovr = skipDuplicates(dscovrData);
@@ -305,6 +304,9 @@ function convertKmToPx(km) {
         }
       },
       legend: {
+        
+        borderColor: 'white',
+        borderWidth: '1',
         itemStyle: {
           font: '10pt Trebuchet MS, Verdana, sans-serif',
           color: 'rgb(220, 220, 220)'
@@ -414,18 +416,18 @@ function convertKmToPx(km) {
             connectorNeighbourDistance: 40,
           },
           tooltip: {
-        
+
             shared: true,
             useHTML: true,
             headerFormat: '<p><span>Dummy header</span>',
             pointFormat:
               '<br>time {point.time}<br>source {point.source}<br>name {series.name}<br>X GSE {point.x}<br>Y GSE{point.y}<br>Z GSE {point.z}',
             footerFormat: '</p>',
-  
-          valueDecimals: 0, // Set number of decimals following each value in tooltip
-        },
-      }
-    },
+
+            valueDecimals: 0, // Set number of decimals following each value in tooltip
+          },
+        }
+      },
 
       // GSE 0 is at Earth.
       // X = Sun-Earth line
@@ -438,185 +440,185 @@ function convertKmToPx(km) {
 
 
       yAxis: {
-      min: -300000,
-      floor: -300000,
-      max: 300000,
-      title: {
-        text: 'GSE Z-axis'
-      },
-      opposite: true,
-      labels: {
-        skew3d: true,
-        style: {
-          color: 'rgba(200,200,200, 0.8)'
+        min: -300000,
+        floor: -300000,
+        max: 300000,
+        title: {
+          text: 'GSE Z-axis'
+        },
+        opposite: true,
+        labels: {
+          skew3d: true,
+          style: {
+            color: 'rgba(200,200,200, 0.9)'
+          }
+
         }
 
-      }
-
-    },
+      },
       xAxis: {
-      floor: 0,
-      // min: 0,
-      // max: 160000000,
-      gridLineWidth: 1,
-      title: {
-        text: 'GSE X-axis'
-      },
-      opposite: false,
-      labels: {
-        skew3d: true,
-        style: {
-          color: 'rgba(200,200,200, 0.8)'
+        floor: 0,
+        // min: 0,
+        // max: 160000000,
+        gridLineWidth: 1,
+        title: {
+          text: 'GSE X-axis'
+        },
+        opposite: false,
+        labels: {
+          skew3d: true,
+          style: {
+            color: 'rgba(200,200,200, 0.9)'
+          }
+
         }
 
-      }
-
-    },
+      },
       zAxis: {
-      min: -300000,
-      floor: -300000,
-      max: 300000,
-      title: {
-        // SUN EARTH LINE
-        text: 'GSE Y-axis'
+        min: -300000,
+        floor: -300000,
+        max: 300000,
+        title: {
+          // SUN EARTH LINE
+          text: 'GSE Y-axis'
+        },
+        opposite: false,
+        labels: {
+          skew3d: true,
+          style: {
+            color: 'rgba(200,200,200, 0.9)'
+          }
+        }
+
       },
-      opposite: false,
-      labels: {
-        skew3d: true,
-        style: {
-          color: 'rgba(200,200,200, 0.8)'
-        }
-      }
-
-    },
       legend: {
-      enabled: true,
-      floating: true,
-    },
+        enabled: true,
+        floating: true,
+      },
       bubbleLegend: {
-      color: 'blue',
-    },
+        color: 'blue',
+      },
       exporting: {
-      buttons: {
-        resetButton: {
-          classname: 'reset-button',
+        buttons: {
+          resetButton: {
+            classname: 'reset-button',
 
-          symbol: 'circle',
-          symbolStrokeWidth: 1,
-          symbolFill: '#FFFFFF',
-          symbolStroke: '#330033',
+            symbol: 'circle',
+            symbolStrokeWidth: 1,
+            symbolFill: '#FFFFFF',
+            symbolStroke: '#330033',
 
-          // onclick: function () {
-          //   let alpha = chart.options.chart.options3d.alpha;
-          //   let beta = chart.options.chart.options3d.beta;
-          //   alpha = 0;
-          //   beta = 0;
-          //   chart.update();
-          // }
+            // onclick: function () {
+            //   let alpha = chart.options.chart.options3d.alpha;
+            //   let beta = chart.options.chart.options3d.beta;
+            //   alpha = 0;
+            //   beta = 0;
+            //   chart.update();
+            // }
+          }
         }
-      }
-    },
+      },
       series: [
 
 
-      {
-        name: "ACE",
-        lineWidth: 0.2,
-        marker: {
-          color: {
-            linearGradient: { x1: 0, x2: 0, y1: 0, y2: 1 },
-            stops: [
-              [0, '#090979'], // start
-              [0.5, '#790927'], // middle
-              [1, '#793109'] // end
-            ]
-          },
-          fillColor: 'purple',
-          // symbol: 'circle',
-          // symbol: 'url(imgs/1200px-ACE_spacecraft_model.png)', 
-          // NEED TO CENTER
-          radius: 5,
+        {
+          name: "ACE",
+          lineWidth: 0.2,
+          marker: {
+            color: {
+              linearGradient: { x1: 0, x2: 0, y1: 0, y2: 1 },
+              stops: [
+                [0, '#090979'], // start
+                [0.5, '#790927'], // middle
+                [1, '#793109'] // end
+              ]
+            },
+            fillColor: 'purple',
+            // symbol: 'circle',
+            // symbol: 'url(imgs/1200px-ACE_spacecraft_model.png)', 
+            // NEED TO CENTER
+            radius: 5,
 
-        }
-      },
+          }
+        },
 
-      {
-        name: "DSCOVR",
-        lineWidth: 0.2,
-        zones: [{
+        {
+          name: "DSCOVR",
+          lineWidth: 0.2,
+          zones: [{
 
-          color: '#f7a35c'
-        }, {
-          value: 10,
-          color: '#7cb5ec'
-        }, {
-          color: '#90ed7d'
-        }],
-        marker: {
-          fillColor: 'red',
-          symbol: 'circle',
-          // symbol: 'url(imgs/DSCOVR_spacecraft_model.png)', NEED TO CENTER
-          radius: 5,
-        }
+            color: '#f7a35c'
+          }, {
+            value: 10,
+            color: '#7cb5ec'
+          }, {
+            color: '#90ed7d'
+          }],
+          marker: {
+            fillColor: 'red',
+            symbol: 'circle',
+            // symbol: 'url(imgs/DSCOVR_spacecraft_model.png)', NEED TO CENTER
+            radius: 5,
+          }
 
-      },
+        },
 
-      {
-        name: "EARTH",
-        lineWidth: 1,
-        marker: {
-          fillColor: 'blue',
-          symbol: 'circle',
-          // symbol: 'url(imgs/sun.jpeg)', NEED TO CENTER
-          radius: 7,
-        }
+        {
+          name: "EARTH",
+          lineWidth: 1,
+          marker: {
+            fillColor: 'blue',
+            symbol: 'circle',
+            // symbol: 'url(imgs/sun.jpeg)', NEED TO CENTER
+            radius: 7,
+          }
 
-      },
-      {
-        name: "SUN",
-        visible: false,
-        lineWidth: 1,
-        marker: {
-          fillColor: 'yellow',
-          symbol: 'circle',
-          // symbol: 'url(imgs/sun.jpeg)', NEED TO CENTER
-          radius: 8,
-        }
+        },
+        {
+          name: "SUN",
+          visible: false,
+          lineWidth: 1,
+          marker: {
+            fillColor: 'yellow',
+            symbol: 'circle',
+            // symbol: 'url(imgs/sun.jpeg)', NEED TO CENTER
+            radius: 8,
+          }
 
-      },
-      {
-        name: "SEZ 2.0 deg",
-        lineWidth: 1,
-        visible: true,
-        marker: {
-          enabled: false
-        }
+        },
+        {
+          name: "SEZ 2.0 deg",
+          lineWidth: 1,
+          visible: true,
+          marker: {
+            enabled: false
+          }
 
-      },
-      {
-        name: "SEZ 4.0 deg",
-        lineWidth: 1,
-        visible: true,
-        marker: {
-          enabled: false
-        }
+        },
+        {
+          name: "SEZ 4.0 deg",
+          lineWidth: 1,
+          visible: true,
+          marker: {
+            enabled: false
+          }
 
-      },
-      {
-        name: "Sun-Earth line",
-        lineWidth: 1,
-        visible: false,
-        marker: {
-          fillColor: 'orange',
-          symbol: 'circle',
-          // symbol: 'url(imgs/sun.jpeg)', NEED TO CENTER
-          radius: 1,
-        }
+        },
+        {
+          name: "Sun-Earth line",
+          lineWidth: 1,
+          visible: false,
+          marker: {
+            fillColor: 'orange',
+            symbol: 'circle',
+            // symbol: 'url(imgs/sun.jpeg)', NEED TO CENTER
+            radius: 1,
+          }
 
-      },
-    ]
+        },
+      ]
     });
-}
+  }
 
 
   // RECENTER BUTTON
@@ -642,15 +644,15 @@ function convertKmToPx(km) {
       // let bubbleRadius = 0.1 + Math.abs((i - dataPoints.length)) ** E / (dataPoints.length) ** E;
       let d = { x: dataPoints[i].y_gse, y: dataPoints[i].z_gse, r: 6 };
       // chartDataBubble.datasets[spaceCraft].data.push(d);
-  
+
       //console.log('alpha ' + ((dataPoints.length-i)/ dataPoints.length));
       backgroundColors.push(colors + ((dataPoints.length - i) / dataPoints.length) + ')');
       //console.log('color[' + i + '] ' + backgroundColors[backgroundColors.length-1]);
-  
-      let d2 = {x: dataPoints[i].y_gse, y: dataPoints[i].z_gse};
+
+      let d2 = { x: dataPoints[i].y_gse, y: dataPoints[i].z_gse };
       console.log("chartDataLine " + chartDataLine)
       chartDataLine.datasets[spaceCraft].data.push(d2);
-    
+
     }
     // chartDataBubble.datasets[spaceCraft].backgroundColors = backgroundColors;
   }
@@ -659,48 +661,48 @@ function convertKmToPx(km) {
 
   //Draggable function 
   function dragStart(eStart) {
-  eStart = chart.pointer.normalize(eStart);
+    eStart = chart.pointer.normalize(eStart);
 
-  let posX = eStart.chartX,
-    posY = eStart.chartY,
-    alpha = chart.options.chart.options3d.alpha,
-    beta = chart.options.chart.options3d.beta,
-    sensitivity = 5,  // lower is more sensitive
-    handlers = [];
+    let posX = eStart.chartX,
+      posY = eStart.chartY,
+      alpha = chart.options.chart.options3d.alpha,
+      beta = chart.options.chart.options3d.beta,
+      sensitivity = 5,  // lower is more sensitive
+      handlers = [];
 
-  function drag(e) {
-    // Get e.chartX and e.chartY
-    e = chart.pointer.normalize(e);
+    function drag(e) {
+      // Get e.chartX and e.chartY
+      e = chart.pointer.normalize(e);
 
-    chart.update({
-      chart: {
-        options3d: {
-          alpha: alpha + (e.chartY - posY) / sensitivity,
-          beta: beta + (posX - e.chartX) / sensitivity
+      chart.update({
+        chart: {
+          options3d: {
+            alpha: alpha + (e.chartY - posY) / sensitivity,
+            beta: beta + (posX - e.chartX) / sensitivity
+          }
         }
-      }
-    }, undefined, undefined, false);
+      }, undefined, undefined, false);
+    }
+
+    function unbindAll() {
+      handlers.forEach(function (unbind) {
+        if (unbind) {
+          unbind();
+        }
+      });
+      handlers.length = 0;
+    }
+
+    handlers.push(H.addEvent(document, 'mousemove', drag));
+    handlers.push(H.addEvent(document, 'touchmove', drag));
+
+    handlers.push(H.addEvent(document, 'mouseup', unbindAll));
+    handlers.push(H.addEvent(document, 'touchend', unbindAll));
   }
 
-  function unbindAll() {
-    handlers.forEach(function (unbind) {
-      if (unbind) {
-        unbind();
-      }
-    });
-    handlers.length = 0;
-  }
-
-  handlers.push(H.addEvent(document, 'mousemove', drag));
-  handlers.push(H.addEvent(document, 'touchmove', drag));
-
-  handlers.push(H.addEvent(document, 'mouseup', unbindAll));
-  handlers.push(H.addEvent(document, 'touchend', unbindAll));
-}
-
-create3DChart();
-H.addEvent(chart.container, 'mousedown', dragStart);
-H.addEvent(chart.container, 'touchstart', dragStart);
+  create3DChart();
+  H.addEvent(chart.container, 'mousedown', dragStart);
+  H.addEvent(chart.container, 'touchstart', dragStart);
 
 
 }(Highcharts));
