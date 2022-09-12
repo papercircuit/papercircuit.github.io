@@ -1,0 +1,72 @@
+/* 
+Colors from coolors.co 
+
+CSS HSL 
+--dodger-blue: hsla(206, 88%, 55%, 1); 
+--purple: rgba(175, 72, 193, 0.815)
+*/
+
+
+.about-wrapper {
+    min-height: 40em;
+    height: fit-content;
+    background: rgba(199, 113, 214, 0.402);
+    border: 1px solid rgb(199, 113, 214);
+    z-index: 1;
+    border-radius: 7px;
+
+
+}
+
+.about-img-bg {
+    position: relative;
+    height: 40vh;
+    width: 100%;
+    margin-left: 1em;
+    border-radius: 7px;
+    background: rgba(201, 140, 220, 0.299);
+    top: 1em;
+    /* Credit to https://shadows.brumm.af/ for this layered box shadow  */
+    box-shadow:
+        1.8px 1.7px 0.4px -10px rgba(0, 0, 0, 0.067),
+        4.2px 4px 0.9px -10px rgba(0, 0, 0, 0.097),
+        7.5px 7.3px 1.6px -10px rgba(0, 0, 0, 0.12),
+        12.5px 12px 2.7px -10px rgba(0, 0, 0, 0.14),
+        20.6px 19.8px 4.5px -10px rgba(0, 0, 0, 0.163),
+        36.1px 34.7px 7.9px -10px rgba(0, 0, 0, 0.193),
+        78px 75px 17px -10px rgba(0, 0, 0, 0.26);
+
+    transform: rotate(5deg);
+    z-index: 2;
+}
+
+
+.about-img {
+    position: relative;
+    display: block;
+    margin: auto;
+    width: 26em;
+    transform: rotate(-5deg);
+    /* Rotate image back to compensate for parent rotation */
+    z-index: 3;
+    border-radius: 7px;
+    border: 2px solid rgba(255, 255, 255, 0.319);
+    top: 3em;
+}
+
+
+
+
+.about-text-wrapper {
+    width: 80vw;
+    margin: auto;
+    margin-top: 5em;
+    padding: 1em;
+    position: relative;
+}
+
+.about-text {
+    color: white;
+    overflow-wrap: break-word;
+    /* https://developer.mozilla.org/en-US/docs/Web/CSS/CSS_Text/Wrapping_Text */
+}

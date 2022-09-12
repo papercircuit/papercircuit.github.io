@@ -1,0 +1,73 @@
+/* 
+Colors from coolors.co 
+
+CSS HSL 
+--dodger-blue: hsla(206, 88%, 55%, 1); 
+--purple: rgba(175, 72, 193, 0.815)
+*/
+
+.proj-wrapper {
+
+  height: fit-content;
+  min-width: 600px;
+  max-width: 600px;
+  background: rgba(139, 64, 171, 0.111);
+  border: 1px solid rgba(199, 113, 214, 0.714);
+  margin: 3em 0;
+  z-index: 1;
+  border-radius: 10px;
+  padding: 1.5em;
+  box-shadow: 
+  1.8px 1.7px 0.4px -10px rgba(255, 255, 255, 0,498),
+  4.2px 4px 0.9px -10px rgba(255, 255, 255, 0.497),
+  7.5px 7.3px 1.6px -10px rgba(255, 255, 255, 0.42),
+  12.5px 12px 2.7px -10px rgba(255, 255, 255, 0.44),
+  36.1px 24.7px 7.9px -10px rgba(255, 255, 255, 0.493);
+}
+
+.proj-img {
+  position: relative;
+  display: block;
+  margin: auto;
+  width: 300px;
+  z-index: 3;
+  border-radius: 10px;
+  border: 1px solid rgb(199, 113, 214);
+  /* Credit to https://shadows.brumm.af/ for this layered box shadow  */
+  box-shadow:
+    1.8px 1.7px 0.4px -10px rgba(0, 0, 0, 0.067),
+    4.2px 4px 0.9px -10px rgba(0, 0, 0, 0.097),
+    7.5px 7.3px 1.6px -10px rgba(0, 0, 0, 0.12),
+    12.5px 12px 2.7px -10px rgba(0, 0, 0, 0.14),
+    36.1px 24.7px 7.9px -10px rgba(0, 0, 0, 0.193);
+  top: 2em;
+}
+
+.proj-title {
+  left: 1.6em;
+  top: 1em;
+}
+
+.proj-text-wrapper {
+
+  flex-direction: row;
+  margin: 1em;
+  margin-top: 4em;
+  top: 6em;
+}
+
+.proj-text {
+  color: white;
+  overflow-wrap: break-word;
+  /* https://developer.mozilla.org/en-US/docs/Web/CSS/CSS_Text/Wrapping_Text */
+}
+
+@media (max-width:500px) {
+  .proj-wrapper {
+    margin-top: 5em;
+  }
+
+  .proj-text-wrapper {
+    margin-top: 4em;
+  }
+}

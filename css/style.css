@@ -1,0 +1,275 @@
+/* 
+Colors from coolors.co 
+
+CSS HSL 
+--dodger-blue: hsla(206, 88%, 55%, 1); 
+--purple: rgba(175, 72, 193, 0.815);
+
+*/
+
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+
+}
+
+body {
+  display: flex;
+  min-width: 300px;
+  flex-direction: column;
+  background: rgb(9, 77, 120);
+  font-family: 'Source Code Pro', monospace;
+  color: white;
+}
+
+body a {
+  color: white;
+}
+
+main {
+  min-height: 56em;
+  height: fit-content;
+  flex-direction: column;
+  justify-content: center;
+}
+
+main p {
+  font-size: .9em;
+}
+
+/* ----- NAV HEADER ----- */
+
+.nav-list {
+  padding-bottom: .7em;
+  display: flex;
+  flex-direction: row;
+  align-items: stretch;
+  border-bottom: .3em groove hsla(206, 88%, 55%, 1);
+}
+
+.main-nav li {
+  flex: 1;
+  list-style: none;
+  border: 0px solid hsla(59, 94%, 57%, 1);
+  padding: .5em 2em 0 2em;
+  transition: all .5s ease-out;
+  height: 3em;
+  text-align: center;
+}
+
+.main-nav li a {
+  text-decoration: none;
+  padding: 10px;
+  display: block;
+}
+
+.main-nav li a:hover {
+  flex: 1;
+  list-style: none;
+  color: rgba(175, 72, 193, 0.815);
+  border-bottom: 3px solid rgba(175, 72, 193, 0.815);
+  transition: all .5s ease;
+  height: 3em;
+}
+
+
+/* ----- MAIN ----- */
+main {
+  margin: 1em;
+  min-height: 1080px;
+  color: white;
+  display: flex;
+  justify-content: flex-start;
+  align-items: center;
+  position: relative;
+}
+
+/* ----- NAME LOGO -----*/
+.slide-anim{
+  animation:  2s ease-out;
+  transition: transfrom 2s ease;
+}
+
+@keyframes slide{
+  0%{
+    transform: translatex(-50px);
+    }
+  100%{
+    transform: translatex(0px);
+    }
+  }
+
+.name-logo {
+  min-width: 200px;
+  font-weight: 400;
+  font-size: 4em;
+  white-space: nowrap;
+  padding: .5em;
+  position: relative;
+  color: white;
+  border-bottom: .7em groove hsla(206, 88%, 55%, 1);
+  border-radius: .3em;
+
+  text-align: center;
+  transform: rotate(-6deg);
+  transition: all .8s ease-out;
+  margin-bottom: 1em;
+  transition: all 1s ease-in;
+}
+
+.name-logo:hover {
+  transition: all 1s ease-in;
+  transform: rotate(-0deg);
+  border-bottom: .8em groove rgba(175, 72, 193, 0.815);
+}
+
+.name-logo a {
+  display: block;
+  text-decoration: none;
+  color: white;
+}
+
+.sub-heading {
+  font-weight: 100;
+}
+
+/* ----- COFFEE -----  */
+
+.coffee-container {
+  position: relative;
+  padding-top: 1em;
+  width: 100%;
+  min-width: 20em;
+  min-height: 45em;
+
+}
+
+.coffee-text-container {
+  text-align: left;
+  margin: 4em;
+}
+
+.coffee-container a {
+  text-decoration: none;
+  display: flex;
+  justify-content: center;
+}
+
+
+/* Material Icons from google fonts */
+.material-icons.md-48 {
+  font-size: 30em;
+  color: rgba(248, 245, 42, 0.242);
+  border: 0;
+  transition: all 1s ease-out;
+  margin: auto;
+}
+
+.material-icons.md-48:hover {
+  margin: auto;
+  font-size: 31em;
+  color: rgb(54, 24, 2);
+  transition: all 2s ease;
+}
+
+/* ABOUT */
+
+.about-wrapper {
+  background: rgba(199, 113, 214, 0.402);
+  border: 1px solid rgb(199, 113, 214);
+  z-index: 1;
+  border-radius: 7px;
+}
+
+.about-img-bg {
+  position: relative;
+  height: 30vh;
+  width: 100%;
+  margin-left: 1em;
+  border-radius: 7px;
+  background: rgba(201, 140, 220, 0.299);
+  top: 1em;
+  /* Credit to https://shadows.brumm.af/ for this layered box shadow  */
+  box-shadow:
+      1.8px 1.7px 0.4px -10px rgba(0, 0, 0, 0.067),
+      4.2px 4px 0.9px -10px rgba(0, 0, 0, 0.097),
+      7.5px 7.3px 1.6px -10px rgba(0, 0, 0, 0.12),
+      12.5px 12px 2.7px -10px rgba(0, 0, 0, 0.14),
+      20.6px 19.8px 4.5px -10px rgba(0, 0, 0, 0.163),
+      36.1px 34.7px 7.9px -10px rgba(0, 0, 0, 0.193),
+      78px 75px 17px -10px rgba(0, 0, 0, 0.26);
+
+  transform: rotate(5deg);
+  z-index: 2;
+}
+
+
+.about-img {
+  position: relative;
+  display: block;
+  margin: auto;
+  width: 26em;
+  transform: rotate(-5deg);
+  /* Rotate image back to compensate for parent rotation */
+  z-index: 3;
+  border-radius: 7px;
+  border: 2px solid rgba(255, 255, 255, 0.319);
+  top: 3em;
+}
+
+
+
+
+.about-text-wrapper {
+  width: 80vw;
+  margin: auto;
+  margin-top: 5em;
+  padding: 1em;
+  position: relative;
+}
+
+.about-text {
+  color: white;
+  overflow-wrap: break-word;
+  /* https://developer.mozilla.org/en-US/docs/Web/CSS/CSS_Text/Wrapping_Text */
+}
+
+
+/* ----- FOOTER ----- */
+
+footer {
+  border-top: .7em groove hsla(206, 88%, 55%, 1);
+  text-align: center;
+}
+
+/* ----- MEDIA RULES ----- */
+
+@media (max-width: 500px) {
+  .nav-list {
+    display: block;
+  }
+
+  .name-logo {
+    font-size: 2.2em;
+    padding: .2em;
+    border-radius: .4em;
+    transform: rotate(-10deg);
+  }
+
+  .coffee-container {
+    padding: 1em;
+    position: relative;
+  }
+
+  .material-icons.md-48 {
+    font-size: 17em;
+    color: rgba(248, 245, 42, 0.242);
+  }
+
+  .material-icons.md-48:hover {
+    font-size: 18em;
+    color: rgb(54, 24, 2);
+    transition: all 1s ease;
+  }
+}

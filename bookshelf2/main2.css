@@ -1,0 +1,77 @@
+*,
+*::before,
+*::after {
+    box-sizing: border-box;
+}
+body {
+    background-image: url(img/bookshelf-bg.jpg);
+    background-repeat: repeat-y;
+    background-size: 300%;
+    background-position: -400px;
+}
+
+main {
+    display: flex;
+    justify-content: center;
+}
+
+.dropzone {
+    background-image: url(img/backpack.jpg);
+    background-repeat: no-repeat;
+    background-size: 100%;
+    background-color:beige;
+    background-position: 0 bottom;
+    height: 20rem;
+    width: 20rem;
+    border-radius: 1rem;
+    padding: 1rem;
+    font-size: 1.6rem;
+    
+}
+
+.bookshelf-element {
+    width: 80vw;
+    display: flex;
+    flex-wrap: wrap;
+    grid-template-columns: 5rem 10rem 10rem 10rem;
+}
+
+.book-element {
+    height: 30rem;
+    padding: 10px;
+    margin: 5px;
+    text-decoration: none;
+    line-break: anywhere;
+    list-style-type: none;
+    width: 12rem;
+    border: 4px solid darkolivegreen;
+    border-radius: .2rem;
+    background-color: burlywood;
+    font-weight: 900;
+    font-size: 15px;
+    line-height: 1.9;
+    overflow: auto;
+}
+
+.book-element:hover {
+    background-color: aliceblue;
+}
+
+.book-text1 {
+    font-size: 1.4rem;
+}
+
+.book-text2 {
+    font-size: 1rem;
+    font-family: 'Courier New', Courier, monospace;
+}
+
+.book-text3 {
+    font-size: .8rem;
+    font-weight: 400;
+}
+
+.book-text4 {
+    font-size: .8rem;
+    font-weight: 200;
+}
