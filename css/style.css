@@ -164,6 +164,7 @@ main {
 /* ABOUT */
 
 .about-wrapper {
+  height: 32vh;
   background: rgba(199, 113, 214, 0.402);
   border: 1px solid rgb(199, 113, 214);
   z-index: 1;
@@ -172,7 +173,7 @@ main {
 
 .about-img-bg {
   position: relative;
-  height: 30vh;
+  height: 32vh;
   width: 100%;
   margin-left: 1em;
   border-radius: 7px;
@@ -189,6 +190,7 @@ main {
       78px 75px 17px -10px rgba(0, 0, 0, 0.26);
 
   transform: rotate(5deg);
+ 
   z-index: 2;
 }
 
@@ -197,7 +199,7 @@ main {
   position: relative;
   display: block;
   margin: auto;
-  width: 26em;
+  width: 32vh;
   transform: rotate(-5deg);
   /* Rotate image back to compensate for parent rotation */
   z-index: 3;
