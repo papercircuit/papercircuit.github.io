@@ -18,7 +18,8 @@ body {
   display: flex;
   min-width: 300px;
   flex-direction: column;
-  background: rgb(9, 77, 120);
+  background: rgb(10,5,89);
+  background: linear-gradient(281deg, rgba(10,5,89,1) 0%, rgba(26,89,120,1) 47%, rgba(0,198,255,1) 100%);
   font-family: 'Source Code Pro', monospace;
   color: white;
 }
@@ -86,19 +87,6 @@ main {
 }
 
 /* ----- NAME LOGO -----*/
-.slide-anim{
-  animation:  2s ease-out;
-  transition: transfrom 2s ease;
-}
-
-@keyframes slide{
-  0%{
-    transform: translatex(-50px);
-    }
-  100%{
-    transform: translatex(0px);
-    }
-  }
 
 .name-logo {
   min-width: 200px;
@@ -110,12 +98,12 @@ main {
   color: white;
   border-bottom: .7em groove hsla(206, 88%, 55%, 1);
   border-radius: .3em;
-
+  transition-delay: 2s;
   text-align: center;
   transform: rotate(-6deg);
   transition: all .8s ease-out;
   margin-bottom: 1em;
-  transition: all 1s ease-in;
+ 
 }
 
 .name-logo:hover {
