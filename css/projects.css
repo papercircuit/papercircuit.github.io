@@ -11,6 +11,7 @@ CSS HSL
   height: fit-content;
   min-width: 600px;
   max-width: 600px;
+<<<<<<< HEAD
   background: rgba(139, 64, 171, 0.111);
   border: 1px solid rgba(199, 113, 214, 0.714);
   margin: 3em 0;
@@ -23,6 +24,14 @@ CSS HSL
   7.5px 7.3px 1.6px -10px rgba(255, 255, 255, 0.42),
   12.5px 12px 2.7px -10px rgba(255, 255, 255, 0.44),
   36.1px 24.7px 7.9px -10px rgba(255, 255, 255, 0.493);
+=======
+  background: rgba(148, 33, 168, 0.328);
+  border: 1px solid rgb(199, 113, 214);
+  margin: 3em 0;
+  z-index: 1;
+  border-radius: 70px;
+  padding: 1.5em;
+>>>>>>> 0a525009dd2be7dfa1aaf95c9d031e36fcafda53
 }
 
 .proj-img {
