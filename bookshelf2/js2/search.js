@@ -1,23 +1,35 @@
-// Could not get this to work.
+const input = document.querySelector('search');
+const log = document.getElementById('log');
+// const sort = document.querySelector('sort-method');
+// sort.addEventListener('select', sortArray);
 
-function search() {
-    // Declare variables
-    document.querySelector("body");
-    let input, filter, ul, li, a, i, txtValue;
+function searchArray(e) {
+  let filtered = [];
+  const input = e.target.value.toLowerCase();
+  if (input) {
+    filtered = bookData.filter((el) => {
+      return Object.values(el).some((val) =>
+        String(val).toLowerCase().includes(input));
+    });
+    
+    // Clear bookshelf
+    freshBookshelf.books = [];
+    console.log("filtered", filtered)
+    log.textContent = JSON.stringify(filtered);
 
-    input = document.getElementById('myInput');
-    filter = input.value.toUpperCase();
-    ul = document.getElementByTagName("ul");
-    li = ul.getElementsByTagName("li");
-  
-    // Loop through all list items, and hide those who don't match the search query
-    for (i = 0; i < li.length; i++) {
-      a = li[i].getElementsByTagName("li")[0];
-      txtValue = a.textContent || a.innerText;
-      if (txtValue.toUpperCase().indexOf(filter) > -1) {
-        li[i].style.display = "";
-      } else {
-        li[i].style.display = "none";
-      }
+    for (const bookInfo of filtered) {
+      const book2 = new Book(
+        bookInfo.author,
+        bookInfo.language,
+        bookInfo.subject,
+        bookInfo.title
+      );
+      freshBookshelf.addBook(book2);
     }
+  
   }
+  app.replaceChildren(freshBookshelf.render());
+ 
+}
+
+

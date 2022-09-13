@@ -1,11 +1,9 @@
-// Draggable functionality inspired by: https://www.digitalocean.com/community/tutorials/js-drag-and-drop-vanilla-js
+// Draggable functionality by: https://www.digitalocean.com/community/tutorials/js-drag-and-drop-vanilla-js
 
 function onDragStart(event) {
     event
         .dataTransfer
         .setData('text/plain', event.target.id);
-        
-
 }
 
 function onDragOver(event) {
