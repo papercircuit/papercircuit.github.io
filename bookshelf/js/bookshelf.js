@@ -1,5 +1,5 @@
 const removeBtn = document.querySelector('.remove-btn');
-
+let counter = 0;
 function Bookshelf(books = []) {
   this.books = books;
   this.visibleBooks = books;
@@ -15,31 +15,16 @@ function Bookshelf(books = []) {
     this.visibleBooks.splice(index, 1);
   };
 
-
-
-
-  // this.removeBook = function (book) {
-  //   // Find a book with the same title
-  //   const idx = this.books.map((b) => b.title).indexOf(book.title);
-  //   if (idx !== -1) {
-  //     this.books.splice(idx, 1);
-  //     return book;
-  //   } else {
-  //     return null;
-  //   }
-  // };
-
-
   this.render = function () {
     document.querySelector('#app');
-    let counter = 0;
+   
     const counterElement = document.querySelector('.counter');
     const ul = Object.assign(document.createElement("ul"), { className: "bookshelf" });
     const books = this.visibleBooks.map((b) => b.render());
     ul.replaceChildren(...books);
     books.forEach(element => {
       counter++;
-      counterElement.textContent = counter;
+      counterElement.textContent = `Number of visible books: ${counter}`;
     });
    
     return ul;

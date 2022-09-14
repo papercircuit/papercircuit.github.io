@@ -10,7 +10,8 @@ body {
     background-size: 200rem;
     background-position: -400px; */
     min-width: 300px;
-    background-color: rgb(0, 159, 214);
+    background-color: rgb(90, 159, 214);
+ 
     font: bold 1em/100% "Helvetica Neue", Arial, sans-serif;
     padding: 2em 0;
     text-align: center;
@@ -136,6 +137,10 @@ input {
 
 .favorite-books-section {
     border: 1px solid pink;
+}
+
+.hidden {
+    display: none;
 }
 
 

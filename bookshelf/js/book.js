@@ -69,8 +69,8 @@ function Book(author, language, subject, title) {
       const counterElement = document.querySelector('.counter');
       const index = bookshelf.books.indexOf(this);
       ul.classList.toggle('hidden');
-      let counter = 0;
-      counter =
+      bookshelf.books.splice(index, 1);
+      counter--;
       counterElement.textContent = counter;
     });
 
