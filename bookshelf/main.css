@@ -9,7 +9,7 @@ body {
     background-repeat: repeat-y;
     background-size: 200rem;
     background-position: -400px; */
-    background-color: rgb(0,159,214);
+    background-color: rgb(0, 159, 214);
     font: bold 1em/100% "Helvetica Neue", Arial, sans-serif;
     padding: 2em 0;
     text-align: center;
@@ -24,25 +24,6 @@ body {
     flex-direction: column;
     background-color: rgba(0, 0, 0, 0.796);
 }
-
-/* .dropzone {
-    background-color: rgba(245, 245, 220, 0.442);
-    background-position: 0 bottom;
-    min-height: 20rem;
-    width: 80%;
-    border-radius: 1rem;
-    padding: 1rem;
-    font-size: 1.6rem;
-    text-align: center;
-    font-size: 3rem;
-    display: flex;
-    justify-content: center;
-    flex-direction: column;
-    text-align: center;
-
-} */
-
-
 
 
 
@@ -69,7 +50,7 @@ body {
     text-align: left;
     margin: 1rem;
     padding: 1rem;
- 
+
 }
 
 .book:hover {
@@ -115,9 +96,14 @@ input {
     color: white
 }
 
+
+.user-input-header {
+    margin-top: 2rem;
+}
+
 .fav {
     background-color: pink;
-} 
+}
 
 .favorite-books {
     min-height: 100px;
@@ -144,7 +130,7 @@ input {
     width: 50vw;
     margin: auto;
     border-radius: .5rem;
- 
+
 }
 
 .favorite-books-section {
@@ -153,81 +139,71 @@ input {
 
 
 
-.hider {
-    position: absolute;
-    top: 0;
-    left: 0;
-    width: 100%;
-    height: 100%;
-    background-color: rgba(0, 0, 0, 0.546);
-    z-index: 2;
-}
 
-.hidden {
-    display: none;
-}
+
 
 
 /* BUTTONS */
 
 button {
-  align-items: center;
-  background-color: #fee6e3;
-  border: 2px solid #111;
-  border-radius: 8px;
-  box-sizing: border-box;
-  color: #111;
-  cursor: pointer;
-  display: inline;
-  font-family: Inter,sans-serif;
-  font-size: 16px;
-  height: 48px;
-  justify-content: center;
-  line-height: 24px;
-  max-width: 100%;
-  padding: 0 25px;
-  position: relative;
-  text-align: center;
-  text-decoration: none;
-  user-select: none;
-  -webkit-user-select: none;
-  touch-action: manipulation;
-  font-size: 1rem;
-  padding: .5rem;
- margin: auto;
+    align-items: center;
+    background-color: #fee6e3;
+    border: 2px solid #111;
+    border-radius: 8px;
+    box-sizing: border-box;
+    color: #111;
+    cursor: pointer;
+    display: inline;
+    font-family: Inter, sans-serif;
+    font-size: 16px;
+    height: 48px;
+    justify-content: center;
+    line-height: 24px;
+    max-width: 100%;
+    padding: 0 25px;
+    position: relative;
+    text-align: center;
+    text-decoration: none;
+    user-select: none;
+    -webkit-user-select: none;
+    touch-action: manipulation;
+    font-size: 1rem;
+    padding: .5rem;
+    margin: auto;
+
 
 }
 
 button:after {
-  background-color: #111;
-  border-radius: 8px;
-  content: "";
-  display: block;
-  height: 48px;
-  left: 0;
-  width: 100%;
-  position: absolute;
-  top: -2px;
-  transform: translate(8px, 8px);
-  transition: transform .2s ease-out;
-  z-index: -1;
+    background-color: #111;
+    border-radius: 8px;
+    content: "";
+    display: block;
+    height: 48px;
+    left: 0;
+    width: 100%;
+    position: absolute;
+    top: -2px;
+    transform: translate(8px, 8px);
+    transition: transform .2s ease-out;
+    z-index: -1;
 }
 
 button:hover:after {
-  transform: translate(0, 0);
+    transform: translate(0, 0);
 }
 
 button:active {
-  background-color: #ffdeda;
-  outline: 0;
+    background-color: #ffdeda;
+    outline: 0;
 }
 
 button:hover {
-  outline: 0;
+    outline: 0;
 }
 
 @media (min-width: 768px) {
-  button {
-    padding: 0 40px;
-  }
-} 
+    button {
+        padding: 0 40px;
+    }
+}
