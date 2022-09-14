@@ -343,10 +343,10 @@ function convertKmToPx(km) {
         fitToPlot: 'true',
         reflow: 'false',
         // Spacing effects titles and legend only.
-        spacingTop: 10,
+        spacingTop: 20,
         spacingBottom: 10,
-        spacingRight: 00,
-        spacingLeft: 00,
+        spacingRight: 15,
+        spacingLeft: 15,
         // Margin effects grid only. KEEP SQUARE!
         marginTop: 80,
         marginBottom: 80,

@@ -1,0 +1,119 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8" />
+  <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Bookshelf Data SUBMISSION</title>
+  <link rel="stylesheet" href="main.css" />
+  <link rel="stylesheet" href="nav.css">
+  <link rel="stylesheet" href="dropdown.css">
+  <link rel="stylesheet" href="popupform.css">
+</head>
+
+<body>
+  
+
+  <!-- NAVBAR -->
+
+  <nav class="nav-bar main">
+    <ul>
+      <li><a href="#"> Home </a></li>
+      <li><a href="#"> About </a></li>
+      <li><a href="#"> Contact </a></li>
+    </ul>
+  </nav>
+
+
+  <!-- SEARCH BAR -->
+
+  <section>
+    <h1 class="search-header">Search for some books!</h1>
+    <input class="search-input " placeholder="Search">
+    <button class="searchBtn">Search</button>
+
+    <!-- SORT DROPDOWN -->
+
+
+
+    <h1 class="dropdown-header">Sort by:</h1>
+
+    <select class="sortBy">
+      <option value="titleaz">Title A-Z</option>
+      <option value="titleza">Title Z-A</option>
+      <option value="authoraz">Author A-Z</option>
+      <option value="authorza">Author Z-A</option>
+      <option value="language">Language</option>
+      <option value="subject">Subject</option>
+    </select>
+  </section>
+
+
+  <!--  USER INPUT Form with text inputs to allow users to create new books and add them to the bookshelf -->
+
+  <input type="text" onfocus="this.value=''" placeholder="Title" name="user-input-title" value="Title"
+    class="userInputTitle">
+  <input type="text" onfocus="this.value=''" placeholder="Author" name="user-input-author" value="Author"
+    class="userInputAuthor">
+  <input type="text" onfocus="this.value=''" placeholder="Language" name="user-input-language" value="Language"
+    class="userInputLanguage">
+  <input type="text" onfocus="this.value=''" placeholder="Subject" name="user-input-subject" value="Subject"
+    class="userInputSubject">
+  <br>
+  <input type="submit" value="Submit" class="userSubmitBtn">
+
+  <!-- VISIBLE BOOKS COUNTER -->
+
+  <h1 class="counter"></h1>
+
+  <!-- FAVORITE BOOKS SECTION -->
+
+  <section class="favorite-books-section">
+    <h1 class="favorite-books-header">
+      <span>Favorite Books</span>
+    </h1>
+    <ul class="favorite-books">
+
+    </ul>
+  </section>
+
+  <!-- POPUP FORM -->
+  <!-- A button to open the popup form -->
+  <button class="open-button" onclick="openForm()">Open Form</button>
+
+  <!-- The form -->
+  <div class="form-popup" id="myForm">
+    <form action="/action_page.php" class="form-container">
+      <h1>Login</h1>
+
+      <label for="email"><b>Email</b></label>
+      <input type="text" placeholder="Enter Email" name="email" required>
+
+      <label for="psw"><b>Password</b></label>
+      <input type="password" placeholder="Enter Password" name="psw" required>
+
+      <button type="submit" class="btn login">Login</button>
+      <button type="button" class="btn cancel" onclick="closeForm()">Close</button>
+    </form>
+  </div>
+
+  <!-- BOOKSHELF SECTION -->
+
+  <main id="app">
+
+    <!-- The following elements are created with Javascript -->
+    <!-- <ul class="bookshelf"></ul> -->
+    <!-- <ul class="book"></ul> -->
+
+  </main>
+
+
+
+  <script src="js/book-data.js"></script>
+  <script src="js/book.js"></script>
+  <script src="js/bookshelf.js"></script>
+  <script src="index.js"></script>
+</body>
+
+</html>

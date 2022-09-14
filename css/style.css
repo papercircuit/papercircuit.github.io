@@ -174,8 +174,7 @@ main {
 /* ABOUT */
 
 .about-wrapper {
-  height: 32vh;
-  background: rgba(199, 113, 214, 0.402);
+  background: rgba(199, 113, 214, 0.204);
   border: 1px solid rgb(199, 113, 214);
   z-index: 1;
   border-radius: 7px;
@@ -186,8 +185,9 @@ main {
   height: 32vh;
   width: 100%;
   margin-left: 1em;
+  border: 1px solid rgb(199, 113, 214);
   border-radius: 7px;
-  background: rgba(201, 140, 220, 0.299);
+  background: rgba(201, 140, 220, 0.227);
   top: 1em;
   /* Credit to https://shadows.brumm.af/ for this layered box shadow  */
   box-shadow:
@@ -218,15 +218,10 @@ main {
   top: 3em;
 }
 
-
-
-
 .about-text-wrapper {
   width: 80vw;
-  margin: auto;
-  margin-top: 5em;
+  margin: .3rem;
   padding: 1em;
-  position: relative;
 }
 
 .about-text {
