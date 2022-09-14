@@ -8,13 +8,6 @@ function Bookshelf(books = []) {
     this.visibleBooks.unshift(book);
   };
 
-  // Hide book when remove button is clicked
-
-  this.removeBook = function (book) {
-    const index = this.books.indexOf(book);
-    this.visibleBooks.splice(index, 1);
-  };
-
   this.render = function () {
     document.querySelector('#app');
    

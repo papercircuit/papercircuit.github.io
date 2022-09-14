@@ -71,7 +71,7 @@ function Book(author, language, subject, title) {
       ul.classList.toggle('hidden');
       bookshelf.books.splice(index, 1);
       counter--;
-      counterElement.textContent = counter;
+      counterElement.textContent = `Number of visible books: ${counter}`;
     });
 
     // Set the text content of each li to the corresponding property of the book
