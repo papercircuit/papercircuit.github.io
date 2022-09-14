@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8" />
+  <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Bookshelf Data SUBMISSION</title>
+  <link rel="stylesheet" href="main.css" />
+  <link rel="stylesheet" href="nav.css">
+  <link rel="stylesheet" href="dropdown.css">
+  <link rel="stylesheet" href="popupform.css">
+</head>
+
+<body>
+  
+
+  <!-- NAVBAR -->
+
+  <nav class="nav-bar main">
+    <ul>
+      <li><a href="home.html"> Home </a></li>
+      <li><a href="about.html"> About </a></li>
+      <li><a href="contact.html"> Contact </a></li>
+    </ul>
+  </nav>
+
+  <main>
+    <h1>ABOUT</h1>
+    <p>Bookshelf is a website that allows users to search for books and add them to their own personal bookshelf. Users can also create their own books and add them to their bookshelf. The website is designed to be a simple and easy way to keep track of books that you have read or want to read.</p>
+  </main>
+
+
+  <!-- POPUP FORM -->
+  <!-- A button to open the popup form -->
+  <button class="open-button" onclick="openForm()">Open Form</button>
+
+  <!-- The form -->
+  <div class="form-popup" id="myForm">
+    <form action="/action_page.php" class="form-container">
+      <h1>Login</h1>
+
+      <label for="email"><b>Email</b></label>
+      <input type="text" placeholder="Enter Email" name="email" required>
+
+      <label for="psw"><b>Password</b></label>
+      <input type="password" placeholder="Enter Password" name="psw" required>
+
+      <button type="submit" class="btn login">Login</button>
+      <button type="button" class="btn cancel" onclick="closeForm()">Close</button>
+    </form>
+  </div>
+
+
+
+
+
+  <script src="index.js"></script>
+</body>
+
+</html>
