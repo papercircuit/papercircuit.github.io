@@ -37,12 +37,47 @@
             <p class="proj-text">I consider sketching a hobby/therapy. Pen or pencil on paper both excites and calms me.<br>
                 
             </p>
-            <a href="sketches/" target="_blank" rel="noopener noreferrer"><img alt="satellite visualizer"
+            <a class="sketch-link" href="sketches/" target="_blank" rel="noopener noreferrer"><img alt="sketch of building in new york"
                     class="proj-img" src="sketches/116th-and-Broadway-NYC-lo-res.jpeg"></a>
             <div class="proj-text-wrapper">
                 <p class="proj-text"></p>
             </div>
         </section>
+
+        <figure class="sketches"></figure>
+        <!-- For each jpeg in the sketches directory, create an image element and put it in a list -->
+
+        <script>
+          class Sketch {
+            constructor(name, url) {
+              this.name = name;
+              this.url = url;
+            }
+          }
+
+          class PhotoGrid {
+            constructor() {
+              this.sketches = [];
+            }
+
+            addSketch(name, url) {
+              this.sketches.push(new Sketch(name, url));
+            }
+
+            render() {
+              const sketches = document.querySelector('.sketches');
+              this.sketches.forEach((sketch) => {
+                const sketchElement = document.createElement('img');
+                sketchElement.src = sketch.url;
+                sketchElement.alt = sketch.name;
+                sketches.appendChild(sketchElement);
+              });
+            }
+          }
+           
+
+          
+        </script>
         
     </main>
 
