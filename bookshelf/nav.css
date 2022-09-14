@@ -1,14 +1,16 @@
 .main{
-    margin: 50px;
+   
     background-color: #d75d77;
     border: 5px solid pink; 
+
   }
   
   .nav-bar{
     word-spacing: 40px;
     font-size: 20px;
     font-family: arial;
-    
+    display: flex;
+    justify-content: center;
   }
   
   .nav-bar ul li a{
