@@ -1,97 +1,22 @@
-const sortButton = document.getElementById('sort-button');
-const sortInput = document.getElementById('sort-method')
-const sortSelection = sortInput.options[sortInput.selectedIndex];
+// --------------------------
+//#region Sorting
+// --------------------------
 
-document.getElementById('title-A-Z').value = sortSelection.value;
+const sortBy = document.querySelector(".sortBy");
 
+// NOTE: This only sorts by the titles of the books!
+sortBy.addEventListener("change", () => {
+  const query = sortBy.value;
+  let sortFn;
 
-function sortArray(e) {
-    let sorted = [];
-    const sortInput = e.target.value;
+  if (query === "titleaz") {
+    sortFn = (a, b) => a.title.localeCompare(b.title);
+  } else if (query === "titleza") {
+    sortFn = (a, b) => b.title.localeCompare(a.title);
+  }
 
-    // Sort by title A-Z
-    if (sortInput === "title-A-Z") {
-        sorted = Bookdata.sort((a, b) => a.title.localeCompare(b.title));
+  bookshelf.sortVisibleBooks(sortFn);
+  render();
+});
 
-        // Clear bookshelf
-        freshBookshelf.books = [];
-        console.log("Sorted by title A-Z", sorted)
-        log.textContent = JSON.stringify(sorted);
-
-        for (const bookInfo of sorted) {
-            const book = new Book(
-                bookInfo.author,
-                bookInfo.language,
-                bookInfo.subject,
-                bookInfo.title
-            );
-            freshBookshelf.addBook(book);
-        }
-    
-    };
-    // Sort by title A-Z
-    if (sortInput === "title-A-Z") {
-        sorted = bookData.sort((a, b) => b.title.localeCompare(a.title));
-
-        // Clear bookshelf
-        freshBookshelf.books = [];
-        console.log("Sorted by title Z-A", sorted)
-        log.textContent = JSON.stringify(sorted);
-
-        for (const bookInfo of sorted) {
-            const book = new Book(
-                bookInfo.author,
-                bookInfo.language,
-                bookInfo.subject,
-                bookInfo.title
-            );
-            freshBookshelf.addBook(book);
-        }
-    
-    };
-    // Sort by author-A-Z
-    if (sortInput === "author-A-Z") {
-        sorted = bookData.map(bookData.sort((a, b) => a.author.localeCompare(b.author)));
-
-        // Clear bookshelf
-        freshBookshelf.books = [];
-        console.log("Sorted by author A-Z", sorted)
-        log.textContent = JSON.stringify(sorted);
-
-        for (const bookInfo of sorted) {
-            const book = new Book(
-                bookInfo.author,
-                bookInfo.language,
-                bookInfo.subject,
-                bookInfo.title
-            );
-            freshBookshelf.addBook(book);
-        }
-  
-    };
-    // Sort by author Z-A
-    if (sortInput === "author-Z-A") {
-        sorted = bookData.sort((a, b) => b.author.localeCompare(a.author));
-
-        // Clear bookshelf
-        freshBookshelf.books = [];
-        console.log("Sorted by author Z-A", sorted)
-        log.textContent = JSON.stringify(sorted);
-
-        for (const bookInfo of sorted) {
-            const book = new Book(
-                bookInfo.author,
-                bookInfo.language,
-                bookInfo.subject,
-                bookInfo.title
-            );
-            freshBookshelf.addBook(book);
-        }
-       
-    };
-
-    app.replaceChildren(freshBookshelf.render());
-
-}
-
-
+//#endregion Sorting

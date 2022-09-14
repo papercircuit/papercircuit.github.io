@@ -13,6 +13,16 @@ for (const bookInfo of bookData) {
     freshBookshelf.addBook(book);
 }
 
+//Render bookshelf
+const render = () => {
+    bookList.replaceChildren(freshBookshelf.render());
+};
+
+// Render the first time the page loads
+freshBookshelf.filterVisibleBooks(() => true);
+freshBookshelf.sortVisibleBooks((a, b) => a.title.localeCompare(b.title));
+render();
+
 const sort = () => {
     // Remove list if it exists
     const existingBookshelf = document.querySelector(".bookshelf-element");

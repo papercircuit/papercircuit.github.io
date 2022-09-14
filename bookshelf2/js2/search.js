@@ -1,5 +1,5 @@
 const input = document.querySelector('search');
-const log = document.getElementById('log');
+const log = document.querySelector('log');
 // const sort = document.querySelector('sort-method');
 // sort.addEventListener('select', sortArray);
 

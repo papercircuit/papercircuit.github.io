@@ -18,8 +18,7 @@ body {
   display: flex;
   min-width: 300px;
   flex-direction: column;
-  background: rgb(10,5,89);
-  background: linear-gradient(281deg, rgba(10,5,89,1) 0%, rgba(26,89,120,1) 47%, rgba(0,198,255,1) 100%);
+  background: linear-gradient(281deg, rgba(10, 5, 89, 1) 0%, rgba(26, 89, 120, 1) 47%, rgba(0, 198, 255, 1) 100%);
   font-family: 'Source Code Pro', monospace;
   color: white;
 }
@@ -103,7 +102,7 @@ main {
   transform: rotate(-6deg);
   transition: all .8s ease-out;
   margin-bottom: 1em;
- 
+
 }
 
 .name-logo:hover {
@@ -128,8 +127,10 @@ main {
   position: relative;
   padding-top: 1em;
   width: 100%;
-  min-width: 20em;
-  min-height: 45em;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
 
 }
 
@@ -138,28 +139,37 @@ main {
   margin: 4em;
 }
 
-.coffee-container a {
-  text-decoration: none;
-  display: flex;
-  justify-content: center;
-}
-
-
-/* Material Icons from google fonts */
-.material-icons.md-48 {
-  font-size: 30em;
-  color: rgba(248, 245, 42, 0.242);
-  border: 0;
+.coffee-img {
+  height: 19em;
   transition: all 1s ease-out;
   margin: auto;
+  z-index: 2;
+  position: relative;
+
 }
 
-.material-icons.md-48:hover {
-  margin: auto;
-  font-size: 31em;
-  color: rgb(54, 24, 2);
-  transition: all 2s ease;
+
+
+.bean-img {
+  width: 100%;
+  display: inline-block;
+  top: 3.5rem;
+  left: 4.6rem;
+  position: absolute;
+  z-index: 1;
+  transition: all 1s ease-out;
 }
+
+.bean-img:hover {
+  width: 8rem;
+  top: 6.5rem;
+  left: 4.6rem;
+  position: absolute;
+  z-index: 1;
+  transition: all 1s ease-in;
+}
+
+
 
 /* ABOUT */
 
@@ -181,16 +191,16 @@ main {
   top: 1em;
   /* Credit to https://shadows.brumm.af/ for this layered box shadow  */
   box-shadow:
-      1.8px 1.7px 0.4px -10px rgba(0, 0, 0, 0.067),
-      4.2px 4px 0.9px -10px rgba(0, 0, 0, 0.097),
-      7.5px 7.3px 1.6px -10px rgba(0, 0, 0, 0.12),
-      12.5px 12px 2.7px -10px rgba(0, 0, 0, 0.14),
-      20.6px 19.8px 4.5px -10px rgba(0, 0, 0, 0.163),
-      36.1px 34.7px 7.9px -10px rgba(0, 0, 0, 0.193),
-      78px 75px 17px -10px rgba(0, 0, 0, 0.26);
+    1.8px 1.7px 0.4px -10px rgba(0, 0, 0, 0.067),
+    4.2px 4px 0.9px -10px rgba(0, 0, 0, 0.097),
+    7.5px 7.3px 1.6px -10px rgba(0, 0, 0, 0.12),
+    12.5px 12px 2.7px -10px rgba(0, 0, 0, 0.14),
+    20.6px 19.8px 4.5px -10px rgba(0, 0, 0, 0.163),
+    36.1px 34.7px 7.9px -10px rgba(0, 0, 0, 0.193),
+    78px 75px 17px -10px rgba(0, 0, 0, 0.26);
 
   transform: rotate(5deg);
- 
+
   z-index: 2;
 }
 
@@ -252,14 +262,7 @@ footer {
     position: relative;
   }
 
-  .material-icons.md-48 {
-    font-size: 17em;
-    color: rgba(248, 245, 42, 0.242);
-  }
-
-  .material-icons.md-48:hover {
-    font-size: 18em;
-    color: rgb(54, 24, 2);
-    transition: all 1s ease;
-  }
+  /* Need to add coffee-img media queries */
 }
+
+;
