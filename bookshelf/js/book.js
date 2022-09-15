@@ -68,9 +68,11 @@ function Book(author, language, subject, title) {
     removeButton.addEventListener('click', () => {
       const counterElement = document.querySelector('.counter');
       const index = bookshelf.books.indexOf(this);
+      // Remove book by adding a class of 'hidden'
       ul.classList.toggle('hidden');
-      bookshelf.books.splice(index, 1);
+      // Counter -1 for every book removed
       counter--;
+      // Update counter
       counterElement.textContent = `Number of visible books: ${counter}`;
     });
 

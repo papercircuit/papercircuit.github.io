@@ -7,7 +7,7 @@ const userInputAuthor = document.querySelector(".userInputAuthor");
 const userInputSubject = document.querySelector(".userInputSubject");
 const userInputLanguage = document.querySelector(".userInputLanguage");
 const userSubmitBtn = document.querySelector(".userSubmitBtn");
-const hider = document.querySelector(".hider");
+
 
 // Load in book data
 for (const bookInfo of bookData) {
@@ -31,34 +31,34 @@ render();
 
 //#endregion Initialization
 
-// --------------------------
-//#region Searching
-// --------------------------
+
+//-----------------SERACH FUNCTION-----------------//
 
 const searchInput = document.querySelector(".search-input");
 const searchBtn = document.querySelector(".searchBtn");
 
-
+// Search for books. Ignore "the" when sorting.
 searchBtn.addEventListener("click", () => {
   const query = searchInput.value.toLowerCase();
   const searchFn = (b) => {
-    if (query.includes("the") === true) {
-      query.replace("the", "");
-    }
-    return b.title.toLowerCase().includes(query);
+   
+    return (
+      b.title.toLowerCase().includes(query) 
+      // b.author.toLowerCase().includes(query) ||
+      // b.subject.toLowerCase().includes(query) ||
+      // b.language.toLowerCase().includes(query)
+    );
   };
 
   bookshelf.filterVisibleBooks(searchFn);
   render();
 });
 
-//#endregion Searching
-// --------------------------
 
 
-// --------------------------
-//#region User Input Custom Book
-// --------------------------
+
+// --------------------------USER INPUT--------------------------
+
 
 
 userSubmitBtn.addEventListener("click", () => {
