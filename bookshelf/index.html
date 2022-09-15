@@ -10,10 +10,12 @@
   <link rel="stylesheet" href="nav.css">
   <link rel="stylesheet" href="dropdown.css">
   <link rel="stylesheet" href="popupform.css">
+  <link rel="stylesheet"
+    href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@20..48,100..700,0..1,-50..200" />
 </head>
 
 <body>
- 
+
   <!-- NAVBAR -->
 
   <nav class="nav-bar main">
@@ -24,6 +26,22 @@
     </ul>
   </nav>
 
+  <!-- COLOR PICKER -->
+
+  <label for="colorPicker">
+    Choose a different background color:
+    <i class="material-symbols-outlined">
+      palette
+    </i>
+    <input type="color" list="mycolors" name="colorPicker" id="colorPicker" value="#222fff">
+  </label>
+
+  <!-- // Color Options -->
+  <datalist id="mycolors">
+    <option>#5a9ed6</option>
+    <option>#B2DBBF</option>
+    <option>#81667A</option>
+  </datalist>
 
   <!-- SEARCH BAR -->
 
@@ -32,13 +50,20 @@
     <input class="search-input " placeholder="Search">
     <button class="searchBtn">Search</button>
     <br>
+    <!-- VISIBLE BOOKS COUNTER -->
+
+    <h3 class="counter"></h3>
+
     <br>
+
+    <hr>
+
     <!-- SORT DROPDOWN -->
 
-    </section>
-    <section>
+  </section>
+  <section>
     <h1 class="dropdown-header">Sort by:</h1>
-      
+
     <select class="sortBy">
       <option value="titleaz">Title A-Z</option>
       <option value="titleza">Title Z-A</option>
@@ -48,7 +73,9 @@
       <option value="subject">Subject</option>
     </select>
   </section>
-
+  <br>
+  <br>
+  <hr>
 
   <!--  USER INPUT Form with text inputs to allow users to create new books and add them to the bookshelf -->
 
@@ -65,9 +92,6 @@
   <br>
   <input type="submit" value="Submit" class="userSubmitBtn">
 
-  <!-- VISIBLE BOOKS COUNTER -->
-
-  <h3 class="counter"></h3>
 
   <!-- FAVORITE BOOKS SECTION -->
 
@@ -115,6 +139,8 @@
   <script src="js/book-data.js"></script>
   <script src="js/book.js"></script>
   <script src="js/bookshelf.js"></script>
+  <script src="js/color-picker.js"></script>
+  <script src="js/short-stories.js"></script>
   <script src="index.js"></script>
 </body>
 

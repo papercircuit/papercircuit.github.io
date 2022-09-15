@@ -37,22 +37,30 @@ render();
 const searchInput = document.querySelector(".search-input");
 const searchBtn = document.querySelector(".searchBtn");
 
-// Search for books. Ignore "the" when sorting.
+// Search for books
+//use the `filter` method on search terms so that the word "THE" doesn't affect any search term outcomes
 searchBtn.addEventListener("click", () => {
   const query = searchInput.value.toLowerCase();
   const searchFn = (b) => {
-   
+     if(query.includes("the")){
+      //replace "the" with an empty string so that it doesn't affect the search
+      const filteredQuery = query.replace("the", "");
+      return filteredQuery;
+     }
     return (
-      b.title.toLowerCase().includes(query) 
-      // b.author.toLowerCase().includes(query) ||
-      // b.subject.toLowerCase().includes(query) ||
-      // b.language.toLowerCase().includes(query)
+   
+      b.title.toLowerCase().includes(query) ||
+      b.author[0].toLowerCase().includes(query) ||
+      b.subject[0].toLowerCase().includes(query) ||
+      b.language.includes(query)
     );
   };
 
   bookshelf.filterVisibleBooks(searchFn);
   render();
 });
+
+
 
 
 

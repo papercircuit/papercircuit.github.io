@@ -25,7 +25,7 @@ function Bookshelf(books = []) {
     ul.replaceChildren(...books);
     books.forEach(element => {
       counter++;
-      counterElement.textContent = `Number of visible books: ${counter}`;
+      counterElement.textContent = `Number of matching books: ${counter}`;
     });
     
     return ul;

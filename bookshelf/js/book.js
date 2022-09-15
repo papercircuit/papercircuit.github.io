@@ -73,7 +73,7 @@ function Book(author, language, subject, title) {
       // Counter -1 for every book removed
       counter--;
       // Update counter
-      counterElement.textContent = `Number of visible books: ${counter}`;
+      counterElement.textContent = `Number of matching books: ${counter}`;
     });
 
     // Set the text content of each li to the corresponding property of the book

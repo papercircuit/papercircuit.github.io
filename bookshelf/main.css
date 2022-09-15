@@ -11,12 +11,34 @@ body {
     background-position: -400px; */
     min-width: 300px;
     background-color: rgb(90, 159, 214);
- 
+    color: white;
     font: bold 1em/100% "Helvetica Neue", Arial, sans-serif;
     padding: 2em 0;
     text-align: center;
     z-index: 1;
 }
+
+#colorPicker {
+    height: 5rem;
+    width: 5rem;
+    display: none;
+    padding: 4rem;
+}
+
+
+i.material-symbols-outlined {
+    padding: 1rem;
+    font-size: 49px;
+    font-variation-settings:
+        'FILL' 0,
+        'wght' 800,
+        'GRAD' 0,
+        'opsz' 48,
+    ;
+
+
+}
+
 
 h1 {
     font-size: 2em;
@@ -31,7 +53,7 @@ h2 {
 h3 {
     font-size: 1.2em;
     margin: 0 0 0.5em;
-    color: white;
+
     margin: 1rem;
 }
 
@@ -144,6 +166,8 @@ input {
 
 .favorite-books-section {
     border: 1px solid pink;
+    padding: 1rem;
+    margin: 1rem;
 }
 
 .hidden {
