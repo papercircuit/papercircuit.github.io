@@ -19,15 +19,29 @@ function Bookshelf(books = []) {
     document.querySelector('#app');
     // Set counter to 0 for every render
     counter = 0;
+    let englishCounter = 0;
+    // Get counter elements
     const counterElement = document.querySelector('.counter');
+    const englishCounterElement = document.querySelector('.englishCounter');
     const ul = Object.assign(document.createElement("ul"), { className: "bookshelf" });
     const books = this.visibleBooks.map((b) => b.render());
     ul.replaceChildren(...books);
     books.forEach(element => {
+
+
+      // Counter +1 for every book rendered
       counter++;
+      // Update counter
       counterElement.textContent = `Number of matching books: ${counter}`;
+      englishCounterElement.textContent = `Number of English books: ${englishCounter}`
+      // If element.language is English, englishCounter +1
+      if(this.language == "en") {
+        englishCounter++;
+      }
+      
+      englishCounterElement.textContent = `Number of English books: ${englishCounter}`;
     });
-    
+
     return ul;
   };
 

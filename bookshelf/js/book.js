@@ -7,6 +7,8 @@ function Book(author, language, subject, title) {
   this.comments = [];
   // Set every book to NOT be a favorite by default
   this.favorite = false;
+  // Set every book to NOT be checked out by default
+  this.checkedOut = false;
 
 
   this.render = () => {
@@ -68,6 +70,8 @@ function Book(author, language, subject, title) {
     removeButton.addEventListener('click', () => {
       const counterElement = document.querySelector('.counter');
       const index = bookshelf.books.indexOf(this);
+      // Show book as checked out
+      this.checkedOut = true;
       // Remove book by adding a class of 'hidden'
       ul.classList.toggle('hidden');
       // Counter -1 for every book removed
@@ -87,7 +91,7 @@ function Book(author, language, subject, title) {
     // Set the button text content
     favButton.textContent = "FAV/UNFAV📔";
     commentButton.textContent = "WRITE A COMMENT 📝";
-    removeButton.textContent = "REMOVE 🗑";
+    removeButton.textContent = "CHECK OUT 📚";
 
     // Append the li's and buttons to the ul
     ul.append(li1, li2, li3, li4, li5, favButton, commentButton, removeButton);
