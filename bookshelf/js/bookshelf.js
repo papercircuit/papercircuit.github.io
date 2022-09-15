@@ -17,7 +17,8 @@ function Bookshelf(books = []) {
 
   this.render = function () {
     document.querySelector('#app');
-   
+    // Set counter to 0 for every render
+    counter = 0;
     const counterElement = document.querySelector('.counter');
     const ul = Object.assign(document.createElement("ul"), { className: "bookshelf" });
     const books = this.visibleBooks.map((b) => b.render());
@@ -26,7 +27,7 @@ function Bookshelf(books = []) {
       counter++;
       counterElement.textContent = `Number of visible books: ${counter}`;
     });
-   
+    
     return ul;
   };
 

@@ -1,3 +1,5 @@
+// Live demo at https://papercircuit.github.io/bookshelf/index.html
+
 const bookList = document.querySelector("#app");
 const bookshelf = new Bookshelf();
 const userInputTitle = document.querySelector(".userInputTitle");
