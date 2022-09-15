@@ -113,8 +113,7 @@ sortBy.addEventListener("change", () => {
 
 
 
-// --------------------------POPUP--------------------------
-
+// When open form button is clicked openForm() is called
 function openForm() {
   document.getElementById("myForm").style.display = "block";
 }

@@ -16,6 +16,8 @@
 
 <body>
 
+  
+
   <!-- NAVBAR -->
 
   <nav class="nav-bar main">
@@ -25,6 +27,12 @@
       <li><a href="contact.html"> Contact </a></li>
     </ul>
   </nav>
+
+  <div class="login-container">
+    <ul id="listuser">
+      <h3> All users here: </h3>
+    </ul> 
+  </div>
 
   <!-- COLOR PICKER -->
 
@@ -109,17 +117,17 @@
 
   <!-- The form -->
   <div class="form-popup" id="myForm">
-    <form action="/action_page.php" class="form-container">
+    <form id="loginForm" action="/action_page.php" class="form-container">
       <h1>Login</h1>
 
       <label for="email"><b>Email</b></label>
-      <input type="text" placeholder="Enter Email" name="email" required>
+      <input type="text" placeholder="Enter Email" class="email" name="email" required>
 
       <label for="psw"><b>Password</b></label>
-      <input type="password" placeholder="Enter Password" name="psw" required>
+      <input type="password" placeholder="Enter Password" class="psw" name="psw" required>
 
       <button type="submit" class="btn login">Login</button>
-      <button type="button" class="btn cancel" onclick="closeForm()">Close</button>
+      <button type="button" class="btn cancel" onclick="Login()">Close</button>
     </form>
   </div>
 
@@ -140,6 +148,7 @@
   <script src="js/bookshelf.js"></script>
   <script src="js/color-picker.js"></script>
   <script src="js/short-stories.js"></script>
+  <script src="js/login.js"></script>
   <script src="index.js"></script>
 </body>
 
