@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <link rel="stylesheet" type="text/css" href="style.css">
+
+  <title>Coffee Clicker</title>
+</head>
+
+<body>
+  <main class="column-container">
+    <section class="column">
+      <div class="container left">
+        <div class="counter-container">Coffee: <span id="coffee_counter">0</span></div>
+        <div class="cps-container"><span id="cps">0</span> coffee/second</div>
+        <button id="big_coffee">☕️</button>
+        <button id="save">Save</button>
+        <button id="load">Load</button>
+        <button id="reset">Reset</button>
+      </div>
+      <div class="container left beans">
+        <form action="https://www.paypal.com/donate" method="post" target="_top">
+          <img src="PointingHand.gif" alt="">
+          <button id="buy_beans" name="submit" title="PayPal - The safer, easier way to pay online!" alt="Donate with PayPal button"><a href="https://paypal.me/kennymakesmusic?country.x=US&locale.x=en_US">BUY BEANS</a></button>
+          </form>
+          <section id="current-beans"><span>These are your beans</span></section>
+      </div>
+    </section>
+    <section class="column">
+      <div class="column-header">Coffee Producers</div>
+      <div class="container right" id="producer_container">
+      </div>
+    </section>
+    <script type="text/javascript" src="data.js"></script>
+    <script type="text/javascript" src="script.js"></script>
+  </main>
+</body>
+
+</html>
