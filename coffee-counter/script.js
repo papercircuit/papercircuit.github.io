@@ -3,6 +3,7 @@
  **************/
 let coffeeCount = 0;
 let totalCPS = 0;
+const feedback = document.querySelector('#feedback');
 
 
 function updateCoffeeView(coffeeCount) {
@@ -74,8 +75,8 @@ function makeProducerDiv(producer) {
   const html = `
   <div class="producer-column">
     <div class="producer-title">${displayName}</div>
-    <button type="button" id="buy_${producer.id}">Buy</button>
-    <button type="button" id="sell_${producer.id}">Sell</button>
+    <button type="button" id="buy" class="buy_${producer.id}">Buy</button>
+    <button type="button" id="sell" class="sell_${producer.id}">Sell</button>
   </div>
   <div class="producer-column">
     <div>Quantity: ${producer.qty}</div>
@@ -171,10 +172,8 @@ function updateCPSView(cps) {
 function updatePrice(oldPrice) {
   // your code here
   //Return the price rounded down to the nearest integer
-
   // Set game pace here by changing multiplier
   const multiplier = 1.5;
-
   return Math.floor(oldPrice * multiplier);
 }
 
@@ -198,8 +197,8 @@ function attemptToBuyProducer(data, producerId) {
     getProducerById(data, producerId).qty += 1;
     //Update the price of the producer to 125% of the previous price, rounded down
     getProducerById(data, producerId).price = updatePrice(getProducerById(data, producerId).price);
-
     data.totalCPS += getProducerById(data, producerId).cps;
+    feedback.innerText = `You bought a ${makeDisplayNameFromId(producerId)}!`;
     return true;
   } else {
     return false;
@@ -215,22 +214,25 @@ function attemptToBuyProducer(data, producerId) {
 // 5) updates the coffee count on the DOM, reflecting that coffee has been spent, when a purchase succeeds
 // 6) updates the total CPS on the DOM, reflecting that the new producer's CPS has been added
 
+
 function buyButtonClick(event, data) {
   // your code here
-  //Make sure the event is a click on a button element
-  if (event.target.tagName === 'BUTTON') {
-    // If the player can afford the producer, attempt to buy the producer
-    if (attemptToBuyProducer(data, event.target.id.slice(4))) {
-      renderProducers(data);
-      updateCoffeeView(data.coffee);
-      updateCPSView(data.totalCPS);
-      renderBeans(data);
-    } else {
-      //If the player cannot afford the producer, show an alert box with the message "Not enough coffee!"
-      alert('Not enough coffee!');
-    }
+  // Producer id is the last part of the class name
+  const producerId = event.target.className.split('_')[1];
+  //If the player can afford the producer, attempt to buy the producer
+  if (canAffordProducer(data, producerId)) {
+    attemptToBuyProducer(data, producerId);
+    //Update the coffee count on the DOM
+    updateCoffeeView(data.coffee);
+    //Update the total CPS on the DOM
+    updateCPSView(data.totalCPS);
+    //Render the updated producers
+    renderProducers(data);
+  } else {
+    feedback.innerText = "Not enough coffee";
   }
 }
+
 
 // The sellButtonClick function
 // Removes a producer from the player's inventory if the player has at least one of that producer
@@ -239,25 +241,25 @@ function buyButtonClick(event, data) {
 // Updates the coffee count on the DOM, reflecting that coffee has been earned, when a sale succeeds
 // Updates the total CPS on the DOM, reflecting that the sold producer's CPS has been removed
 
-// Can't get this to work yet :(
-
 function sellButtonClick(event, data) {
   // your code here
-  //Make sure the event is a click on a button element
-  if (event.target.tagName === 'BUTTON') {
-    //If the player has at least one of the producer, sell the producer
-    if (getProducerById(data, event
-      .target.id.slice(4)).qty > 0) {
-      //Decrement the quantity of the producer in question
-      getProducerById(data, event.target.id.slice(4)).qty -= 1;
-      //Increment the player's coffee by the current price of the producer
-      data.coffee += getProducerById(data, event.target.id.slice(4)).price;
-      //Update the total CPS
-      data.totalCPS -= getProducerById(data, event.target.id.slice(4)).cps;
-      renderProducers(data);
-      updateCoffeeView(data.coffee);
-      updateCPSView(data.totalCPS);
-    }
+  // Producer id is the last part of the class name
+  const producerId = event.target.className.split('_')[1];
+  //If the player has at least one of the producer, attempt to sell the producer
+  if (getProducerById(data, producerId).qty > 0) {
+    //Increment the player's coffee by the current price of the producer
+    data.coffee += getProducerById(data, producerId).price;
+    //Decrement the quantity of the producer in question
+    getProducerById(data, producerId).qty -= 1;
+    //Update the total CPS
+    data.totalCPS -= getProducerById(data, producerId).cps;
+    //Update the coffee count on the DOM
+    updateCoffeeView(data.coffee);
+    //Update the total CPS on the DOM
+    updateCPSView(data.totalCPS);
+    //Render the updated producers
+    renderProducers(data);
+    feedback.innerText = `You sold a ${makeDisplayNameFromId(producerId)}`;
   }
 }
 
@@ -265,7 +267,8 @@ function sellButtonClick(event, data) {
 
 
 
-  
+
+
 // The tick function
 // ✓ increases coffee count by the total CPS
 // ✓ updates the DOM to reflect this new coffee count
@@ -292,11 +295,7 @@ function calculateCPS(data) {
   return data.totalCPS;
 }
 
-// - Periodically save the game state using `window.localStorage` so that the player doesn't have to start over every time they refresh the page; load the game state from `window.localStorage` when the page loads. 
 
-function populateStorage(data) {
-  localStorage.setItem('coffeeClickerData', JSON.stringify(data));
-}
 
 // - Add a "reset" button that resets the game state to the initial state and updates the DOM to reflect this.
 function resetGame() {
@@ -306,28 +305,29 @@ function resetGame() {
   location.reload();
 }
 document.getElementById('reset').addEventListener('click', resetGame);
-// - Add a "save" button that saves the game state to `window.localStorage` and a "load" button that loads the game state from `window.localStorage`. (You'll need to add some HTML elements to the page to make this work.)
+
+
 function saveGame() {
-  //Save the game state to window.localStorage
-  populateStorage(data);
-  alert('Game saved!');
+  //Save the game state to localStorage
+  localStorage.setItem('data', JSON.stringify(data));
+  feedback.innerText = 'Game saved!';
 }
 document.getElementById('save').addEventListener('click', saveGame);
 
-// - Add a "load" button that loads the game state from `window.localStorage`. (You'll need to add some HTML elements to the page to make this work.)
+
 function loadGame() {
   //Load the game state from window.localStorage
-  data = JSON.parse(localStorage.getItem('coffeeClickerData'));
+  data = JSON.parse(localStorage.getItem('data'));
   //Update the DOM to reflect the new game state
   updateCoffeeView(data.coffee);
   updateCPSView(data.totalCPS);
   renderProducers(data);
-  alert('Game loaded!');
+  feedback.innerText = 'Game loaded';
 }
 document.getElementById('load').addEventListener('click', loadGame);
 
 
-// Render one bean png for each coffee in the data object
+// Render one bean png for each "coffee" in the data object
 function renderBeans(data) {
   const beanContainer = document.getElementById('current-beans');
   const bean = document.createElement('img');
@@ -338,10 +338,16 @@ function renderBeans(data) {
   //Loop through the number of coffee and add a bean to the bean container
   for (let i = 0; i < data.coffee; i++) {
     beanContainer.appendChild(bean.cloneNode());
-
   }
 }
 
+// Listen for click on buy beans button and add 100 coffee to the data object
+document.getElementById('buy-beans').addEventListener('click', function () {
+  data.coffee += 100;
+  renderBeans(data);
+  updateCoffeeView(data.coffee);
+  feedback.innerText = 'SO MANY BEANS';
+});
 
 
 
@@ -372,12 +378,17 @@ if (typeof process === 'undefined') {
   // Pass in the browser event and our data object to the event listener
   const producerContainer = document.getElementById('producer_container');
   producerContainer.addEventListener('click', event => {
+    if(event.target.id === 'buy') {
     buyButtonClick(event, data);
+  } else if (event.target.id === 'sell') {
+    sellButtonClick(event, data);
+  }
   });
 
   // Call the tick function passing in the data object once per second
   setInterval(() => tick(data), 1000);
 }
+
 // Meanwhile, if we aren't in a browser and are instead in node
 // we'll need to exports the code written here so we can import and
 // Don't worry if it's not clear exactly what's going on here;
