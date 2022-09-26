@@ -65,8 +65,6 @@ function makeDisplayNameFromId(id) {
   return titleCasedID.join(' ');
 }
 
-
-// You shouldn't need to edit this function-- its tests should pass once you've written makeDisplayNameFromId
 function makeProducerDiv(producer) {
   const containerDiv = document.createElement('div');
   containerDiv.className = 'producer';
@@ -79,9 +77,10 @@ function makeProducerDiv(producer) {
     <button type="button" id="sell" class="sell--${producer.id}">Sell</button>
   </div>
   <div class="producer-column">
-    <div>Quantity: ${producer.qty}</div>
+    <div>Price: ${currentCost} beans</div>
+    <div>You have: ${producer.qty}</div>
     <div>Coffee/second: ${producer.cps}</div>
-    <div>Cost: ${currentCost} coffee</div>
+    
   </div>
   `;
   containerDiv.innerHTML = html;
@@ -380,15 +379,18 @@ if (typeof process === 'undefined') {
   // Pass in the browser event and our data object to the event listener
   const producerContainer = document.getElementById('producer_container');
   producerContainer.addEventListener('click', event => {
-    if(event.target.id === 'buy') {
-    buyButtonClick(event, data);
-  } else if (event.target.id === 'sell') {
-    sellButtonClick(event, data);
-  }
+    if (event.target.id === 'buy') {
+      buyButtonClick(event, data);
+    } else if (event.target.id === 'sell') {
+      sellButtonClick(event, data);
+    }
   });
 
   // Call the tick function passing in the data object once per second
   setInterval(() => tick(data), 1000);
+
+  //Update rendered beans every 100ms
+  setInterval(() => renderBeans(data), 100);
 }
 
 // Meanwhile, if we aren't in a browser and are instead in node
