@@ -72,7 +72,7 @@ function makeProducerDiv(producer) {
   const currentCost = producer.price;
   const html = `
   <div class="producer-column">
-    <div class="producer-title">${displayName}</div>
+    <div class="producer-title">${displayName}⇢</div>
     <button type="button" id="buy" class="buy--${producer.id}">Buy</button>
     <button type="button" id="sell" class="sell--${producer.id}">Sell</button>
   </div>
