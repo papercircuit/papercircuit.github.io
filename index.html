@@ -1,0 +1,141 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Kenny Johnson ␥ Designer ⇥ Developer</title>
+
+    <link rel="stylesheet" href="css/style.css">
+    <link rel="stylesheet" href="css/wave.css">
+    <link rel="stylesheet" href="coffee-animation.css">
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+    <link rel="icon" type="image/x-icon" href="/imgs/favicon.ico">
+    <link rel="stylesheet" href="https://fonts.googleapis.com/icon?family=Material+Icons">
+    <link rel="shortcut icon" href="favicon.ico" type="image/x-icon">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Source+Code+Pro:ital,wght@0,300;0,400;1,700&display=swap"
+        rel="stylesheet">
+
+</head>
+
+<body>
+    <header>
+        <nav class="main-nav">
+            <ul class="horizontal nav-list">
+                <li><a href="index.html">Home</a></li>
+                <li><a href="projects.html">Projects</a></li>
+                <!-- <li><a href="art.html">Art</a></li> -->
+
+            </ul>
+        </nav>
+    </header>
+
+    <main class="container">
+        <h1 class="name-logo"><a href="/">Kenny Johnson</a></h1>
+        <h2 class="sub-heading"> Designer ␥ Developer </h2>
+
+        <!--Wave Container-->
+        <div class="wave-container">
+            <svg class="waves" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink"
+                viewBox="20 24 150 28" preserveAspectRatio="none" shape-rendering="auto">
+                <defs>
+                    <path id="gentle-wave"
+                        d="M-160 44c30 0 58-18 88-18s 58 18 88 18 58-18 88-18 58 18 88 18 v44h-352z" />
+                </defs>
+                <g class="parallax">
+                    <use xlink:href="#gentle-wave" x="48" y="0" fill="rgba(950,215,200,0.6" />
+                    <use xlink:href="#gentle-wave" x="48" y="3" fill="rgba(180,100,115,0.4)" />
+                    <use xlink:href="#gentle-wave" x="48" y="5" fill="rgba(150,200,255,0.2)" />
+                    <use xlink:href="#gentle-wave" x="48" y="7" fill="rgba(150,200,600,0.2)" />
+                </g>
+            </svg>
+        </div>
+        <!--Waves end-->
+
+ 
+
+
+        <div class="coffee-text-container">
+            <h3 class="coffee-text">Hi, I'm Kenny and I like making coffee and fun websites. Take a look around! I
+                work mostly with Javascript and I am currently learning React. </h3>
+
+            <br>
+            <br>
+            <hr>
+            <br>
+            <br>
+
+            <div class="about-wrapper">
+                <div class="about-img-bg">
+                    <img alt="portrait photo of kenny with forest background" class="about-img" src="imgs/kenny.jpeg" />
+                </div>
+
+                <div class="about-text-wrapper">
+                    <!-- <p class="about-text">asdf</p>             -->
+                </div>
+            </div>
+            <br>
+            <br>
+            <hr>
+        </div>
+
+        <div class="coffee-animation">
+            <div class="saucer">
+            </div>
+            <div class="cup">
+                <div class="top">
+                    <div class="vapour">
+                        <span style="--i:1;"></span>
+                        <span style="--i:3;"></span>
+                        <span style="--i:16;"></span>
+                        <span style="--i:5;"></span>
+                        <span style="--i:13;"></span>
+                        <span style="--i:20;"></span>
+                        <span style="--i:6;"></span>
+                        <span style="--i:7;"></span>
+                        <span style="--i:10;"></span>
+                        <span style="--i:8;"></span>
+                        <span style="--i:17;"></span>
+                        <span style="--i:11;"></span>
+                        <span style="--i:12;"></span>
+                        <span style="--i:14;"></span>
+                        <span style="--i:2;"></span>
+                        <span style="--i:9;"></span>
+                        <span style="--i:15;"></span>
+                        <span style="--i:4;"></span>
+                        <span style="--i:19;"></span>
+                    </div>
+                    <div class="circle">
+                        <div class="coffee"></div>
+                    </div>
+                </div>
+
+                <div class="handle">
+
+                </div>
+            </div>
+        </div>
+
+
+
+
+
+
+    </main>
+
+    <footer>
+        <a href="mailto:kenny.johnson.nyc@gmail.com" target="_blank">
+            <!-- GIF courtesy of https://gifcities.org/ -->
+            <span style="display: block;">Send me an email</span>
+            <img alt="retro email gif" src="imgs/email.gif" />
+        </a>
+    </footer>
+
+    <script src="script.js"></script>
+</body>
+
+</html>
