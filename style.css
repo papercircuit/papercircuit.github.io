@@ -1,0 +1,183 @@
+@font-face {
+  font-family: 'Santana-BlackCondensed';
+  src: url(starbucks/Santana-BlackCondensed.ttf);
+}
+
+@font-face {
+  font-family: 'Santana-Black';
+  src: url(starbucks/Santana-Black.ttf);
+}
+
+* {
+  box-sizing: border-box;
+}
+
+body {
+  margin: 0px;
+  /* https://commons.wikimedia.org/wiki/File:Coffee_plantation,_Kaua%CA%BBi_59.jpg */
+  background-image: url("coffee-bg.jpeg");
+  background-size: cover;
+  background-repeat: no-repeat;
+  background-attachment: fixed;
+  color: rgb(235, 235, 235);
+  font-family: 'Santana-Black';
+}
+
+a {
+  color: #fff;
+  text-decoration: none;
+}
+
+.column-container {
+  display: flex;
+  width: 100%;
+  height: 100vh;
+  min-width: 650px;
+  align-items: flex-start;
+}
+
+.column {
+  margin: 10px;
+  margin-top: 0px;
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  align-content: flex-start;
+}
+
+.container {
+  margin-top: 25px;
+  margin-left: 5px;
+  display: flex;
+  flex-direction: column;
+  align-self: flex-start;
+  align-items: center;
+  justify-content: flex-start;
+  /* background-image: url(bean.png); */
+  background-size: 40px;
+  background-repeat: repeat;
+  border: 2px solid rgb(49, 24, 7);
+  width: 100%;
+  height: fit-content;
+  background-color: rgba(0, 0, 0, 0.944);
+}
+
+
+
+.bean {
+  width: 30px;
+  height: 30px;
+  margin: 2px;
+}
+
+#current-beans {
+  min-height: 30rem;
+}
+
+.column-header {
+  font-size: 25px;
+  position: relative;
+  background-color: rgba(0, 0, 0, 0.942);
+  padding: 5px;
+  margin: 10px;
+  border: 2px solid rgb(57, 28, 8);
+  border-radius: 5px;
+  
+}
+
+.welcome {
+  padding: 1rem;
+}
+
+#big_coffee {
+  user-select: none;
+  font-size: 128px;
+  cursor: pointer;
+}
+
+.counter-container {
+  font-size: 30px;
+  margin: 10px;
+  padding: 1rem;
+}
+
+.cps-container {
+  font-size: 20px;
+}
+
+/* PRODUCER */
+
+#producer_container {
+  padding: 10px;
+  overflow: auto;
+  border: 2px solid rgb(59, 29, 8);
+  border-radius: 5px;
+  height: calc(100vh - 200px);
+  background-color: rgba(0, 0, 0, 0.925);
+}
+
+.producer {
+  margin-bottom: 5px;
+  padding: 10px;
+  border-bottom: 1px solid #fff;
+  border-radius: 4px;
+  display: flex;
+  justify-content: space-between;
+}
+.producer-column {
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+}
+
+.producer-title {
+  font-size: 20px;
+
+}
+
+.price {
+  font-size: 20px;
+}
+
+
+
+#feedback {
+  height: 5rem;
+  font-size: 2rem;
+  font-family: 'Courier New', Courier, monospace;
+  text-align: center;
+  justify-content: center;
+}
+
+
+
+/* Buttons */
+
+button {
+  transition: all .5s ease;
+  color: #fff;
+  border: 3px solid white;
+  font-family:'Montserrat', sans-serif;
+  text-transform: uppercase;
+  text-align: center;
+  line-height: 1;
+  font-size: 17px;
+  background-color : transparent;
+  padding: 10px;
+  outline: none;
+  border-radius: 4px;
+  padding: 10px;
+  margin: 5px;
+}
+button:hover {
+  color: #001F3F;
+  background-color: #fff;
+}
+button a:hover {
+  color: #001F3F;
+  background-color: #fff;
+}
+
+.producer button {
+  font-size: 15px;
+}

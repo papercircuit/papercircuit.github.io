@@ -2,143 +2,73 @@
 <html lang="en">
 
 <head>
+  <meta charset="UTF-8">
+  <link rel="stylesheet" type="text/css" href="style.css">
 
-    <meta charset="UTF-8">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Kenny Johnson ␥ Designer ⇥ Developer</title>
-
-    <link rel="stylesheet" href="css/style.css">
-    <link rel="stylesheet" href="css/wave.css">
-    <link rel="stylesheet" href="coffee-animation.css">
-    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
-    <link rel="icon" type="image/x-icon" href="/imgs/favicon.ico">
-    <link rel="stylesheet" href="https://fonts.googleapis.com/icon?family=Material+Icons">
-    <link rel="shortcut icon" href="favicon.ico" type="image/x-icon">
-    <link rel="preconnect" href="https://fonts.googleapis.com">
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Source+Code+Pro:ital,wght@0,300;0,400;1,700&display=swap"
-        rel="stylesheet">
-
+  <title>Coffee Clicker</title>
 </head>
 
 <body>
-    <header>
-        <nav class="main-nav">
-            <ul class="horizontal nav-list">
-                <li><a href="index.html">Home</a></li>
-                <li><a href="projects.html">Projects</a></li>
-                <!-- <li><a href="art.html">Art</a></li> -->
+  <main class="column-container">
 
-            </ul>
-        </nav>
-    </header>
+    <section class="column">
 
-    <main class="container">
-        <h1 class="name-logo"><a href="/">Kenny Johnson</a></h1>
-        <h2 class="sub-heading"> Designer ␥ Developer </h2>
-        <br>
+      <div class="container left welcome">
+        <span>
+          <h1>Welcome to Coffee Clicker!</h1>
+          <p>Click the coffee cup below to make some coffee</p>
+          <p>Just like in real life!</p>
+          <p>As your bean collection increases, you will find various tools to help you on your caffeine fueled journey
+            in the column on the right</p>
+        </span>
+      </div>
 
-        <!--Wave Container-->
-        <div class="wave-container">
-            <svg class="waves" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink"
-                viewBox="20 24 150 28" preserveAspectRatio="none" shape-rendering="auto">
-                <defs>
-                    <path id="gentle-wave"
-                        d="M-160 44c30 0 58-18 88-18s 58 18 88 18 58-18 88-18 58 18 88 18 v44h-352z" />
-                </defs>
-                <g class="parallax">
-                    <use xlink:href="#gentle-wave" x="48" y="0" fill="rgba(950,215,200,0.6" />
-                    <use xlink:href="#gentle-wave" x="48" y="3" fill="rgba(180,100,115,0.4)" />
-                    <use xlink:href="#gentle-wave" x="48" y="5" fill="rgba(150,200,255,0.2)" />
-                    <use xlink:href="#gentle-wave" x="48" y="7" fill="rgba(150,200,600,0.2)" />
-                </g>
-            </svg>
+
+
+      <div class="container left clicker">
+        <div class="counter-container">Coffee: <span id="coffee_counter">0</span></div>
+        <div class="cps-container"><span id="cps">0</span> coffee/second</div>
+        <div id="clicks-per"></div>
+        <button id="big_coffee">☕️</button>
+        <div class="button-container">
+          <button id="save">Save</button>
+          <button id="load">Load</button>
+          <button id="reset">Delete Save</button>
         </div>
-        <!--Waves end-->
+      </div>
 
- 
+      <div class="container left">
+        <span id="feedback"></span>
+      </div>
 
+      <div class="container left beans">
+        <span>Bean Collection</span>
+        <section id="current-beans"></section>
+      </div>
 
-        <div class="coffee-text-container">
-            <h3 class="coffee-text">Hi, I'm Kenny and I like making coffee and fun websites. Take a look around! I
-                work mostly with Javascript and I am currently learning React. </h3>
+  
 
-            <br>
-            <br>
-            <hr>
-            <br>
-            <br>
+    </section>
 
-            <div class="about-wrapper">
-                <div class="about-img-bg">
-                    <img alt="portrait photo of kenny with forest background" class="about-img" src="imgs/kenny.jpeg" />
-                </div>
+    <section class="column">
+      <div class="column-header">Coffee Producers</div>
+      <div class="container right" id="producer_container">
+      </div>
 
-                <div class="about-text-wrapper">
-                    <!-- <p class="about-text">asdf</p>             -->
-                </div>
-            </div>
-            <br>
-            <br>
-            <hr>
-        </div>
-
-        <div></div>
-
-        <div class="coffee-animation">
-            <div class="saucer">
-            </div>
-            <div class="cup">
-                <div class="top">
-                    <div class="vapour">
-                        <span style="--i:1;"></span>
-                        <span style="--i:3;"></span>
-                        <span style="--i:16;"></span>
-                        <span style="--i:5;"></span>
-                        <span style="--i:13;"></span>
-                        <span style="--i:20;"></span>
-                        <span style="--i:6;"></span>
-                        <span style="--i:7;"></span>
-                        <span style="--i:10;"></span>
-                        <span style="--i:8;"></span>
-                        <span style="--i:17;"></span>
-                        <span style="--i:11;"></span>
-                        <span style="--i:12;"></span>
-                        <span style="--i:14;"></span>
-                        <span style="--i:2;"></span>
-                        <span style="--i:9;"></span>
-                        <span style="--i:15;"></span>
-                        <span style="--i:4;"></span>
-                        <span style="--i:19;"></span>
-                    </div>
-                    <div class="circle">
-                        <div class="coffee"></div>
-                    </div>
-                </div>
-
-                <div class="handle">
-
-                </div>
-            </div>
-        </div>
+      <div class="container right beans">
+        <form action="https://www.paypal.com/donate" method="post" target="_top">
+          <img src="PointingHand.gif" alt="">
+          <button id="buy-beans" name="submit" title="PayPal - The safer, easier way to pay online!"
+            alt="Donate with PayPal button"><a target="_blank"
+              href="https://paypal.me/kennymakesmusic?country.x=US&locale.x=en_US">BUY 100 BEANS AND WIN</a></button>
+        </form>
+      </div>
+    </section>
 
 
-
-
-
-
-    </main>
-
-    <footer>
-        <a href="mailto:kenny.johnson.nyc@gmail.com" target="_blank">
-            <!-- GIF courtesy of https://gifcities.org/ -->
-            <span style="display: block;">Send me an email</span>
-            <img alt="retro email gif" src="imgs/email.gif" />
-        </a>
-    </footer>
-
-    <script src="script.js"></script>
+    <script type="text/javascript" src="data.js"></script>
+    <script type="text/javascript" src="script.js"></script>
+  </main>
 </body>
 
 </html>
