@@ -75,8 +75,8 @@ function makeProducerDiv(producer) {
   const html = `
   <div class="producer-column">
     <div class="producer-title">${displayName}</div>
-    <button type="button" id="buy" class="buy_${producer.id}">Buy</button>
-    <button type="button" id="sell" class="sell_${producer.id}">Sell</button>
+    <button type="button" id="buy" class="buy--${producer.id}">Buy</button>
+    <button type="button" id="sell" class="sell--${producer.id}">Sell</button>
   </div>
   <div class="producer-column">
     <div>Quantity: ${producer.qty}</div>
@@ -153,6 +153,7 @@ function getProducerById(data, producerId) {
 
 function canAffordProducer(data, producerId) {
   // your code here
+  //Get the producer object with the matching id
   if (data.coffee >= getProducerById(data, producerId).price) {
     return true;
   } else {
@@ -218,7 +219,8 @@ function attemptToBuyProducer(data, producerId) {
 function buyButtonClick(event, data) {
   // your code here
   // Producer id is the last part of the class name
-  const producerId = event.target.className.split('_')[1];
+  const producerId = event.target.className.split('--')[1];
+  console.log('producerId', producerId);
   //If the player can afford the producer, attempt to buy the producer
   if (canAffordProducer(data, producerId)) {
     attemptToBuyProducer(data, producerId);
@@ -243,8 +245,8 @@ function buyButtonClick(event, data) {
 
 function sellButtonClick(event, data) {
   // your code here
-  // Producer id is the last part of the class name
-  const producerId = event.target.className.split('_')[1];
+  const producerId = event.target.className.split('--')[1];
+  console.log('producerId', producerId);
   //If the player has at least one of the producer, attempt to sell the producer
   if (getProducerById(data, producerId).qty > 0) {
     //Increment the player's coffee by the current price of the producer
