@@ -323,6 +323,7 @@ function loadGame() {
   updateCoffeeView(data.coffee);
   updateCPSView(data.totalCPS);
   renderProducers(data);
+  renderBeans(data);
   feedback.innerText = 'Game loaded';
 }
 document.getElementById('load').addEventListener('click', loadGame);
