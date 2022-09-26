@@ -77,9 +77,9 @@ function makeProducerDiv(producer) {
     <button type="button" id="sell" class="sell--${producer.id}">Sell</button>
   </div>
   <div class="producer-column">
-    <div>Price: ${currentCost} beans</div>
-    <div>You have: ${producer.qty}</div>
-    <div>Coffee/second: ${producer.cps}</div>
+    <div class="price">Price: ${currentCost} beans</div>
+    <div class="you-have">You have: ${producer.qty}</div>
+    <div class="cps">Coffee/second: ${producer.cps}</div>
     
   </div>
   `;
