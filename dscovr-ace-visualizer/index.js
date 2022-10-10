@@ -221,6 +221,8 @@ function convertKmToPx(km) {
   return px;
 }
 
+// HIGHCHARTS CONFIGURATION BEGINS HERE
+
 (function (H) {
 
   function create3DChart() {
@@ -626,3 +628,5 @@ function convertKmToPx(km) {
 
 
 }(Highcharts));
+
+// HIGHCHARTS CONFIGURATION END
