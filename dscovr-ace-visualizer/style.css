@@ -18,11 +18,17 @@ a:active {
 }
 
 body {
-  background-color: black;
   display: flex;
   align-items: center;
   justify-content: center;
   flex-flow: column;
+  /* background-image: url("/imgs/hubble-bg.webp"); */
+  background-position: center;
+  background-clip: content-box;
+  background-size: contain;
+  background-color: rgb(15, 15, 15);
+
+
 }
 
 #container {
@@ -30,7 +36,8 @@ body {
   flex-flow: column;
   justify-content: center;
   align-items: center;
-  box-shadow: 0 0 49px rgba(179, 179, 179, 0.379);
+  -webkit-box-shadow: 0px 0px 2px 1px #FFFFFF;
+  box-shadow: 0px 0px 6px 6px #727272;
   /* Must be set to fixed px. */
   min-width: 300px;
   min-height: 300px;
@@ -39,52 +46,26 @@ body {
   height: 800px;
   margin-top: 2rem;
   margin-bottom: 2rem;
-  border-radius: .85em;
+  box-shadow: 0px 0px 2px 1px #FFFFFF;
+  background-color: black;
+  border-radius: .3em;
 }
 
-/* 
-@media (pointer:none),
-(pointer:coarse) {
-  #container {
-    display: flex;
-    position: relative;
-    justify-content: center;
-    align-items: center;
-    box-shadow: 0 0 30px rgb(179, 179, 179);
-  
-    /* Must be set to fixed px. */
-/* min-width: 300px;
-    min-height: 300px;
-    width: 300px;
-    height: 300px;
-    margin: auto;
-    border-radius: .85em;
-  }
-} */
-*/ .anchor-style {
+.logos {
+  display: flex;
+  flex-flow: row;
+  justify-content: center;
+  align-items: center;
+  margin-top: 1rem;
+  margin-bottom: 1rem;
+  background-color: #000000;
+}
+
+
+.anchor-style {
   color: white;
 }
 
-.logos-container {
-  margin-left: auto;
-  margin-right: auto;
-  height: 80px;
-  width: 70%;
-  display: inline-flex;
-  position: relative;
-}
-
-.logo {
-  width: 80px;
-  height: 100%;
-  background-repeat: no-repeat;
-  background-position: center center;
-  max-width: 85px;
-  margin: 0 auto;
-  text-align: center;
-  clear: left;
-  padding-left: 5px;
-}
 
 .info-container {
   display: flex;
@@ -93,11 +74,15 @@ body {
   align-items: center;
   margin: auto;
   margin-top: 2rem;
-  max-width: 700px;
+  max-width: 800px;
   min-width: 400px;
   min-height: 400px;
   box-shadow: 0 0 3px rgb(179, 179, 179);
   color: white;
+  -webkit-box-shadow: 0px 0px 2px 1px #FFFFFF;
+  box-shadow: 0px 0px 2px 1px #FFFFFF;
+  background-color: black;
+  padding: 2rem;
 }
 
 .info-img {
@@ -105,7 +90,6 @@ body {
   height: auto;
   border: 1px solid;
   margin: 1em;
-
 }
 
 .links {
@@ -113,14 +97,12 @@ body {
   font-weight: 500;
   font-size: 18px;
   position: relative;
-
 }
 
 .footer {
   background-color: #000000;
   color: whitesmoke;
   height: 50px;
-
 }
 
 .center-button {
@@ -135,8 +117,6 @@ body {
   width: 60px;
   height: 34px;
   margin: 10px;
-
-
 }
 
 /* Hide default HTML checkbox */
@@ -144,8 +124,9 @@ body {
   opacity: 0;
   width: 0;
   height: 0;
-
 }
+
+
 
 /* The slider */
 .slider {
@@ -171,7 +152,6 @@ body {
   background-color: white;
   -webkit-transition: .4s;
   transition: .4s;
-
 }
 
 input:checked+.slider {
@@ -182,13 +162,18 @@ input:focus+.slider {
   box-shadow: 0 0 3px white;
 }
 
-
-
 input:checked+.slider:before {
   -webkit-transform: translateX(26px);
   -ms-transform: translateX(26px);
   transform: translateX(26px);
 }
+
+
+
+
+
+
+
 
 /* Rounded sliders */
 .slider.round {
@@ -200,11 +185,16 @@ input:checked+.slider:before {
   border-radius: 50%;
 }
 
-
-
 #progressive-line-chart-container {
   position: fixed;
 }
+
+
+
+
+
+
+/* Highcharts */
 
 
 .highcharts-figure,
@@ -220,7 +210,6 @@ input:checked+.slider:before {
   text-align: center;
   width: 100%;
   max-width: 200px;
-
 }
 
 .highcharts-data-table caption {

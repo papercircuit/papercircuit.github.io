@@ -19,33 +19,20 @@
   <script src="https://code.highcharts.com/modules/export-data.js"></script>
   <script src="https://code.highcharts.com/modules/accessibility.js"></script>
   <link rel="stylesheet" href="style.css">
-
-
 </head>
 
 <body>
-
-
-
-
   <header>
 
+    <!-- LOGOS -->
+    <div class="logos">
+      <img src="imgs/noaa_logo.png" alt="NOAA" class="logo">
+      <img src="imgs/nasa_logo.png" alt="NSF" class="logo">
+      <img src="imgs/nws_logo.png" alt="USRA" class="logo">
+    </div>
   </header>
 
   <main>
-
-    <!-- LOGOS -->
-    <!-- <figure class="logos-container">
-        <div id="noaa-img" class="logo"></div>
-        <div id="dscovr-img" class="logo"></div>
-        <div id="ace-img" class="logo"></div>
-        <div id="nasa-img" class="logo"></div>
-        <div id="nws-img" class="logo"></div>
-
-    </figure> -->
-
-
-
 
     <!-- CHART -->
 
@@ -55,35 +42,14 @@
       </p>
     </figure>
 
-    <figure class="highcharts-figure2">
-      <div id="container2"></div>
-      <p class="highcharts-description2">
-      </p>
-    </figure>
-
-    <!-- <button class="center-button" onclick="centerChart()">RECENTER</button> -->
-
-
-
-    <!-- DARKMODE -->
-    <!-- Rounded switch -->
-
-    <!-- <label class="switch">
-      <input id="dark-mode-checkbox" type="checkbox" onchange="darkMode(this)">
-      <span id="checkbox-text" class="slider round">
-      </span>
-      label element -->
-      <!-- <span class="labels" data-on="ON" data-off="OFF">
-      </span>
-    </label> --> 
-
     <!-- INFO -->
 
     <div class=info-container>
       <h2>INFO</h2>
 
       <p>
-        This graph is designed to give a visual representation of the locations of two satellites.
+        This graph is designed to give a visual representation of the locations of two space weather satellites orbting
+        the sun.
       </p>
       <p>
         https://en.wikipedia.org/wiki/Lagrange_point
@@ -123,17 +89,13 @@
     </div>
 
     <!-- Ecliptic is a 2d plane that cust through the sun. Aligned along the sun's equator. 
-    
     GSE 0 is at Earth.
     X = Sun-Earth line
     Y = Sun Earth ecliptic
     Z = Up Down
-
     RLP 0 is at L1
-  
-
-  
   -->
+
 
     <!-- FOOTER -->
 
@@ -142,7 +104,8 @@
     </div>
 
     <script src="script3.js"></script>
-
+    </div>
+  </main>
 </body>
 
 
