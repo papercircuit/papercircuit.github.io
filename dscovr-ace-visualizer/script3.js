@@ -50,12 +50,12 @@ function buildCircle(radius, x) {
 console.log("buildCircle ", buildCircle(100000, l1));
 
 
-
+// convert degrees to radians
 function toRadians(angle) {
   return angle * (Math.PI / 180);
 }
 
-
+// set how far back in time to go
 function defineEndTime() {
   let end = endTime.getTime();
   let offset = weeksPerOrbit * pointsPerWeek * minutesPerPoint * millisPerMinute;
@@ -71,7 +71,7 @@ function convertTime(time) {
   return '' + d + t;
 }
 
-
+// pad single digit numbers with a leading zero
 function zeroPad(num) {
   return (num >= 0 && num < 10) ? '0' + num : num; //between 0 and 10 add to num
 }
@@ -90,9 +90,11 @@ $.get(sscUrl, fetchData, 'json');
  * 
  */
 
+// get the data from the SSC api
 function fetchData(positionData) {
 
   let ace = {};
+  
   let ACEsize = positionData.Result.Data[1][0].Time[1].length;
   // reference the arrays of each field
   ace.time_tag = positionData.Result.Data[1][0].Time[1];
