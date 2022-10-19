@@ -329,6 +329,11 @@ function subsample(inputData) {
         }
       },
 
+      // need to fix this
+      exporting: {
+        enabled: false,
+      },
+
       title: {
         text: 'Satellite Orbit Visualization of ACE and DSCOVR'
       },
