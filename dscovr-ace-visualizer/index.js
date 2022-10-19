@@ -4,17 +4,17 @@ const endTime = new Date();
 const minutesPerPoint = 12;// SSCweb data for ACE and DSCOVR is resolution 720 = 12 minutes
 const millisPerMinute = 60 * 1000;
 const distanceToSun = 93000000; // miles
-const radiusSun = 432690; // miles
-const distanceToL1 = 1000000;
+const radiusSun = 432690; // sun radius in miles
+const distanceToL1 = 1000000; // distance to l1 from earth
 const E = 8;
-const sunGSE = [[155000000, 0, 0]];
-const earthGSE = [[0, 0, 0]];
-const sunEarthLine = [[0, 0, 0], [155000000, 0, 0]]
-const l1 = 1600000;
-const sez2rad = Math.tan(toRadians(2)) * l1;
-const sez4rad = Math.tan(toRadians(4)) * l1;
-const sez2Deg = buildCircle(sez2rad, l1);
-const sez4Deg = buildCircle(sez4rad, l1);
+const sunGSE = [[155000000, 0, 0]]; // GSE coordinates of the sun
+const earthGSE = [[0, 0, 0]]; // GSE coordinates of Earth
+const sunEarthLine = [[0, 0, 0], [155000000, 0, 0]] // line from sun to earth with earth at origin
+const l1 = 1600000; // L1 distance in miles
+const sez2rad = Math.tan(toRadians(2)) * l1; // SEZ2 radius
+const sez4rad = Math.tan(toRadians(4)) * l1; // SEZ4 radius
+const sez2Deg = buildCircle(sez2rad, l1); // SEZ2 boundary
+const sez4Deg = buildCircle(sez4rad, l1); // Build a circle for the SEZ4 boundary
 let weeksPerOrbit = 26;  // # of samples, e.g., 26 weeks = months = 1 orbit
 let radiusSunPx;
 let startTime;
@@ -22,12 +22,10 @@ let aceData = [];
 let dscovrData = [];
 let dscovrBackgroundColor = [];
 let aceBackgroundColor = [];
-let pointsPerWeek = 7 * 24 * (60 / minutesPerPoint);
-let pointsPerDay = 7 * 24;
+let pointsPerWeek = 7 * 24 * (60 / minutesPerPoint); // 7 days * 24 hours * 60 minutes / 12 minutes per point
+let pointsPerDay = 7 * 24; // 7 days * 24 hours
 let aceData3d;
 let dscovrData3d;
-let aceData3dLine;
-let dscovrData3dLine;
 let chart;
 let alpha = Math.atan(radiusSun / distanceToSun);
 let radiusSunAtL1 = distanceToL1 * Math.tan(alpha) * 1.6;
@@ -70,7 +68,7 @@ function convertTime(time) {
 // pad single digit numbers with a leading zero
 function zeroPad(num) {
   // if num is less than 10, add a leading zero
-  return (num >= 0 && num < 10) ? '0' + num : num; 
+  return (num >= 0 && num < 10) ? '0' + num : num;
 }
 
 // compute the time range of data to request from NASA
@@ -88,13 +86,9 @@ $.get(sscUrl, fetchData, 'json');
 
 // get the data from the SSC api
 function fetchData(positionData) {
-
   let ace = {};
-
   let ACEsize = positionData.Result.Data[1][0].Time[1].length;
-  // reference the arrays of each field
   ace.time_tag = positionData.Result.Data[1][0].Time[1];
-  // Assign properties to ace object. Each property is an array
   ace.x_gse = positionData.Result.Data[1][0].Coordinates[1][0].X[1];
   ace.y_gse = positionData.Result.Data[1][0].Coordinates[1][0].Y[1];
   ace.z_gse = positionData.Result.Data[1][0].Coordinates[1][0].Z[1];
@@ -106,12 +100,6 @@ function fetchData(positionData) {
   for (let i = 0; i < ACEsize; i++) {
     aceData.push({ source: 'ace', time: ace.time_tag[i][1], x_gse: ace.x_gse[i], y_gse: ace.z_gse[i], z_gse: ace.y_gse[i] });
   }
-  console.log("ace.time_tag ", ace.time_tag[0][1]);
-
-
-  // Object
-
-  // Array(21840)
 
   let dscovr = {};
   let DSCOVRsize = positionData.Result.Data[1][0].Time[1].length;
@@ -206,21 +194,6 @@ function subsample(inputData) {
   return outputData;
 }
 
-function convertKmToPx(km) {
-  // need DPR?
-  let chartPx = (lineChart !== undefined) ? lineChart.canvas.width : 600;
-  // console.log('chart width in pixels ' + chartPx);
-
-  // compute the pixel per km ratio
-  let ratio = chartPx / 600000;
-  // console.log('km to pixel ratio ' + ratio);
-
-  let px = Math.round(km * ratio);
-  // console.log('converted km to px ' + px);
-
-  return px;
-}
-
 // HIGHCHARTS CONFIGURATION BEGINS HERE
 
 (function (H) {
@@ -290,7 +263,6 @@ function convertKmToPx(km) {
       chart: {
         type: 'scatter3d',
         renderTo: 'container', // Target element id
-
         fitToPlot: 'true',
         reflow: 'false',
         // Spacing effects titles and legend only.
@@ -308,9 +280,11 @@ function convertKmToPx(km) {
         width: 800,
 
         // Chart background image
-
+        // plotBackgroundImage: './imgs/twinkle.jpg',
+      
         allowMutatingData: false,
         animation: true,
+
         events: {
           load() {
             const chart = this;
@@ -321,8 +295,8 @@ function convertKmToPx(km) {
             }, 1700);
           }
         },
-        options3d: {
 
+        options3d: {
           enabled: true,
           // Setting alpha and beta to zero puts earth on left and satellites on right. alpha rotates on the vertical axis. beta rotates on the horizontal axis.
           alpha: 0,
@@ -356,7 +330,7 @@ function convertKmToPx(km) {
       },
 
       title: {
-        text: 'Satellite Orbit Visualization'
+        text: 'Satellite Orbit Visualization of ACE and DSCOVR'
       },
 
       subtitle: {
@@ -364,19 +338,30 @@ function convertKmToPx(km) {
       },
 
       plotOptions: {
+
         scatter3d: {
-          label: {
-            connectorAllowed: true,
-            connectorNeighbourDistance: 40,
+          animation: true,
+          animationLimit: 1000,
+          animationDuration: 1000,
+          turboThreshold: 0,
+          marker: {
+            radius: 1,
+            states: {
+              hover: {
+                enabled: true,
+                lineColor: 'rgb(100,100,100)'
+              }
+            }
           },
+       
+    
+          // Set the style and default values for tooltips on hover
           tooltip: {
             shared: true,
             useHTML: true,
-            headerFormat: '<p><span>Dummy header</span>',
-            pointFormat:
-              '<br>time {point.time}<br>source {point.source}<br>name {series.name}<br>X GSE {point.x}<br>Y GSE{point.y}<br>Z GSE {point.z}',
+            headerFormat: '<span>{series.name}</span>',
+            pointFormat: '<span style="color:{point.color}">\u25CF</span> {point.x} GSE, {point.y} GSE, {point.z} GSE<br/>',
             footerFormat: '</p>',
-
             valueDecimals: 0, // Set number of decimals following each value in tooltip
           },
         }
@@ -560,7 +545,7 @@ function convertKmToPx(km) {
   }
 
 
-
+  // Bubble fader function (not working)
   function bubbleFader(dataPoints, backgroundColors, colors, spaceCraft) {
     // console.log('bubbleFader dataPoints.length ' + dataPoints.length);
     let i;
@@ -581,7 +566,8 @@ function convertKmToPx(km) {
     // chartDataBubble.datasets[spaceCraft].backgroundColors = backgroundColors;
   }
 
-  //Draggable function 
+
+  // Make the chart draggable
   function dragStart(eStart) {
     eStart = chart.pointer.normalize(eStart);
 

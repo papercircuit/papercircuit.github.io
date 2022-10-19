@@ -27,8 +27,6 @@ body {
   background-clip: content-box;
   background-size: contain;
   background-color: rgb(15, 15, 15);
-
-
 }
 
 #container {
@@ -64,11 +62,9 @@ body {
   box-shadow: 0px 0px 2px 1px #FFFFFF;
 }
 
-
 .anchor-style {
   color: white;
 }
-
 
 .info-container {
   display: flex;
@@ -108,97 +104,7 @@ body {
   height: 50px;
 }
 
-.center-button {
-  width: 100px;
-  height: 100px;
-}
-
-/* The switch - the box around the slider */
-.switch {
-  position: relative;
-  display: inline-block;
-  width: 60px;
-  height: 34px;
-  margin: 10px;
-}
-
-/* Hide default HTML checkbox */
-.switch input {
-  opacity: 0;
-  width: 0;
-  height: 0;
-}
-
-
-
-/* The slider */
-.slider {
-  position: absolute;
-  cursor: pointer;
-  top: 0;
-  left: 0;
-  right: 0;
-  bottom: 0;
-  background-color: rgba(103, 103, 103, 0.449);
-  -webkit-transition: .4s;
-  transition: .4s;
-  box-shadow: 0 0 1px white;
-}
-
-.slider:before {
-  position: absolute;
-  content: "";
-  height: 26px;
-  width: 26px;
-  left: 4px;
-  bottom: 4px;
-  background-color: white;
-  -webkit-transition: .4s;
-  transition: .4s;
-}
-
-input:checked+.slider {
-  background-color: rgba(40, 85, 185, 0.777);
-}
-
-input:focus+.slider {
-  box-shadow: 0 0 3px white;
-}
-
-input:checked+.slider:before {
-  -webkit-transform: translateX(26px);
-  -ms-transform: translateX(26px);
-  transform: translateX(26px);
-}
-
-
-
-
-
-
-
-
-/* Rounded sliders */
-.slider.round {
-  border-radius: 34px;
-  color: hsla(rgb(0, 0, 0))
-}
-
-.slider.round:before {
-  border-radius: 50%;
-}
-
-#progressive-line-chart-container {
-  position: fixed;
-}
-
-
-
-
-
-
 /* Highcharts */
-
 
 .highcharts-figure,
 .highcharts-data-table table {
