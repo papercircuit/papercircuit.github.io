@@ -1,5 +1,3 @@
-// @ts-check
-
 const endTime = new Date();
 const minutesPerPoint = 12;// SSCweb data for ACE and DSCOVR is resolution 720 = 12 minutes
 const millisPerMinute = 60 * 1000;
@@ -281,7 +279,7 @@ function subsample(inputData) {
 
         // Chart background image
         // plotBackgroundImage: './imgs/twinkle.jpg',
-      
+
         allowMutatingData: false,
         animation: true,
 
@@ -358,8 +356,8 @@ function subsample(inputData) {
               }
             }
           },
-       
-    
+
+
           // Set the style and default values for tooltips on hover
           tooltip: {
             shared: true,
@@ -440,14 +438,6 @@ function subsample(inputData) {
       bubbleLegend: {
         color: 'blue',
       },
-
-      exporting: {
-        buttons: {
-          // reset button sets camera to default position
-          // create a button to reset the camera
-        }
-      },
-
       series: [
         {
           name: "ACE",
