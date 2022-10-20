@@ -8,7 +8,6 @@ const userInputSubject = document.querySelector(".userInputSubject");
 const userInputLanguage = document.querySelector(".userInputLanguage");
 const userSubmitBtn = document.querySelector(".userSubmitBtn");
 
-
 // Load in book data
 for (const bookInfo of bookData) {
   const book = new Book(
@@ -31,7 +30,6 @@ render();
 
 //#endregion Initialization
 
-
 //-----------------SERACH FUNCTION-----------------//
 
 const searchInput = document.querySelector(".search-input");
@@ -42,13 +40,13 @@ const searchBtn = document.querySelector(".searchBtn");
 searchBtn.addEventListener("click", () => {
   const query = searchInput.value.toLowerCase();
   const searchFn = (b) => {
-     if(query.includes("the")){
+    if (query.includes("the")) {
       //replace "the" with an empty string so that it doesn't affect the search
       const filteredQuery = query.replace("the", "");
       return filteredQuery;
-     }
+    }
     return (
-   
+
       b.title.toLowerCase().includes(query) ||
       b.author[0].toLowerCase().includes(query) ||
       b.subject[0].toLowerCase().includes(query) ||
@@ -60,14 +58,7 @@ searchBtn.addEventListener("click", () => {
   render();
 });
 
-
-
-
-
-
 // --------------------------USER INPUT--------------------------
-
-
 
 userSubmitBtn.addEventListener("click", () => {
   // Set variables to user input
@@ -110,8 +101,6 @@ sortBy.addEventListener("change", () => {
   bookshelf.sortVisibleBooks(sortFn);
   render();
 });
-
-
 
 // When open form button is clicked openForm() is called
 function openForm() {
