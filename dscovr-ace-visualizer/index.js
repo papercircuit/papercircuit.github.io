@@ -56,7 +56,7 @@ function defineEndTime() {
   startTime = new Date(start);
 }
 
-//concatinate string to access SSC api
+// concatinate string to access SSC api
 function convertTime(time) {
   let d = '' + time.getUTCFullYear() + zeroPad(time.getUTCMonth() + 1) + zeroPad(time.getUTCDate());
   let t = 'T' + zeroPad(time.getUTCHours()) + zeroPad(time.getUTCMinutes()) + zeroPad(time.getUTCSeconds()) + 'Z';
@@ -74,7 +74,9 @@ defineEndTime();
 const start = convertTime(startTime);
 const end = convertTime(endTime);
 let sscUrl = 'https://sscweb.gsfc.nasa.gov/WS/sscr/2/locations/ace,dscovr/' + start + ',' + end + '/';
+// get the data from the SSC api
 $.get(sscUrl, fetchData, 'json');
+
 
 /**
  * 
@@ -82,8 +84,13 @@ $.get(sscUrl, fetchData, 'json');
  * 
  */
 
-// get the data from the SSC api
+// fetch the data from the SSC api 
+// https://sscweb.gsfc.nasa.gov/
+
 function fetchData(positionData) {
+  // get the ACE data
+  // "size" in ACEsize and DSCOVRsize refers to the number of points in the data set
+  // https://sscweb.gsfc.nasa.gov/WebServices/REST/#Get_Observatories
   let ace = {};
   let ACEsize = positionData.Result.Data[1][0].Time[1].length;
   ace.time_tag = positionData.Result.Data[1][0].Time[1];
@@ -91,14 +98,12 @@ function fetchData(positionData) {
   ace.y_gse = positionData.Result.Data[1][0].Coordinates[1][0].Y[1];
   ace.z_gse = positionData.Result.Data[1][0].Coordinates[1][0].Z[1];
 
-  // Put all properties together into aceData object which contains arrays
-
-  // Swap Y GSE for Z to convert from GSE to local
-
+  // push the data into the aceData array
   for (let i = 0; i < ACEsize; i++) {
     aceData.push({ source: 'ace', time: ace.time_tag[i][1], x_gse: ace.x_gse[i], y_gse: ace.z_gse[i], z_gse: ace.y_gse[i] });
   }
 
+  // get the DSCOVR data
   let dscovr = {};
   let DSCOVRsize = positionData.Result.Data[1][0].Time[1].length;
   dscovr.time_tag = positionData.Result.Data[1][1].Time[1];
@@ -107,35 +112,35 @@ function fetchData(positionData) {
   dscovr.z_gse = positionData.Result.Data[1][1].Coordinates[1][0].Z[1];
 
   // Swap Y GSE for Z to convert from GSE to local
-
   for (let i = 0; i < DSCOVRsize; i++) {
     dscovrData.push({ source: 'dscovr', time: dscovr.time_tag[i], x_gse: dscovr.x_gse[i], y_gse: dscovr.z_gse[i], z_gse: dscovr.y_gse[i] });
   }
-  console.log("dscovr.time_tag ", dscovr.time_tag[0]);
 
   // clean up the data and reverse the time order      
   let tempAce = skipDuplicates(aceData);
   let tempDscovr = skipDuplicates(dscovrData);
 
-  // subsample the data to improve the rendering performance 
+  // subsample the data to improve rendering performance 
   aceData = subsample(tempAce);
   dscovrData = subsample(tempDscovr);
-  // console.log("aceData " + JSON.stringify(aceData));
+
+
+  // Convert an array of coordinate objects to an array of arrays
+  function convertTo3d(data) {
+    let result = [];
+    for (const item of data) {
+      // X = Y GSE
+      // Y = Z GSE
+      // Z = X GSE
+      result.push([item.x_gse, item.y_gse, item.z_gse]);
+    }
+    return result;
+  }
 
   aceData3d = convertTo3d(aceData);
   dscovrData3d = convertTo3d(dscovrData);
 
-  // FEED DATA TO CHART
-  let aceAnim = [];
-  // chart.series[0].setData(aceData3d);
-  // incrementally build the array that will drive the plot, with a small delay in between each increment to
-  // "animate" the drawing of the orbit path
-
-  // for (let i = 0; i < aceData3d.length; i++) {
-  //   aceAnim.push(aceData3d[i]);
-  //   chart.series[0].setData(aceAnim);
-  // }
-
+  // FEED DATA TO HIGHCHARTS
   chart.series[0].setData(aceData3d);
   chart.series[1].setData(dscovrData3d);
   chart.series[2].setData(earthGSE);
@@ -143,21 +148,6 @@ function fetchData(positionData) {
   chart.series[4].setData(sez2Deg);
   chart.series[5].setData(sez4Deg);
   chart.series[6].setData(sunEarthLine)
-}
-
-/**
- * Convert an array of coordinate objects to an array of coordinate arrays.
- */
-
-function convertTo3d(data) {
-  let result = [];
-  for (const item of data) {
-    // X = Y GSE
-    // Y = Z GSE
-    // Z = X GSE
-    result.push([item.x_gse, item.y_gse, item.z_gse]);
-  }
-  return result;
 }
 
 function skipDuplicates(input) {
@@ -192,21 +182,15 @@ function subsample(inputData) {
   return outputData;
 }
 
+
+
 // HIGHCHARTS CONFIGURATION BEGINS HERE
 
 (function (H) {
-
   function create3DChart() {
 
     // Theme loads before data 
     Highcharts.theme = {
-      colors: {
-        linearGradient: [0, 0, 500, 500],
-        stops: [
-          [0, 'rgb(255, 255, 255)'],
-          [1, 'rgb(0, 0, 0)']
-        ]
-      },
       title: {
         style: {
           color: 'rgb(220, 220, 220)',
@@ -238,24 +222,6 @@ function subsample(inputData) {
     };
     Highcharts.setOptions(Highcharts.theme);
 
-    // Give the points a 3D feel by adding a radial gradient
-
-    // Highcharts.setOptions({
-    //   colors: Highcharts.getOptions().colors.map(function (color) {
-    //     return {
-    //       radialGradient: {
-    //         cx: 0.4,
-    //         cy: 0.3,
-    //         r: 0.5
-    //       },
-    //       stops: [
-    //         [0, color],
-    //         [1, Highcharts.color(color).brighten(-0.2).get('rgb')]
-    //       ]
-    //     };
-    //   })
-    // });
-
     // Set up the chart
     chart = new Highcharts.Chart({
       chart: {
@@ -263,17 +229,22 @@ function subsample(inputData) {
         renderTo: 'container', // Target element id
         fitToPlot: 'true',
         reflow: 'false',
-        // Spacing effects titles and legend only.
+
+        // Spacing effects titles and legend only
         spacingTop: 20,
         spacingBottom: 10,
         spacingRight: 15,
         spacingLeft: 15,
-        // Margin effects grid only. KEEP SQUARE!
+
+        // Margin effects grid only 
+        // KEEP SQUARE!
         marginTop: 80,
         marginBottom: 80,
         marginRight: 20,
         marginLeft: 20,
-        // Hardcode equal pixels
+
+        // Final chart size in px 
+        // KEEP SQUARE!
         height: 800,
         width: 800,
 
@@ -283,6 +254,7 @@ function subsample(inputData) {
         allowMutatingData: false,
         animation: true,
 
+        // Set loading screen
         events: {
           load() {
             const chart = this;
@@ -296,12 +268,15 @@ function subsample(inputData) {
 
         options3d: {
           enabled: true,
+
           // Setting alpha and beta to zero puts earth on left and satellites on right. alpha rotates on the vertical axis. beta rotates on the horizontal axis.
           alpha: 0,
           beta: -90,
+
           // Depth effects scale!
           depth: 620,
           viewDistance: 10,
+
           frame: {
             left: { // Camera front
               visible: false,
@@ -321,7 +296,6 @@ function subsample(inputData) {
             },
             bottom: { // Camera bottom
               visible: false,
-
             }
           }
         }
@@ -341,8 +315,9 @@ function subsample(inputData) {
       },
 
       plotOptions: {
-
         scatter3d: {
+
+          // animation on load only
           animation: true,
           animationLimit: 1000,
           animationDuration: 1000,
@@ -357,15 +332,14 @@ function subsample(inputData) {
             }
           },
 
-
           // Set the style and default values for tooltips on hover
           tooltip: {
             shared: true,
             useHTML: true,
             headerFormat: '<span>{series.name}</span>',
-            pointFormat: '<span style="color:{point.color}">\u25CF</span> {point.x} GSE, {point.y} GSE, {point.z} GSE<br/>',
+            pointFormat: '<span style="color:{point.color}">\u25CF</span> <br>{point.x} GSE, <br> {point.y} GSE, <br>{point.z} GSE',
             footerFormat: '</p>',
-            valueDecimals: 0, // Set number of decimals following each value in tooltip
+            valueDecimals: 0, // Set decimals following each value in tooltip
           },
         }
       },
@@ -438,6 +412,8 @@ function subsample(inputData) {
       bubbleLegend: {
         color: 'blue',
       },
+
+      // SERIES CONFIGURATION BEGINS HERE
       series: [
         {
           name: "ACE",
@@ -532,9 +508,8 @@ function subsample(inputData) {
             // symbol: 'url(imgs/sun.jpeg)', NEED TO CENTER
             radius: 1,
           }
-
-        },
-
+        }
+        // SERIES CONFIGURATION ENDS HERE
       ]
     });
   }
@@ -610,4 +585,3 @@ function subsample(inputData) {
 
 }(Highcharts));
 
-// HIGHCHARTS CONFIGURATION END
