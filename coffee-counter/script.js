@@ -1,10 +1,6 @@
-/**************
- *   SLICE 1
- **************/
 let coffeeCount = 0;
 let totalCPS = 0;
 const feedback = document.querySelector('#feedback');
-
 
 function updateCoffeeView(coffeeCount) {
   // your code here
@@ -22,19 +18,6 @@ function clickCoffee(data) {
   renderProducers(data);
   renderBeans(data);
 }
-
-/**************
- *   SLICE 2
- **************/
-
-//  Slice 2: Unlocking & Rendering Producers
-//     The unlockProducers function
-//       1) changes `unlocked` to `true` when the player's coffee count is equal to or larger than half the initial price of the producer
-//       2) does not set `unlocked` to `false` once a producer has been unlocked, even if the coffee count drops again
-//     The getUnlockedProducers function
-//       3) returns an array of producer objects
-//       - filters out producer objects that are not unlocked
-//       ✓ does not mutate the data
 
 function unlockProducers(producers, coffeeCount) {
   // your code here
@@ -87,10 +70,6 @@ function makeProducerDiv(producer) {
   return containerDiv;
 }
 
-// The deleteAllChildNodes function
-// 1) calls the `.removeChild()` method on the DOM node passed in at least once
-// 2) gets rid of all of the children of the DOM node passed in
-
 function deleteAllChildNodes(parent) {
   // your code here
   if (parent.hasChildNodes()) {
@@ -100,15 +79,6 @@ function deleteAllChildNodes(parent) {
     }
   }
 }
-
-
-// The renderProducers function
-// ✓ calls document.getElementById() or document.querySelector()
-// 1) appends some producer div elements to the producer container
-// 2) unlocks any locked producers that need to be unlocked
-// 3) only appends unlocked producers
-// 4) deletes the producer container's children before appending new producers
-// 5) is not in some way hardcoded to pass the tests
 
 function renderProducers(data) {
   // your code here
@@ -125,15 +95,6 @@ function renderProducers(data) {
   );
 }
 
-/**************
- *   SLICE 3
- **************/
-
-//  The getProducerById function
-//  1) returns an object
-//  2) returns the correct producer object
-//  3) is not hardcoded to pass the tests
-
 function getProducerById(data, producerId) {
   // your code here
   //Get the producer object with the matching id
@@ -144,11 +105,6 @@ function getProducerById(data, producerId) {
   //Return the producer object 
   return producer[0];
 }
-
-// The canAffordProducer function
-//       - returns a boolean
-//       - returns true if the player can afford the producer
-//       - returns false if the player cannot afford the producer
 
 function canAffordProducer(data, producerId) {
   // your code here
@@ -165,10 +121,6 @@ function updateCPSView(cps) {
   document.getElementById('cps').innerText = cps;
 }
 
-// The updatePrice function
-// 1) returns an integer, not a float
-// 2) returns 125% of the input price, rounded down
-
 function updatePrice(oldPrice) {
   // your code here
   //Return the price rounded down to the nearest integer
@@ -176,17 +128,6 @@ function updatePrice(oldPrice) {
   const multiplier = 1.5;
   return Math.floor(oldPrice * multiplier);
 }
-
-// The attemptToBuyProducer function
-// ✓ returns a boolean
-// ✓ returns false if the player cannot afford the producer
-// ✓ returns true if the player can afford the producer
-// ✓ increments the quantity of the producer in question only if the player can afford it
-// ✓ decrements the player's coffee by the *current* price of the producer, but only if the player can afford it
-// ✓ updates the price of the producer to 125% of the previous price, rounded down, but only if the player can afford the producer
-// 1) updates the total CPS, but only if the player can afford the producer
-// ✓ does not modify data in any way if the player tries to buy something they can't afford
-
 
 function attemptToBuyProducer(data, producerId) {
   // your code here
@@ -206,15 +147,6 @@ function attemptToBuyProducer(data, producerId) {
 
 }
 
-// The buyButtonClick function
-// 1) mutates the data only if the player can afford the producer
-// 2) shows an alert box with the message "Not enough coffee!" only if the player cannot afford the producer
-// 3) does not modify data or show an alert box if the event passed in doesn't represent a click on a button element
-// 4) renders the updated producers when a purchase succeeds
-// 5) updates the coffee count on the DOM, reflecting that coffee has been spent, when a purchase succeeds
-// 6) updates the total CPS on the DOM, reflecting that the new producer's CPS has been added
-
-
 function buyButtonClick(event, data) {
   // your code here
   // Producer id is the last part of the class name
@@ -233,14 +165,6 @@ function buyButtonClick(event, data) {
     feedback.innerText = "Not enough coffee";
   }
 }
-
-
-// The sellButtonClick function
-// Removes a producer from the player's inventory if the player has at least one of that producer
-// Does not modify data in any way if the player tries to sell something they don't have
-// Renders the updated producers when a sale succeeds
-// Updates the coffee count on the DOM, reflecting that coffee has been earned, when a sale succeeds
-// Updates the total CPS on the DOM, reflecting that the sold producer's CPS has been removed
 
 function sellButtonClick(event, data) {
   // your code here
@@ -264,17 +188,6 @@ function sellButtonClick(event, data) {
   }
 }
 
-
-
-
-
-
-
-// The tick function
-// ✓ increases coffee count by the total CPS
-// ✓ updates the DOM to reflect this new coffee count
-// 4) updates the DOM to reflect any newly unlocked producers
-
 function tick(data) {
   // your code here
   //Increase the coffee count by the total CPS
@@ -295,8 +208,6 @@ function calculateCPS(data) {
   data.totalCPS = totalCPS;
   return data.totalCPS;
 }
-
-
 
 // - Add a "reset" button that resets the game state to the initial state and updates the DOM to reflect this.
 function resetGame() {
@@ -328,7 +239,6 @@ function loadGame() {
 }
 document.getElementById('load').addEventListener('click', loadGame);
 
-
 // Render one bean png for each "coffee" in the data object
 function renderBeans(data) {
   const beanContainer = document.getElementById('current-beans');
@@ -351,22 +261,6 @@ document.getElementById('buy-beans').addEventListener('click', function () {
   feedback.innerText = 'SO MANY BEANS';
 });
 
-
-
-/*************************
- *  Start your engines!
- *************************/
-
-// You don't need to edit any of the code below
-// But it is worth reading so you know what it does!
-
-// So far we've just defined some functions; we haven't actually
-// called any of them. Now it's time to get things moving.
-
-// We'll begin with a check to see if we're in a web browser; if we're just running this code in node for purposes of testing, we don't want to 'start the engines'.
-
-// How does this check work? Node gives us access to a global variable /// called `process`, but this variable is undefined in the browser. So,
-// we can see if we're in node by checking to see if `process` exists.
 if (typeof process === 'undefined') {
   // Get starting data from the window object
   // (This comes from data.js)
@@ -392,28 +286,4 @@ if (typeof process === 'undefined') {
 
   //Update rendered beans every 100ms
   setInterval(() => renderBeans(data), 100);
-}
-
-// Meanwhile, if we aren't in a browser and are instead in node
-// we'll need to exports the code written here so we can import and
-// Don't worry if it's not clear exactly what's going on here;
-// We just need this to run the tests in Mocha.
-else if (process) {
-  module.exports = {
-    updateCoffeeView,
-    clickCoffee,
-    unlockProducers,
-    getUnlockedProducers,
-    makeDisplayNameFromId,
-    makeProducerDiv,
-    deleteAllChildNodes,
-    renderProducers,
-    updateCPSView,
-    getProducerById,
-    canAffordProducer,
-    updatePrice,
-    attemptToBuyProducer,
-    buyButtonClick,
-    tick
-  };
 }
