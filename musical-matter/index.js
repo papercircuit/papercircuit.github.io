@@ -206,6 +206,9 @@ Matter.Events.on(engine, 'collisionStart', function (event) {
 
     // change color of body on collision to random color
     body.render.fillStyle = `rgb(${Math.floor(Math.random() * 255)}, ${Math.floor(Math.random() * 255)}, ${Math.floor(Math.random() * 255)})`;
+
+
+
 });
 
 // add wind effect to bodies from left to right
@@ -217,7 +220,7 @@ Matter.Events.on(engine, 'collisionStart', function (event) {
 //     for (let i = 0; i < bodies.length; i++) {
 //         let body = bodies[i];
 //         if (body.position.x < 600) {
-//             Matter.Body.applyForce(body, { x: 100, y: 0 }, { x: wind, y: 0 });
+//             Matter.Body.applyForce(body, { x: 0, y: 0 }, { x: wind, y: 0 });
 //         }
 //         else {
 //             Matter.Body.applyForce(body, { x: 0, y: 0 }, { x: .0001, y: 0 });
