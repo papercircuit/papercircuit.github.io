@@ -236,6 +236,17 @@ Matter.Events.on(mouseConstraint, 'mousedown', function (event) {
     Matter.World.add(engine.world, body);
 });
 
+// If a body is outside the canvas area, remove it
+Matter.Events.on(engine, 'beforeUpdate', function (event) {
+    let bodies = Matter.Composite.allBodies(engine.world);
+    for (let i = 0; i < bodies.length; i++) {
+        let body = bodies[i];
+        if (body.position.y > 1200) {
+            Matter.World.remove(engine.world, body);
+        }
+    }
+});
+
 
 
 function startApp() {
