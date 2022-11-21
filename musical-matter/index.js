@@ -23,8 +23,8 @@ let render = Matter.Render.create({
 let ground = Matter.Bodies.rectangle(400, 1200, 810, 100, { isStatic: true });
 
 // place walls at sides of screen from ground to 50% screen height
-let leftWall = Matter.Bodies.rectangle(0, 600, 60, 1200, { isStatic: true });
-let rightWall = Matter.Bodies.rectangle(800, 600, 60, 1200, { isStatic: true });
+let leftWall = Matter.Bodies.rectangle(0, 850, 60, 1200, { isStatic: true });
+let rightWall = Matter.Bodies.rectangle(800, 850, 60, 1200, { isStatic: true });
 
 // create angular "walls" to keep ball in play
 let leftAngularWall1 = Matter.Bodies.rectangle(340, 200, 10, 200, { isStatic: true, angle: 2 });
@@ -206,9 +206,6 @@ Matter.Events.on(engine, 'collisionStart', function (event) {
 
     // change color of body on collision to random color
     body.render.fillStyle = `rgb(${Math.floor(Math.random() * 255)}, ${Math.floor(Math.random() * 255)}, ${Math.floor(Math.random() * 255)})`;
-
-
-
 });
 
 // add wind effect to bodies from left to right
@@ -220,7 +217,7 @@ Matter.Events.on(engine, 'collisionStart', function (event) {
 //     for (let i = 0; i < bodies.length; i++) {
 //         let body = bodies[i];
 //         if (body.position.x < 600) {
-//             Matter.Body.applyForce(body, { x: 0, y: 0 }, { x: wind, y: 0 });
+//             Matter.Body.applyForce(body, { x: 100, y: 0 }, { x: wind, y: 0 });
 //         }
 //         else {
 //             Matter.Body.applyForce(body, { x: 0, y: 0 }, { x: .0001, y: 0 });
