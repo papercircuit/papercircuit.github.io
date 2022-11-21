@@ -1,7 +1,7 @@
 let engine = Matter.Engine.create();
 
 let render = Matter.Render.create({
-    // element: document.body,
+    element: document.body,
     engine: engine,
     options: {
         width: 800,
@@ -9,7 +9,6 @@ let render = Matter.Render.create({
         wireframes: false,
         // background: 'url(./windchime.png)',
         // backgroundSize: 'cover',
-        canvas: document.getElementById('canvas'),
 
         showAngleIndicator: true,
         showCollisions: true,
