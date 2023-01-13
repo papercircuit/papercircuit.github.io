@@ -1,5 +1,4 @@
 let engine = Matter.Engine.create();
-
 let render = Matter.Render.create({
     element: document.body,
     engine: engine,
@@ -7,9 +6,6 @@ let render = Matter.Render.create({
         width: 800,
         height: 1200,
         wireframes: false,
-        // background: 'url(./windchime.png)',
-        // backgroundSize: 'cover',
-
         showAngleIndicator: true,
         showCollisions: true,
         showVelocity: true,
@@ -28,13 +24,9 @@ let rightWall = Matter.Bodies.rectangle(800, 400, 60, 1200, { isStatic: true });
 
 // create angular "walls" to keep ball in play
 let leftAngularWall1 = Matter.Bodies.rectangle(340, 200, 10, 200, { isStatic: true, angle: 2 });
-
 let rightAngularWall1 = Matter.Bodies.rectangle(500, 400, 10, 200, { isStatic: true, angle: -2 });
-
 let leftAngularWall2 = Matter.Bodies.rectangle(300, 600, 10, 200, { isStatic: true, angle: 2 });
-
 let rightAngularWall2 = Matter.Bodies.rectangle(500, 800, 10, 200, { isStatic: true, angle: -2 });
-
 
 let mouse = Matter.Mouse.create(render.canvas);
 let mouseConstraint = Matter.MouseConstraint.create(engine, {
@@ -44,9 +36,6 @@ let mouseConstraint = Matter.MouseConstraint.create(engine, {
     }
 });
 render.mouse = mouse;
-
-
-// RANDOM BODIES
 
 let stack = Matter.Composites.stack(200, 100, 5, 5, 0, 0, function (x, y) {
     // create random body types and sizes 
@@ -69,7 +58,6 @@ let stack = Matter.Composites.stack(200, 100, 5, 5, 0, 0, function (x, y) {
         case 1:
             return Matter.Bodies.polygon(x, y, sides, Matter.Common.random(5, 25), options);
     }
-
 });
 
 // Every second, drop a random new object from the top middle of the screen

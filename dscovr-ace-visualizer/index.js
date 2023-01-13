@@ -337,7 +337,7 @@ function subsample(inputData) {
             shared: true,
             useHTML: true,
             headerFormat: '<span>{series.name}</span>',
-            pointFormat: '<span style="color:{point.color}">\u25CF</span> <br>{point.x} GSE, <br> {point.y} GSE, <br>{point.z} GSE',
+            pointFormat: '<span style="color:{point.color}">\u25CF</span> <br>{point.x} GSE, <br> {point.y} GSE, <br>{point.z} GSE, <br> {point.time_tag}',
             footerFormat: '</p>',
             valueDecimals: 0, // Set decimals following each value in tooltip
           },
