@@ -28,6 +28,25 @@ let chart;
 let alpha = Math.atan(radiusSun / distanceToSun);
 let radiusSunAtL1 = distanceToL1 * Math.tan(alpha) * 1.6;
 
+ // Create the reset button
+ const resetButton = document.createElement("button");
+ resetButton.innerHTML = "Reset Camera View";
+ resetButton.style.backgroundColor = "lightgray";
+ resetButton.style.padding = "10px 20px";
+ resetButton.style.position = "absolute";
+ resetButton.style.top = "10px";
+ resetButton.style.right = "10px";
+
+ // Append the reset button to the container
+ document.getElementById("container").appendChild(resetButton);
+
+ // Add the click event listener to the reset button
+ resetButton.addEventListener("click", function () {
+   chart.options.chart.options3d.alpha = 0;
+   chart.options.chart.options3d.beta = -90;
+   chart.redraw(false);
+ });
+
 
 
 // Build a circle for the SEZ2 and SEZ4 boundaries
@@ -98,22 +117,24 @@ function fetchData(positionData) {
   ace.y_gse = positionData.Result.Data[1][0].Coordinates[1][0].Y[1];
   ace.z_gse = positionData.Result.Data[1][0].Coordinates[1][0].Z[1];
 
-  // push the data into the aceData array
+
+  // Swap Y GSE for Z to convert from GSE to local and push the data into the aceData array
   for (let i = 0; i < ACEsize; i++) {
-    aceData.push({ source: 'ace', time: ace.time_tag[i][1], x_gse: ace.x_gse[i], y_gse: ace.z_gse[i], z_gse: ace.y_gse[i] });
+    aceData.push({ custom: ace.time_tag[i][1], x_gse: ace.x_gse[i], y_gse: ace.z_gse[i], z_gse: ace.y_gse[i] });
   }
 
   // get the DSCOVR data
   let dscovr = {};
   let DSCOVRsize = positionData.Result.Data[1][0].Time[1].length;
-  dscovr.time_tag = positionData.Result.Data[1][1].Time[1];
+  dscovr.time_tag = positionData.Result.Data[1][1].Time[1]
   dscovr.x_gse = positionData.Result.Data[1][1].Coordinates[1][0].X[1];
   dscovr.y_gse = positionData.Result.Data[1][1].Coordinates[1][0].Y[1];
   dscovr.z_gse = positionData.Result.Data[1][1].Coordinates[1][0].Z[1];
 
-  // Swap Y GSE for Z to convert from GSE to local
+  // Swap Y GSE for Z to convert from GSE to local and push the data into the dscovrData array
   for (let i = 0; i < DSCOVRsize; i++) {
-    dscovrData.push({ source: 'dscovr', time: dscovr.time_tag[i], x_gse: dscovr.x_gse[i], y_gse: dscovr.z_gse[i], z_gse: dscovr.y_gse[i] });
+    dscovr.time_tag[i] = dscovr.time_tag[i];
+    dscovrData.push({ custom: dscovr.time_tag[i], x_gse: dscovr.x_gse[i], y_gse: dscovr.z_gse[i], z_gse: dscovr.y_gse[i] });
   }
 
   // clean up the data and reverse the time order      
@@ -132,17 +153,55 @@ function fetchData(positionData) {
       // X = Y GSE
       // Y = Z GSE
       // Z = X GSE
-      result.push([item.x_gse, item.y_gse, item.z_gse]);
+      result.push({ x: item.x_gse, y: item.y_gse, z: item.z_gse, custom: item.custom });
     }
     return result;
   }
 
-  aceData3d = convertTo3d(aceData);
-  dscovrData3d = convertTo3d(dscovrData);
+  function prepareDscovrData(data) {
+    let result = [];
+    for (let i = 0; i < data.length; i++) {
+      result.push({
+        name: 'DSCOVR',
+        x: data[i].x_gse,
+        y: data[i].y_gse,
+        z: data[i].z_gse,
+        custom: data[i].custom,
+        // rgb color: https://www.rapidtables.com/web/color/RGB_Color.html
+        color: 'rgba(255, 0, 0,' + i / data.length + ')'
+      });
+    }
+    return result;
+  }
+
+  function prepareAceData(data) {
+    let result = [];
+    for (let i = 0; i < data.length; i++) {
+      result.push({
+        name: 'ACE',
+        x: data[i].x_gse,
+        y: data[i].y_gse,
+        z: data[i].z_gse,
+        custom: data[i].custom,
+        color: 'rgba(255, 128, 0,' + i / data.length + ')'
+      });
+    }
+    return result;
+  }
+
+
+
+  aceData3d = prepareAceData(aceData);
+  dscovrData3d = prepareDscovrData(dscovrData);
+
+  console.log('aceData3d', aceData3d);
+  console.log('dscovrData3d', dscovrData3d);
+  // aceData3d = convertTo3d(aceData);
+  // dscovrData3d = convertTo3d(dscovrData);
 
   // FEED DATA TO HIGHCHARTS
-  chart.series[0].setData(aceData3d);
-  chart.series[1].setData(dscovrData3d);
+  chart.series[0].setData(dscovrData3d);
+  chart.series[1].setData(aceData3d);
   chart.series[2].setData(earthGSE);
   chart.series[3].setData(sunGSE);
   chart.series[4].setData(sez2Deg);
@@ -229,28 +288,24 @@ function subsample(inputData) {
         renderTo: 'container', // Target element id
         fitToPlot: 'true',
         reflow: 'false',
-
+        zoomType: 'z',
         // Spacing effects titles and legend only
         spacingTop: 20,
         spacingBottom: 10,
         spacingRight: 15,
         spacingLeft: 15,
-
         // Margin effects grid only 
         // KEEP SQUARE!
         marginTop: 80,
         marginBottom: 80,
         marginRight: 20,
         marginLeft: 20,
-
         // Final chart size in px 
         // KEEP SQUARE!
         height: 800,
         width: 800,
-
         // Chart background image
         // plotBackgroundImage: './imgs/twinkle.jpg',
-
         allowMutatingData: false,
         animation: true,
 
@@ -268,15 +323,12 @@ function subsample(inputData) {
 
         options3d: {
           enabled: true,
-
           // Setting alpha and beta to zero puts earth on left and satellites on right. alpha rotates on the vertical axis. beta rotates on the horizontal axis.
           alpha: 0,
           beta: -90,
-
-          // Depth effects scale!
+          // Depth effects scale! 
           depth: 620,
           viewDistance: 10,
-
           frame: {
             left: { // Camera front
               visible: false,
@@ -300,30 +352,41 @@ function subsample(inputData) {
           }
         }
       },
-
       // need to fix this
       exporting: {
         enabled: false,
       },
 
       title: {
-        text: 'Satellite Orbit Visualization of ACE and DSCOVR'
+        text: 'Satellite Orbit Visualization of DSCOVR and ACE'
       },
 
       subtitle: {
         text: 'Click and drag the plot area to rotate in space'
       },
-
       plotOptions: {
         scatter3d: {
-
           // animation on load only
           animation: true,
           animationLimit: 1000,
           animationDuration: 1000,
-          turboThreshold: 0,
+          turboThreshold: 100000,
+          allowPointSelect: true,
+          point: {
+            events: {
+              drag: function (event) {
+                event.target.update({
+                  animation: false
+                  });
+              },
+              drop: function (event) {
+                event.target.update({
+                  animation: true
+                  });
+              }
+            }
+          },
           marker: {
-            radius: 1,
             states: {
               hover: {
                 enabled: true,
@@ -331,14 +394,10 @@ function subsample(inputData) {
               }
             }
           },
-
           // Set the style and default values for tooltips on hover
           tooltip: {
-            shared: true,
+            shared: false,
             useHTML: true,
-            headerFormat: '<span>{series.name}</span>',
-            pointFormat: '<span style="color:{point.color}">\u25CF</span> <br>{point.x} GSE, <br> {point.y} GSE, <br>{point.z} GSE, <br> {point.time_tag}',
-            footerFormat: '</p>',
             valueDecimals: 0, // Set decimals following each value in tooltip
           },
         }
@@ -404,77 +463,81 @@ function subsample(inputData) {
         }
       },
 
+      // Set the legend
       legend: {
         enabled: true,
-        floating: true,
+        align: 'center',
+        verticalAlign: 'bottom',
+        layout: 'horizontal',
+        itemStyle: {
+          color: 'rgba(200,200,200, 0.8)'
+        },
+        itemHoverStyle: {
+          color: 'rgba(200,200,200, 0.8)'
+        }
       },
 
-      bubbleLegend: {
-        color: 'blue',
-      },
+
+   
 
       // SERIES CONFIGURATION BEGINS HERE
       series: [
         {
-          name: "ACE",
-          lineWidth: 0.2,
-          marker: {
-            color: {
-              linearGradient: { x1: 0, x2: 0, y1: 0, y2: 1 },
-              stops: [
-                [0, '#090979'], // start
-                [0.5, '#790927'], // middle
-                [1, '#793109'] // end
-              ]
-            },
-            fillColor: 'purple',
-            // symbol: 'circle',
-            // symbol: 'url(imgs/1200px-ACE_spacecraft_model.png)', 
-            // NEED TO CENTER
-            radius: 5,
 
-          }
-        },
-
-        {
           name: "DSCOVR",
           lineWidth: 0.2,
-          zones: [{
-
-            color: '#f7a35c'
-          }, {
-            value: 10,
-            color: '#7cb5ec'
-          }, {
-            color: '#90ed7d'
-          }],
+          lineColor: 'rgba(255, 255, 255, 0.7)',
+          lineZIndex: 1,
+          zIndex: 3,
+          tooltip: {
+            headerFormat: '<span>{series.name}</span>',
+            pointFormat: '<span style="color:{point.color}">\u25CF</span> <br>{point.x} GSE, <br> {point.y} GSE, <br>{point.z} GSE, <br> {point.custom}',
+            footerFormat: '</p>'
+          },
           marker: {
-            fillColor: 'red',
             symbol: 'circle',
-            // symbol: 'url(imgs/DSCOVR_spacecraft_model.png)', NEED TO CENTER
+            radius: 5,
+          },
+        },
+        {
+          name: "ACE",
+          lineWidth: 0.2,
+          lineColor: 'rgba(255, 255, 255, 0.7)',
+          lineZIndex: 1,
+          zIndex: 3,
+          tooltip: {
+            headerFormat: '<span>{series.name}</span>',
+            pointFormat: '<span style="color:{point.color}">\u25CF</span> <br>{point.x} GSE, <br> {point.y} GSE, <br>{point.z} GSE, <br> {point.custom}',
+            footerFormat: '</p>',
+          },
+          marker: {
+            symbol: 'circle',
             radius: 5,
           }
         },
         {
           name: "EARTH",
           lineWidth: 1,
+          zIndex: 2,
           marker: {
             fillColor: 'blue',
-            symbol: 'circle',
-            // symbol: 'url(imgs/sun.jpeg)', NEED TO CENTER
-            radius: 7,
+            // symbol: 'circle',
+            symbol: 'url(imgs/earth.png)',
+            height: 15,
+            width: 15,
+            radius: 1,
           }
-
         },
         {
           name: "SUN",
           visible: false,
           lineWidth: 1,
+          zIndex: 1,
           marker: {
             fillColor: 'yellow',
-            symbol: 'circle',
-            // symbol: 'url(imgs/sun.jpeg)', NEED TO CENTER
-            radius: 8,
+            symbol: 'url(imgs/sun.png)', 
+            height: 150,
+            width: 150,
           }
 
         },
@@ -483,6 +546,7 @@ function subsample(inputData) {
           name: "SEZ 2.0 deg",
           lineWidth: 1,
           visible: true,
+          zIndex: 2,
           marker: {
             enabled: false
           }
@@ -492,12 +556,12 @@ function subsample(inputData) {
           name: "SEZ 4.0 deg",
           lineWidth: 1,
           visible: true,
+          zIndex: 2,
           marker: {
             enabled: false
           }
 
         },
-
         {
           name: "Sun-Earth line",
           lineWidth: 1,
@@ -512,30 +576,29 @@ function subsample(inputData) {
         // SERIES CONFIGURATION ENDS HERE
       ]
     });
+
+    // Here we add the reset button using the renderer. The arguments are the text, x and y position.
+    chart.renderer.button('RESET CAMERA', 350, 80)
+      .on('click', function () {
+        chart.update({
+          chart: {
+            options3d: {
+              alpha: 0,
+              beta: -90,
+              // Depth effects scale! 
+              depth: 620,
+              viewDistance: 10,
+            }
+          }
+        });
+      }
+      )
+      .attr({
+        zIndex: 100,
+        class: 'reset-button'
+      })
+      .add();
   }
-
-
-  // Bubble fader function (not working)
-  function bubbleFader(dataPoints, backgroundColors, colors, spaceCraft) {
-    // console.log('bubbleFader dataPoints.length ' + dataPoints.length);
-    let i;
-    for (i = 0; i < dataPoints.length; i++) {
-      // let bubbleRadius = 0.1 + Math.abs((i - dataPoints.length)) ** E / (dataPoints.length) ** E;
-      let d = { x: dataPoints[i].y_gse, y: dataPoints[i].z_gse, r: 6 };
-      // chartDataBubble.datasets[spaceCraft].data.push(d);
-
-      //console.log('alpha ' + ((dataPoints.length-i)/ dataPoints.length));
-      backgroundColors.push(colors + ((dataPoints.length - i) / dataPoints.length) + ')');
-      //console.log('color[' + i + '] ' + backgroundColors[backgroundColors.length-1]);
-
-      let d2 = { x: dataPoints[i].y_gse, y: dataPoints[i].z_gse };
-      console.log("chartDataLine " + chartDataLine)
-      chartDataLine.datasets[spaceCraft].data.push(d2);
-
-    }
-    // chartDataBubble.datasets[spaceCraft].backgroundColors = backgroundColors;
-  }
-
 
   // Make the chart draggable
   function dragStart(eStart) {
@@ -583,5 +646,7 @@ function subsample(inputData) {
   H.addEvent(chart.container, 'touchstart', dragStart);
 
 
+
 }(Highcharts));
+
 
