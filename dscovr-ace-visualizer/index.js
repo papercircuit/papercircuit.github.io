@@ -98,9 +98,10 @@ function fetchData(positionData) {
   ace.y_gse = positionData.Result.Data[1][0].Coordinates[1][0].Y[1];
   ace.z_gse = positionData.Result.Data[1][0].Coordinates[1][0].Z[1];
 
+
   // push the data into the aceData array
   for (let i = 0; i < ACEsize; i++) {
-    aceData.push({ source: 'ace', time: ace.time_tag[i][1], x_gse: ace.x_gse[i], y_gse: ace.z_gse[i], z_gse: ace.y_gse[i] });
+    aceData.push({ custom: ace.time_tag[i][1], x_gse: ace.x_gse[i], y_gse: ace.z_gse[i], z_gse: ace.y_gse[i] });
   }
 
   // get the DSCOVR data
@@ -113,7 +114,7 @@ function fetchData(positionData) {
 
   // Swap Y GSE for Z to convert from GSE to local
   for (let i = 0; i < DSCOVRsize; i++) {
-    dscovrData.push({ source: 'dscovr', time: dscovr.time_tag[i], x_gse: dscovr.x_gse[i], y_gse: dscovr.z_gse[i], z_gse: dscovr.y_gse[i] });
+    dscovrData.push({ custom:{ extrainformation:dscovr.time_tag[i]}, x_gse: dscovr.x_gse[i], y_gse: dscovr.z_gse[i], z_gse: dscovr.y_gse[i] });
   }
 
   // clean up the data and reverse the time order      
@@ -132,7 +133,7 @@ function fetchData(positionData) {
       // X = Y GSE
       // Y = Z GSE
       // Z = X GSE
-      result.push([item.x_gse, item.y_gse, item.z_gse]);
+      result.push({x:item.x_gse, y:item.y_gse, z:item.z_gse, custom:item.custom});
     }
     return result;
   }
@@ -337,8 +338,10 @@ function subsample(inputData) {
             shared: true,
             useHTML: true,
             headerFormat: '<span>{series.name}</span>',
-            pointFormat: '<span style="color:{point.color}">\u25CF</span> <br>{point.x} GSE, <br> {point.y} GSE, <br>{point.z} GSE, <br> {point.time_tag}',
+            pointFormat: '<span style="color:{point.color}">\u25CF</span> <br>{point.x} GSE, <br> {point.y} GSE, <br>{point.z} GSE, <br> {point.custom}',
             footerFormat: '</p>',
+
+         
             valueDecimals: 0, // Set decimals following each value in tooltip
           },
         }
@@ -453,7 +456,12 @@ function subsample(inputData) {
             symbol: 'circle',
             // symbol: 'url(imgs/DSCOVR_spacecraft_model.png)', NEED TO CENTER
             radius: 5,
-          }
+          },
+          // tooltip: {
+          //   pointFormatter: function () {
+          //     return "time tag-->" + this.time_tag;
+          //   }
+          // },
         },
         {
           name: "EARTH",
