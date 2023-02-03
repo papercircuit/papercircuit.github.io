@@ -146,3 +146,11 @@ body {
 .highcharts-data-table tr:hover {
   background: #f1f7ff;
 }
+
+.reset-button rect {
+  fill: #ffffffb0;
+  color: rgb(0, 0, 0);
+  border: 1px solid whitesmoke;
+  height: 30px;
+  cursor: pointer;
+}

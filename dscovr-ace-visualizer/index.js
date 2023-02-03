@@ -358,7 +358,7 @@ function subsample(inputData) {
       },
 
       title: {
-        text: 'Satellite Orbit Visualization of ACE and DSCOVR'
+        text: 'Satellite Orbit Visualization of DSCOVR and ACE'
       },
 
       subtitle: {
@@ -370,7 +370,22 @@ function subsample(inputData) {
           animation: true,
           animationLimit: 1000,
           animationDuration: 1000,
-          turboThreshold: 0,
+          turboThreshold: 100000,
+          allowPointSelect: true,
+          point: {
+            events: {
+              drag: function (event) {
+                event.target.update({
+                  animation: false
+                  });
+              },
+              drop: function (event) {
+                event.target.update({
+                  animation: true
+                  });
+              }
+            }
+          },
           marker: {
             states: {
               hover: {
@@ -473,6 +488,7 @@ function subsample(inputData) {
           lineWidth: 0.2,
           lineColor: 'rgba(255, 255, 255, 0.7)',
           lineZIndex: 1,
+          zIndex: 3,
           tooltip: {
             headerFormat: '<span>{series.name}</span>',
             pointFormat: '<span style="color:{point.color}">\u25CF</span> <br>{point.x} GSE, <br> {point.y} GSE, <br>{point.z} GSE, <br> {point.custom}',
@@ -488,6 +504,7 @@ function subsample(inputData) {
           lineWidth: 0.2,
           lineColor: 'rgba(255, 255, 255, 0.7)',
           lineZIndex: 1,
+          zIndex: 3,
           tooltip: {
             headerFormat: '<span>{series.name}</span>',
             pointFormat: '<span style="color:{point.color}">\u25CF</span> <br>{point.x} GSE, <br> {point.y} GSE, <br>{point.z} GSE, <br> {point.custom}',
@@ -501,23 +518,26 @@ function subsample(inputData) {
         {
           name: "EARTH",
           lineWidth: 1,
+          zIndex: 2,
           marker: {
             fillColor: 'blue',
-            symbol: 'circle',
-            // symbol: 'url(imgs/sun.jpeg)', NEED TO CENTER
-            radius: 7,
+            // symbol: 'circle',
+            symbol: 'url(imgs/earth.png)',
+            height: 15,
+            width: 15,
+            radius: 1,
           }
-
         },
         {
           name: "SUN",
           visible: false,
           lineWidth: 1,
+          zIndex: 1,
           marker: {
             fillColor: 'yellow',
-            symbol: 'circle',
-            // symbol: 'url(imgs/sun.jpeg)', NEED TO CENTER
-            radius: 8,
+            symbol: 'url(imgs/sun.png)', 
+            height: 150,
+            width: 150,
           }
 
         },
@@ -526,6 +546,7 @@ function subsample(inputData) {
           name: "SEZ 2.0 deg",
           lineWidth: 1,
           visible: true,
+          zIndex: 2,
           marker: {
             enabled: false
           }
@@ -535,6 +556,7 @@ function subsample(inputData) {
           name: "SEZ 4.0 deg",
           lineWidth: 1,
           visible: true,
+          zIndex: 2,
           marker: {
             enabled: false
           }
@@ -555,7 +577,8 @@ function subsample(inputData) {
       ]
     });
 
-    chart.renderer.button('Reset Camera', 10, 10)
+    // Here we add the reset button using the renderer. The arguments are the text, x and y position.
+    chart.renderer.button('RESET CAMERA', 350, 80)
       .on('click', function () {
         chart.update({
           chart: {
