@@ -112,9 +112,15 @@ function fetchData(positionData) {
   dscovr.y_gse = positionData.Result.Data[1][1].Coordinates[1][0].Y[1];
   dscovr.z_gse = positionData.Result.Data[1][1].Coordinates[1][0].Z[1];
 
+  console.log("dscovr.time_tag", dscovr.time_tag)
+  console.log("ace.time_tag", ace.time_tag)
+  console.log("Type of ace.time_tag", (ace.time_tag[0][1].length))
+  console.log("Type of dscovr.time_tag", dscovr.time_tag[0][1].length)
+
   // Swap Y GSE for Z to convert from GSE to local
   for (let i = 0; i < DSCOVRsize; i++) {
-    dscovrData.push({ custom:{ extrainformation:dscovr.time_tag[i]}, x_gse: dscovr.x_gse[i], y_gse: dscovr.z_gse[i], z_gse: dscovr.y_gse[i] });
+    // console.log("time_tag[i]", dscovr.time_tag[i])
+    dscovrData.push({ custom: dscovr.time_tag[i], x_gse: dscovr.x_gse[i], y_gse: dscovr.z_gse[i], z_gse: dscovr.y_gse[i] });
   }
 
   // clean up the data and reverse the time order      
@@ -335,7 +341,7 @@ function subsample(inputData) {
 
           // Set the style and default values for tooltips on hover
           tooltip: {
-            shared: true,
+            shared: false,
             useHTML: true,
             headerFormat: '<span>{series.name}</span>',
             pointFormat: '<span style="color:{point.color}">\u25CF</span> <br>{point.x} GSE, <br> {point.y} GSE, <br>{point.z} GSE, <br> {point.custom}',
