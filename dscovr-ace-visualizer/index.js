@@ -142,7 +142,7 @@ function fetchData(positionData) {
   function prepareAceData(data) {
     let result = [];
     for (let i = 0; i < data.length; i++) {
-      result.push({ name: 'ACE', x: data[i].x_gse, y: data[i].y_gse, z: data[i].z_gse, custom: data[i].custom, color: 'rgba(200, 150, 0,' + i / data.length + ')'});
+      result.push({ name: 'ACE', x: data[i].x_gse, y: data[i].y_gse, z: data[i].z_gse, custom: data[i].custom, color: 'rgba(200, 150, 0,' + i / data.length + ')' });
     }
     return result;
   }
@@ -150,7 +150,7 @@ function fetchData(positionData) {
   function prepareDscovrData(data) {
     let result = [];
     for (let i = 0; i < data.length; i++) {
-      result.push({ name: 'DSCOVR', x: data[i].x_gse, y: data[i].y_gse, z: data[i].z_gse, custom: data[i].custom, color: 'rgba(15, 150, 23,' + i / data.length + ')'});
+      result.push({ name: 'DSCOVR', x: data[i].x_gse, y: data[i].y_gse, z: data[i].z_gse, custom: data[i].custom, color: 'rgba(15, 150, 23,' + i / data.length + ')' });
     }
     return result;
   }
@@ -164,8 +164,8 @@ function fetchData(positionData) {
   // dscovrData3d = convertTo3d(dscovrData);
 
   // FEED DATA TO HIGHCHARTS
-  chart.series[0].setData(aceData3d);
-  chart.series[1].setData(dscovrData3d);
+  chart.series[0].setData(dscovrData3d);
+  chart.series[1].setData(aceData3d);
   chart.series[2].setData(earthGSE);
   chart.series[3].setData(sunGSE);
   chart.series[4].setData(sez2Deg);
@@ -436,8 +436,23 @@ function subsample(inputData) {
       // SERIES CONFIGURATION BEGINS HERE
       series: [
         {
+
+          name: "DSCOVR",
+          lineWidth: 0.2,
+          lineColor: 'rgba(255, 0, 0, 0.5)',
+          tooltip: {
+            headerFormat: '<span>{series.name}</span>',
+            pointFormat: '<span style="color:{point.color}">\u25CF</span> <br>{point.x} GSE, <br> {point.y} GSE, <br>{point.z} GSE, <br> {point.custom}',
+            footerFormat: '</p>'
+          },
+          marker: {
+            symbol: 'square',
+            radius: 5,
+          },
+        },
+        {
           name: "ACE",
-          lineWidth: 0.1,
+          lineWidth: 0.2,
           lineColor: 'rgba(255, 0, 0, 0.5)',
           tooltip: {
             headerFormat: '<span>{series.name}</span>',
@@ -448,21 +463,6 @@ function subsample(inputData) {
             symbol: 'circle',
             radius: 5,
           }
-        },
-        {
-
-          name: "DSCOVR",
-          lineWidth: 0.1,
-          lineColor: 'rgba(255, 0, 0, 0.5)',
-          tooltip: {
-            headerFormat: '<span>{series.name}</span>',
-            pointFormat: '<span style="color:{point.color}">\u25CF</span> <br>{point.x} GSE, <br> {point.y} GSE, <br>{point.z} GSE, <br> {point.custom}',
-            footerFormat: '</p>'
-          },
-          marker: {
-            symbol: 'square',
-            radius: 5,
-        },   
         },
         {
           name: "EARTH",
