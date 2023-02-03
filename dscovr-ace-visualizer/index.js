@@ -99,7 +99,7 @@ function fetchData(positionData) {
   ace.z_gse = positionData.Result.Data[1][0].Coordinates[1][0].Z[1];
 
 
-  // push the data into the aceData array
+  // Swap Y GSE for Z to convert from GSE to local and push the data into the aceData array
   for (let i = 0; i < ACEsize; i++) {
     aceData.push({ custom: ace.time_tag[i][1], x_gse: ace.x_gse[i], y_gse: ace.z_gse[i], z_gse: ace.y_gse[i] });
   }
@@ -107,19 +107,14 @@ function fetchData(positionData) {
   // get the DSCOVR data
   let dscovr = {};
   let DSCOVRsize = positionData.Result.Data[1][0].Time[1].length;
-  dscovr.time_tag = positionData.Result.Data[1][1].Time[1];
+  dscovr.time_tag = positionData.Result.Data[1][1].Time[1]
   dscovr.x_gse = positionData.Result.Data[1][1].Coordinates[1][0].X[1];
   dscovr.y_gse = positionData.Result.Data[1][1].Coordinates[1][0].Y[1];
   dscovr.z_gse = positionData.Result.Data[1][1].Coordinates[1][0].Z[1];
 
-  console.log("dscovr.time_tag", dscovr.time_tag)
-  console.log("ace.time_tag", ace.time_tag)
-  console.log("Type of ace.time_tag", (ace.time_tag[0][1].length))
-  console.log("Type of dscovr.time_tag", dscovr.time_tag[0][1].length)
-
-  // Swap Y GSE for Z to convert from GSE to local
+  // Swap Y GSE for Z to convert from GSE to local and push the data into the dscovrData array
   for (let i = 0; i < DSCOVRsize; i++) {
-    // console.log("time_tag[i]", dscovr.time_tag[i])
+    dscovr.time_tag[i] = dscovr.time_tag[i];
     dscovrData.push({ custom: dscovr.time_tag[i], x_gse: dscovr.x_gse[i], y_gse: dscovr.z_gse[i], z_gse: dscovr.y_gse[i] });
   }
 
@@ -139,13 +134,34 @@ function fetchData(positionData) {
       // X = Y GSE
       // Y = Z GSE
       // Z = X GSE
-      result.push({x:item.x_gse, y:item.y_gse, z:item.z_gse, custom:item.custom});
+      result.push({ x: item.x_gse, y: item.y_gse, z: item.z_gse, custom: item.custom });
     }
     return result;
   }
 
-  aceData3d = convertTo3d(aceData);
-  dscovrData3d = convertTo3d(dscovrData);
+  function prepareAceData(data) {
+    let result = [];
+    for (let i = 0; i < data.length; i++) {
+      result.push({ name: 'ACE', x: data[i].x_gse, y: data[i].y_gse, z: data[i].z_gse, custom: data[i].custom, color: 'rgba(200, 150, 0,' + i / data.length + ')'});
+    }
+    return result;
+  }
+
+  function prepareDscovrData(data) {
+    let result = [];
+    for (let i = 0; i < data.length; i++) {
+      result.push({ name: 'DSCOVR', x: data[i].x_gse, y: data[i].y_gse, z: data[i].z_gse, custom: data[i].custom, color: 'rgba(15, 150, 23,' + i / data.length + ')'});
+    }
+    return result;
+  }
+
+  aceData3d = prepareAceData(aceData);
+  dscovrData3d = prepareDscovrData(dscovrData);
+
+  console.log('aceData3d', aceData3d);
+  console.log('dscovrData3d', dscovrData3d);
+  // aceData3d = convertTo3d(aceData);
+  // dscovrData3d = convertTo3d(dscovrData);
 
   // FEED DATA TO HIGHCHARTS
   chart.series[0].setData(aceData3d);
@@ -343,11 +359,6 @@ function subsample(inputData) {
           tooltip: {
             shared: false,
             useHTML: true,
-            headerFormat: '<span>{series.name}</span>',
-            pointFormat: '<span style="color:{point.color}">\u25CF</span> <br>{point.x} GSE, <br> {point.y} GSE, <br>{point.z} GSE, <br> {point.custom}',
-            footerFormat: '</p>',
-
-         
             valueDecimals: 0, // Set decimals following each value in tooltip
           },
         }
@@ -426,48 +437,30 @@ function subsample(inputData) {
       series: [
         {
           name: "ACE",
-          lineWidth: 0.2,
+          lineWidth: 0.1,
+          lineColor: 'rgba(255, 0, 0, 0.5)',
+          tooltip: {
+            headerFormat: '<span>{series.name}</span>',
+            pointFormat: '<span style="color:{point.color}">\u25CF</span> <br>{point.x} GSE, <br> {point.y} GSE, <br>{point.z} GSE, <br> {point.custom}',
+            footerFormat: '</p>',
+          },
           marker: {
-            color: {
-              linearGradient: { x1: 0, x2: 0, y1: 0, y2: 1 },
-              stops: [
-                [0, '#090979'], // start
-                [0.5, '#790927'], // middle
-                [1, '#793109'] // end
-              ]
-            },
-            fillColor: 'purple',
-            // symbol: 'circle',
-            // symbol: 'url(imgs/1200px-ACE_spacecraft_model.png)', 
-            // NEED TO CENTER
-            radius: 5,
-
+            symbol: 'circle',
           }
         },
-
         {
-          name: "DSCOVR",
-          lineWidth: 0.2,
-          zones: [{
 
-            color: '#f7a35c'
-          }, {
-            value: 10,
-            color: '#7cb5ec'
-          }, {
-            color: '#90ed7d'
-          }],
-          marker: {
-            fillColor: 'red',
-            symbol: 'circle',
-            // symbol: 'url(imgs/DSCOVR_spacecraft_model.png)', NEED TO CENTER
-            radius: 5,
+          name: "DSCOVR",
+          lineWidth: 0.1,
+          lineColor: 'rgba(255, 0, 0, 0.5)',
+          tooltip: {
+            headerFormat: '<span>{series.name}</span>',
+            pointFormat: '<span style="color:{point.color}">\u25CF</span> <br>{point.x} GSE, <br> {point.y} GSE, <br>{point.z} GSE, <br> {point.custom}',
+            footerFormat: '</p>'
           },
-          // tooltip: {
-          //   pointFormatter: function () {
-          //     return "time tag-->" + this.time_tag;
-          //   }
-          // },
+          marker: {
+            symbol: 'square',
+        },   
         },
         {
           name: "EARTH",
@@ -511,7 +504,6 @@ function subsample(inputData) {
           }
 
         },
-
         {
           name: "Sun-Earth line",
           lineWidth: 1,
@@ -549,6 +541,7 @@ function subsample(inputData) {
     }
     // chartDataBubble.datasets[spaceCraft].backgroundColors = backgroundColors;
   }
+
 
 
   // Make the chart draggable
