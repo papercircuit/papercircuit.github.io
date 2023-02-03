@@ -28,6 +28,25 @@ let chart;
 let alpha = Math.atan(radiusSun / distanceToSun);
 let radiusSunAtL1 = distanceToL1 * Math.tan(alpha) * 1.6;
 
+ // Create the reset button
+ const resetButton = document.createElement("button");
+ resetButton.innerHTML = "Reset Camera View";
+ resetButton.style.backgroundColor = "lightgray";
+ resetButton.style.padding = "10px 20px";
+ resetButton.style.position = "absolute";
+ resetButton.style.top = "10px";
+ resetButton.style.right = "10px";
+
+ // Append the reset button to the container
+ document.getElementById("container").appendChild(resetButton);
+
+ // Add the click event listener to the reset button
+ resetButton.addEventListener("click", function () {
+   chart.options.chart.options3d.alpha = 0;
+   chart.options.chart.options3d.beta = -90;
+   chart.redraw(false);
+ });
+
 
 
 // Build a circle for the SEZ2 and SEZ4 boundaries
@@ -139,21 +158,38 @@ function fetchData(positionData) {
     return result;
   }
 
-  function prepareAceData(data) {
+  function prepareDscovrData(data) {
     let result = [];
     for (let i = 0; i < data.length; i++) {
-      result.push({ name: 'ACE', x: data[i].x_gse, y: data[i].y_gse, z: data[i].z_gse, custom: data[i].custom, color: 'rgba(200, 150, 0,' + i / data.length + ')' });
+      result.push({
+        name: 'DSCOVR',
+        x: data[i].x_gse,
+        y: data[i].y_gse,
+        z: data[i].z_gse,
+        custom: data[i].custom,
+        // rgb color: https://www.rapidtables.com/web/color/RGB_Color.html
+        color: 'rgba(255, 0, 0,' + i / data.length + ')'
+      });
     }
     return result;
   }
 
-  function prepareDscovrData(data) {
+  function prepareAceData(data) {
     let result = [];
     for (let i = 0; i < data.length; i++) {
-      result.push({ name: 'DSCOVR', x: data[i].x_gse, y: data[i].y_gse, z: data[i].z_gse, custom: data[i].custom, color: 'rgba(15, 150, 23,' + i / data.length + ')' });
+      result.push({
+        name: 'ACE',
+        x: data[i].x_gse,
+        y: data[i].y_gse,
+        z: data[i].z_gse,
+        custom: data[i].custom,
+        color: 'rgba(255, 128, 0,' + i / data.length + ')'
+      });
     }
     return result;
   }
+
+
 
   aceData3d = prepareAceData(aceData);
   dscovrData3d = prepareDscovrData(dscovrData);
@@ -252,28 +288,24 @@ function subsample(inputData) {
         renderTo: 'container', // Target element id
         fitToPlot: 'true',
         reflow: 'false',
-
+        zoomType: 'z',
         // Spacing effects titles and legend only
         spacingTop: 20,
         spacingBottom: 10,
         spacingRight: 15,
         spacingLeft: 15,
-
         // Margin effects grid only 
         // KEEP SQUARE!
         marginTop: 80,
         marginBottom: 80,
         marginRight: 20,
         marginLeft: 20,
-
         // Final chart size in px 
         // KEEP SQUARE!
         height: 800,
         width: 800,
-
         // Chart background image
         // plotBackgroundImage: './imgs/twinkle.jpg',
-
         allowMutatingData: false,
         animation: true,
 
@@ -291,15 +323,12 @@ function subsample(inputData) {
 
         options3d: {
           enabled: true,
-
           // Setting alpha and beta to zero puts earth on left and satellites on right. alpha rotates on the vertical axis. beta rotates on the horizontal axis.
           alpha: 0,
           beta: -90,
-
-          // Depth effects scale!
+          // Depth effects scale! 
           depth: 620,
           viewDistance: 10,
-
           frame: {
             left: { // Camera front
               visible: false,
@@ -323,7 +352,6 @@ function subsample(inputData) {
           }
         }
       },
-
       // need to fix this
       exporting: {
         enabled: false,
@@ -336,17 +364,14 @@ function subsample(inputData) {
       subtitle: {
         text: 'Click and drag the plot area to rotate in space'
       },
-
       plotOptions: {
         scatter3d: {
-
           // animation on load only
           animation: true,
           animationLimit: 1000,
           animationDuration: 1000,
           turboThreshold: 0,
           marker: {
-            radius: 1,
             states: {
               hover: {
                 enabled: true,
@@ -354,7 +379,6 @@ function subsample(inputData) {
               }
             }
           },
-
           // Set the style and default values for tooltips on hover
           tooltip: {
             shared: false,
@@ -424,14 +448,22 @@ function subsample(inputData) {
         }
       },
 
+      // Set the legend
       legend: {
         enabled: true,
-        floating: true,
+        align: 'center',
+        verticalAlign: 'bottom',
+        layout: 'horizontal',
+        itemStyle: {
+          color: 'rgba(200,200,200, 0.8)'
+        },
+        itemHoverStyle: {
+          color: 'rgba(200,200,200, 0.8)'
+        }
       },
 
-      bubbleLegend: {
-        color: 'blue',
-      },
+
+   
 
       // SERIES CONFIGURATION BEGINS HERE
       series: [
@@ -439,21 +471,23 @@ function subsample(inputData) {
 
           name: "DSCOVR",
           lineWidth: 0.2,
-          lineColor: 'rgba(255, 0, 0, 0.5)',
+          lineColor: 'rgba(255, 255, 255, 0.7)',
+          lineZIndex: 1,
           tooltip: {
             headerFormat: '<span>{series.name}</span>',
             pointFormat: '<span style="color:{point.color}">\u25CF</span> <br>{point.x} GSE, <br> {point.y} GSE, <br>{point.z} GSE, <br> {point.custom}',
             footerFormat: '</p>'
           },
           marker: {
-            symbol: 'square',
+            symbol: 'circle',
             radius: 5,
           },
         },
         {
           name: "ACE",
           lineWidth: 0.2,
-          lineColor: 'rgba(255, 0, 0, 0.5)',
+          lineColor: 'rgba(255, 255, 255, 0.7)',
+          lineZIndex: 1,
           tooltip: {
             headerFormat: '<span>{series.name}</span>',
             pointFormat: '<span style="color:{point.color}">\u25CF</span> <br>{point.x} GSE, <br> {point.y} GSE, <br>{point.z} GSE, <br> {point.custom}',
@@ -520,31 +554,28 @@ function subsample(inputData) {
         // SERIES CONFIGURATION ENDS HERE
       ]
     });
+
+    chart.renderer.button('Reset Camera', 10, 10)
+      .on('click', function () {
+        chart.update({
+          chart: {
+            options3d: {
+              alpha: 0,
+              beta: -90,
+              // Depth effects scale! 
+              depth: 620,
+              viewDistance: 10,
+            }
+          }
+        });
+      }
+      )
+      .attr({
+        zIndex: 100,
+        class: 'reset-button'
+      })
+      .add();
   }
-
-
-  // Bubble fader function (not working)
-  function bubbleFader(dataPoints, backgroundColors, colors, spaceCraft) {
-    // console.log('bubbleFader dataPoints.length ' + dataPoints.length);
-    let i;
-    for (i = 0; i < dataPoints.length; i++) {
-      // let bubbleRadius = 0.1 + Math.abs((i - dataPoints.length)) ** E / (dataPoints.length) ** E;
-      let d = { x: dataPoints[i].y_gse, y: dataPoints[i].z_gse, r: 6 };
-      // chartDataBubble.datasets[spaceCraft].data.push(d);
-
-      //console.log('alpha ' + ((dataPoints.length-i)/ dataPoints.length));
-      backgroundColors.push(colors + ((dataPoints.length - i) / dataPoints.length) + ')');
-      //console.log('color[' + i + '] ' + backgroundColors[backgroundColors.length-1]);
-
-      let d2 = { x: dataPoints[i].y_gse, y: dataPoints[i].z_gse };
-      console.log("chartDataLine " + chartDataLine)
-      chartDataLine.datasets[spaceCraft].data.push(d2);
-
-    }
-    // chartDataBubble.datasets[spaceCraft].backgroundColors = backgroundColors;
-  }
-
-
 
   // Make the chart draggable
   function dragStart(eStart) {
@@ -592,5 +623,7 @@ function subsample(inputData) {
   H.addEvent(chart.container, 'touchstart', dragStart);
 
 
+
 }(Highcharts));
+
 
