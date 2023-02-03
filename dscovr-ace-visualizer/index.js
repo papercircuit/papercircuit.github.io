@@ -446,6 +446,7 @@ function subsample(inputData) {
           },
           marker: {
             symbol: 'circle',
+            radius: 5,
           }
         },
         {
@@ -460,6 +461,7 @@ function subsample(inputData) {
           },
           marker: {
             symbol: 'square',
+            radius: 5,
         },   
         },
         {
