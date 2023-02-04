@@ -121,7 +121,12 @@ function fetchData(positionData) {
   // Swap Y GSE for Z to convert from GSE to local and push the data into the aceData array
   for (let i = 0; i < ACEsize; i++) {
     if (ace.time_tag[i] != undefined) {
-    aceData.push({ custom: ace.time_tag[i][1].substring(0,22), x_gse: ace.x_gse[i], y_gse: ace.z_gse[i], z_gse: ace.y_gse[i] });
+    aceData.push({ 
+      custom: ace.time_tag[i][1].substring(0,22), 
+      x_gse: ace.x_gse[i], 
+      y_gse: ace.z_gse[i], 
+      z_gse: ace.y_gse[i] 
+    });
     }
   }
 
@@ -136,7 +141,12 @@ function fetchData(positionData) {
   // Swap Y GSE for Z to convert from GSE to local and push the data into the dscovrData array
   for (let i = 0; i < DSCOVRsize; i++) {
     if (dscovr.time_tag[i] != undefined) {
-      dscovrData.push({ custom: dscovr.time_tag[i][1].substring(0,22), x_gse: dscovr.x_gse[i], y_gse: dscovr.z_gse[i], z_gse: dscovr.y_gse[i] });
+      dscovrData.push({ 
+        custom: dscovr.time_tag[i][1].substring(0,22), 
+        x_gse: dscovr.x_gse[i], 
+        y_gse: dscovr.z_gse[i], 
+        z_gse: dscovr.y_gse[i]
+      });
     }
   }
 
@@ -457,7 +467,7 @@ function subsample(inputData) {
             zIndex: 3,
             tooltip: {
               headerFormat: '<span>{series.name}</span>',
-              pointFormat: '</span> <br>X GSE :{point.x}, <br>Y GSE: {point.y}, <br> Z GSE:{point.z}, <br> UTC:{point.custom}',
+              pointFormat: '</span> <br>X GSE :{point.x} <br>Y GSE: {point.y} <br> Z GSE: {point.z} <br> UTC: {point.custom}',
               footerFormat: '</p>'
             },
             marker: {
@@ -474,7 +484,7 @@ function subsample(inputData) {
             zIndex: 3,
             tooltip: {
               headerFormat: '<span>{series.name}</span>',
-              pointFormat: '</span> <br>X GSE:{point.x} , <br>Y GSE: {point.y} , <br>Z GSE:{point.z} , <br> UTC: {point.custom}',
+              pointFormat: '</span> <br>X GSE: {point.x} <br>Y GSE: {point.y} <br>Z GSE: {point.z} <br> UTC: {point.custom}',
               footerFormat: '</p>',
             },
             marker: {
