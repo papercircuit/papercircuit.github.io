@@ -337,7 +337,6 @@ function subsample(inputData) {
               menuItems: ['downloadPNG', 'downloadJPEG', 'downloadPDF', 'downloadSVG', 'separator', 'downloadCSV', 'downloadXLS']
             }
           }
-
         },
 
         title: {
@@ -447,16 +446,19 @@ function subsample(inputData) {
         legend: {
           enabled: true,
           title: {
-            text: 'Click to hide or show data series',
+            text: 'Click to hide/show data series',
             style: {
-              color: 'rgba(255,255,255, 0.8)'
+              color: 'rgba(255,255,255, 0.8)',
+              fontSize: '10px',
+              fontWeight: 'light',
+              letterSpacing: '1px'
             }
           },
           align: 'center',
           verticalAlign: 'bottom',
           layout: 'horizontal',
           labelFormatter: function () {
-              return this.name;
+            return this.name;
           },
           itemStyle: {
             color: 'rgba(255,255,255, 0.8)'
@@ -649,5 +651,8 @@ function subsample(inputData) {
   }
 
 }(Highcharts));
+
+// Created by Kenny Johnson and Jeff Johnson
+// Email for questions/comment/job offers kenny.johnson.nyc@gmail.com
 
 
