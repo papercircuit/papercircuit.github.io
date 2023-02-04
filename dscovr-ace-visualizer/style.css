@@ -138,9 +138,8 @@ header {
 }
 
 .reset-button rect {
-  fill: #ffffffb0;
+  fill: #ffffff;
   color: rgb(0, 0, 0);
-  border: 1px solid whitesmoke;
   height: 30px;
   cursor: pointer;
 }

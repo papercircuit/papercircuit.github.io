@@ -470,6 +470,14 @@ function subsample(inputData) {
             color: 'rgba(255,255,255, 0.3)'
           }
         },
+        navigation: {
+          buttonOptions: {
+            width: 120,
+            text: 'Download'
+            
+            }
+          
+        },
         // SERIES CONFIGURATION BEGINS HERE
         series: [
           {
