@@ -49,8 +49,6 @@ resetButton.addEventListener("click", function () {
   chart.redraw(false);
 });
 
-
-
 // Build a circle for the SEZ2 and SEZ4 boundaries
 function buildCircle(radius, x) {
   let circleData = [];
@@ -61,18 +59,6 @@ function buildCircle(radius, x) {
   }
   return circleData;
 }
-
-// // Build filled in circle
-// function buildFilledCircle(radius, x) {
-//   let circleData = [];
-//   // this is the angle in radians
-//   for (let i = 0; i <= 360; i = i + 10) {  // <== Set circle resolution here
-//     // this is the x,y of the circle
-//     circleData.push([x, radius * Math.cos(toRadians(i)), radius * Math.sin(toRadians(i))]);
-//   }
-//   return circleData;
-// }
-
 
 // convert degrees to radians
 function toRadians(angle) {
@@ -172,6 +158,7 @@ function fetchData(positionData) {
   aceData = subsample(tempAce);
   dscovrData = subsample(tempDscovr);
 
+  // Prepare the data for the chart
   function prepareDscovrData(data) {
     let result = [];
     for (let i = 1; i < data.length; i++) {
@@ -197,7 +184,7 @@ function fetchData(positionData) {
         y: data[i].y_gse,
         z: data[i].z_gse,
         custom: data[i].custom,
-        color: 'rgba(36, 201, 85,' + i / data.length + ')'
+        color: 'rgba(0, 255, 0,' + i / data.length + ')'
       });
     }
     return result;
@@ -206,45 +193,33 @@ function fetchData(positionData) {
   aceData3d = prepareAceData(aceData);
   dscovrData3d = prepareDscovrData(dscovrData);
 
-  console.log('aceData3d', aceData3d);
-  console.log('dscovrData3d', dscovrData3d);
-  // aceData3d = convertTo3d(aceData);
-  // dscovrData3d = convertTo3d(dscovrData);
-
   // FEED DATA TO HIGHCHARTS
   chart.series[0].setData(dscovrData3d);
   chart.series[1].setData(aceData3d);
   chart.series[2].setData(earthGSE);
   chart.series[3].setData(sunGSE);
-  chart.series[4].setData(sezHalfDeg);
+  chart.series[4].setData(earthGSE);
   chart.series[5].setData(sez2Deg);
   chart.series[6].setData(sez4Deg);
   chart.series[7].setData(sunEarthLine)
 }
 
 function skipDuplicates(input) {
-  let results = [];  // the cleaned up and reversed array to be returned
+  let results = [];
   let i;
-  let last;  // used to keep the last element examined
-  // walk through the array in reverse order
+  let last;
   for (i = input.length - 1; i >= 0; i--) {
-    // is this element is not the same as the last one? (assumes that dupliates are adjacent)
     if (input[i] !== last) {
-      // not the same, so keep it by assigning to the array to be returned
       results.push(input[i]);
     }
-    // retain this element for the next pass through the loop
     last = input[i];
   }
-  // return the reversed array which does not contain duplicates
   return results;
 }
 
 function subsample(inputData) {
   let i;
   let outputData = [];
-
-
   for (i = 0; i < pointsPerWeek * weeksPerOrbit; i += pointsPerWeek) {
     outputData.push(inputData[i]);
   }
@@ -261,13 +236,13 @@ function subsample(inputData) {
         title: {
           style: {
             color: 'rgb(250, 250, 250)',
-            font: 'bold 30px "Trebuchet MS", Verdana, sans-serif'
+            font: 'bold 25px "Arial", sans-serif'
           }
         },
         subtitle: {
           style: {
             color: '#666666',
-            font: 'bold 12px "Trebuchet MS", Verdana, sans-serif'
+            font: 'bold 12px "Arial", sans-serif'
           }
         },
         legend: {
@@ -294,26 +269,24 @@ function subsample(inputData) {
           type: 'scatter3d',
           renderTo: 'container', // Target element id
           fitToPlot: 'true',
-          reflow: 'false',
+          // in highcharts reflow means 
+          reflow: 'true',
           zoomType: 'z',
           // Spacing effects titles and legend only
-          spacingTop: 20,
-          spacingBottom: 10,
-          spacingRight: 15,
-          spacingLeft: 15,
-          // Margin effects grid only 
+          spacingTop: 25,
+          spacingBottom: 15,
+          spacingRight: 10,
+          spacingLeft: 10,
+          // Margin effects grid and chart!
+          marginTop: 0,
+          marginBottom: 0,
+          marginRight: 80,
+          marginLeft: 80,
           // KEEP SQUARE!
-          marginTop: 80,
-          marginBottom: 80,
-          marginRight: 20,
-          marginLeft: 20,
-          width: 800,
-          height: 800,
-          // Chart background image
-          // plotBackgroundImage: './imgs/twinkle.jpg',
+          width: 1000,
+          height: 1000,
           allowMutatingData: false,
           animation: true,
-
           // Set loading screen
           events: {
             load() {
@@ -325,14 +298,14 @@ function subsample(inputData) {
               }, 1700);
             }
           },
-
           options3d: {
             enabled: true,
             // Setting alpha and beta to zero puts earth on left and satellites on right. alpha rotates on the vertical axis. beta rotates on the horizontal axis.
             alpha: 0,
             beta: -90,
-            depth: 620,
-            viewDistance: 10,
+            // MUST MATCH WIDTH AND HEIGHT OF CHART
+            depth: 1000,
+            viewDistance: 5,
             frame: {
               left: { // Camera front
                 visible: false,
@@ -473,9 +446,27 @@ function subsample(inputData) {
         // Set the legend
         legend: {
           enabled: true,
+          title: {
+            text: 'Click to hide or show data series',
+            style: {
+              color: 'rgba(255,255,255, 0.8)'
+            }
+          },
           align: 'center',
           verticalAlign: 'bottom',
           layout: 'horizontal',
+          labelFormatter: function () {
+              return this.name;
+          },
+          itemStyle: {
+            color: 'rgba(255,255,255, 0.8)'
+          },
+          itemHoverStyle: {
+            color: 'rgba(255,255,255, 1)'
+          },
+          itemHiddenStyle: {
+            color: 'rgba(255,255,255, 0.3)'
+          }
         },
         // SERIES CONFIGURATION BEGINS HERE
         series: [
@@ -542,15 +533,15 @@ function subsample(inputData) {
 
           },
           {
-            name: "Sun Disc",
+            name: "SUN DISC/SEV 0.5 deg",
             lineWidth: 1,
-            visible: false,
             zIndex: 2,
-            color: 'rgba(0, 255, 0, 1)',
+            visible: false,
             marker: {
-              enabled: false
+              fillColor: 'rgba(255, 165, 0, 1)',
+              symbol: 'circle',
+              radius: 12,
             }
-
           },
           {
             name: "SEZ 2.0 deg",
@@ -589,16 +580,13 @@ function subsample(inputData) {
       });
 
       // Here we add the reset button using the renderer. The arguments are the text, x and y position.
-      chart.renderer.button('RESET CAMERA', 350, 80)
+      chart.renderer.button('RESET CAMERA', 445, 80)
         .on('click', function () {
           chart.update({
             chart: {
               options3d: {
                 alpha: 0,
-                beta: -90,
-                // Depth effects scale! 
-                depth: 620,
-                viewDistance: 10,
+                beta: -90
               }
             }
           });
