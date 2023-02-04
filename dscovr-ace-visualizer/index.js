@@ -121,7 +121,7 @@ function fetchData(positionData) {
   // Swap Y GSE for Z to convert from GSE to local and push the data into the aceData array
   for (let i = 0; i < ACEsize; i++) {
     if (ace.time_tag[i] != undefined) {
-    aceData.push({ custom: ace.time_tag[i][1], x_gse: ace.x_gse[i], y_gse: ace.z_gse[i], z_gse: ace.y_gse[i] });
+    aceData.push({ custom: ace.time_tag[i][1].substring(0,22), x_gse: ace.x_gse[i], y_gse: ace.z_gse[i], z_gse: ace.y_gse[i] });
     }
   }
 
@@ -136,7 +136,7 @@ function fetchData(positionData) {
   // Swap Y GSE for Z to convert from GSE to local and push the data into the dscovrData array
   for (let i = 0; i < DSCOVRsize; i++) {
     if (dscovr.time_tag[i] != undefined) {
-      dscovrData.push({ custom: dscovr.time_tag[i][1], x_gse: dscovr.x_gse[i], y_gse: dscovr.z_gse[i], z_gse: dscovr.y_gse[i] });
+      dscovrData.push({ custom: dscovr.time_tag[i][1].substring(0,22), x_gse: dscovr.x_gse[i], y_gse: dscovr.z_gse[i], z_gse: dscovr.y_gse[i] });
     }
   }
 
@@ -171,7 +171,7 @@ function fetchData(positionData) {
         y: data[i].y_gse,
         z: data[i].z_gse,
         custom: data[i].custom,
-        color: 'rgba(255, 0, 0,' + i / data.length + ')'
+        color: 'rgba(0, 0, 255,' + i / data.length + ')'
       });
     }
     return result;
@@ -186,7 +186,7 @@ function fetchData(positionData) {
         y: data[i].y_gse,
         z: data[i].z_gse,
         custom: data[i].custom,
-        color: 'rgba(255, 128, 0,' + i / data.length + ')'
+        color: 'rgba(36, 201, 85,' + i / data.length + ')'
       });
     }
     return result;
@@ -269,7 +269,6 @@ function subsample(inputData) {
         legend: {
           itemStyle: {
             font: '10pt Trebuchet MS, Verdana, sans-serif',
-            color: 'rgb(220, 220, 220)'
           },
           itemHoverStyle: {
             color: 'gray'
@@ -472,12 +471,6 @@ function subsample(inputData) {
           align: 'center',
           verticalAlign: 'bottom',
           layout: 'horizontal',
-          itemStyle: {
-            color: 'rgba(200,200,200, 0.8)'
-          },
-          itemHoverStyle: {
-            color: 'rgba(200,200,200, 0.8)'
-          }
         },
 
 
@@ -494,13 +487,14 @@ function subsample(inputData) {
             zIndex: 3,
             tooltip: {
               headerFormat: '<span>{series.name}</span>',
-              pointFormat: '<span style="color:{point.color}">\u25CF</span> <br>{point.x} GSE, <br> {point.y} GSE, <br>{point.z} GSE, <br> {point.custom}',
+              pointFormat: '</span> <br>X GSE :{point.x}, <br>Y GSE: {point.y}, <br> Z GSE:{point.z}, <br> UTC:{point.custom}',
               footerFormat: '</p>'
             },
             marker: {
               symbol: 'circle',
               radius: 5,
             },
+            color: 'rgb(0, 0, 255)'
           },
           {
             name: "ACE",
@@ -510,13 +504,14 @@ function subsample(inputData) {
             zIndex: 3,
             tooltip: {
               headerFormat: '<span>{series.name}</span>',
-              pointFormat: '<span style="color:{point.color}">\u25CF</span> <br>{point.x} GSE, <br> {point.y} GSE, <br>{point.z} GSE, <br> {point.custom}',
+              pointFormat: '</span> <br>X GSE:{point.x} , <br>Y GSE: {point.y} , <br>Z GSE:{point.z} , <br> UTC: {point.custom}',
               footerFormat: '</p>',
             },
             marker: {
               symbol: 'circle',
               radius: 5,
-            }
+            },
+            color: 'rgb(36, 201, 85)'
           },
           {
             name: "EARTH",
@@ -539,8 +534,8 @@ function subsample(inputData) {
             marker: {
               fillColor: 'yellow',
               symbol: 'url(imgs/sun.png)',
-              height: 150,
-              width: 150,
+              height: 25,
+              width: 25,
             }
 
           },
@@ -550,16 +545,17 @@ function subsample(inputData) {
             lineWidth: 1,
             visible: true,
             zIndex: 2,
+            color: 'rgba(255, 0, 0, 1)',
             marker: {
               enabled: false
             }
-
           },
           {
             name: "SEZ 4.0 deg",
             lineWidth: 1,
             visible: true,
             zIndex: 2,
+            color: 'rgba(255, 255, 51, 1)',
             marker: {
               enabled: false
             }
