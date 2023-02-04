@@ -29,6 +29,9 @@ let dscovrData3d;
 let chart;
 let alpha = Math.atan(radiusSun / distanceToSun);
 let radiusSunAtL1 = distanceToL1 * Math.tan(alpha) * 1.6;
+let windowWidth = function () {
+  return $(window).width();
+};
 
 // Create the reset button
 const resetButton = document.createElement("button");
@@ -269,8 +272,7 @@ function subsample(inputData) {
           type: 'scatter3d',
           renderTo: 'container', // Target element id
           fitToPlot: 'true',
-          // in highcharts reflow means 
-          reflow: 'true',
+          reflow: 'false',
           zoomType: 'z',
           // Spacing effects titles and legend only
           spacingTop: 25,
@@ -280,11 +282,12 @@ function subsample(inputData) {
           // Margin effects grid and chart!
           marginTop: 0,
           marginBottom: 0,
-          marginRight: 80,
-          marginLeft: 80,
+          marginRight: 0,
+          marginLeft: 0,
           // KEEP SQUARE!
-          width: 1000,
-          height: 1000,
+          // Get screen width from window object using jQuery. update on resize
+          width: windowWidth(),
+          height: windowWidth(),
           allowMutatingData: false,
           animation: true,
           // Set loading screen
@@ -304,8 +307,8 @@ function subsample(inputData) {
             alpha: 0,
             beta: -90,
             // MUST MATCH WIDTH AND HEIGHT OF CHART
-            depth: 1000,
-            viewDistance: 5,
+            depth: windowWidth(),
+            viewDistance: 0,
             frame: {
               left: { // Camera front
                 visible: false,
@@ -350,7 +353,7 @@ function subsample(inputData) {
           scatter3d: {
             width: 10,
             height: 10,
-            depth: 10,
+            depth: 1,
             // animation on load only
             animation: true,
             animationLimit: 1000,
@@ -608,6 +611,18 @@ function subsample(inputData) {
         })
         .add();
     }
+
+  // Update chart width and height but KEEP SQUARE on resize using jQuery.
+    $(window).resize(function () {
+      var width = $(window).width();
+      // $('#container').css({
+      //   'width': width,
+      //   'height': width
+      // });
+      chart.setSize(width, width);
+    });
+
+
 
     // Make the chart draggable
     function dragStart(eStart) {
