@@ -9,8 +9,10 @@ const sunGSE = [[155000000, 0, 0]]; // GSE coordinates of the sun
 const earthGSE = [[0, 0, 0]]; // GSE coordinates of Earth
 const sunEarthLine = [[0, 0, 0], [155000000, 0, 0]] // line from sun to earth with earth at origin
 const l1 = 1600000; // L1 distance in miles
+const sezHalfrad = Math.tan(toRadians(0.5)) * l1; // SEZ.5 radius
 const sez2rad = Math.tan(toRadians(2)) * l1; // SEZ2 radius
 const sez4rad = Math.tan(toRadians(4)) * l1; // SEZ4 radius
+const sezHalfDeg = buildCircle(sezHalfrad, l1); // SEZ.5 boundary
 const sez2Deg = buildCircle(sez2rad, l1); // SEZ2 boundary
 const sez4Deg = buildCircle(sez4rad, l1); // Build a circle for the SEZ4 boundary
 let weeksPerOrbit = 26;  // # of samples, e.g., 26 weeks = months = 1 orbit
@@ -59,6 +61,18 @@ function buildCircle(radius, x) {
   }
   return circleData;
 }
+
+// // Build filled in circle
+// function buildFilledCircle(radius, x) {
+//   let circleData = [];
+//   // this is the angle in radians
+//   for (let i = 0; i <= 360; i = i + 10) {  // <== Set circle resolution here
+//     // this is the x,y of the circle
+//     circleData.push([x, radius * Math.cos(toRadians(i)), radius * Math.sin(toRadians(i))]);
+//   }
+//   return circleData;
+// }
+
 
 // convert degrees to radians
 function toRadians(angle) {
@@ -121,12 +135,12 @@ function fetchData(positionData) {
   // Swap Y GSE for Z to convert from GSE to local and push the data into the aceData array
   for (let i = 0; i < ACEsize; i++) {
     if (ace.time_tag[i] != undefined) {
-    aceData.push({ 
-      custom: ace.time_tag[i][1].substring(0,22), 
-      x_gse: ace.x_gse[i], 
-      y_gse: ace.z_gse[i], 
-      z_gse: ace.y_gse[i] 
-    });
+      aceData.push({
+        custom: ace.time_tag[i][1].substring(0, 22),
+        x_gse: ace.x_gse[i],
+        y_gse: ace.z_gse[i],
+        z_gse: ace.y_gse[i]
+      });
     }
   }
 
@@ -141,10 +155,10 @@ function fetchData(positionData) {
   // Swap Y GSE for Z to convert from GSE to local and push the data into the dscovrData array
   for (let i = 0; i < DSCOVRsize; i++) {
     if (dscovr.time_tag[i] != undefined) {
-      dscovrData.push({ 
-        custom: dscovr.time_tag[i][1].substring(0,22), 
-        x_gse: dscovr.x_gse[i], 
-        y_gse: dscovr.z_gse[i], 
+      dscovrData.push({
+        custom: dscovr.time_tag[i][1].substring(0, 22),
+        x_gse: dscovr.x_gse[i],
+        y_gse: dscovr.z_gse[i],
         z_gse: dscovr.y_gse[i]
       });
     }
@@ -202,9 +216,10 @@ function fetchData(positionData) {
   chart.series[1].setData(aceData3d);
   chart.series[2].setData(earthGSE);
   chart.series[3].setData(sunGSE);
-  chart.series[4].setData(sez2Deg);
-  chart.series[5].setData(sez4Deg);
-  chart.series[6].setData(sunEarthLine)
+  chart.series[4].setData(sezHalfDeg);
+  chart.series[5].setData(sez2Deg);
+  chart.series[6].setData(sez4Deg);
+  chart.series[7].setData(sunEarthLine)
 }
 
 function skipDuplicates(input) {
@@ -353,7 +368,7 @@ function subsample(inputData) {
         },
 
         title: {
-          text: 'Satellite Orbit Visualization of DSCOVR and ACE'
+          text: 'DSCOVR and ACE Orbit Visualization'
         },
 
         subtitle: {
@@ -503,6 +518,7 @@ function subsample(inputData) {
             name: "EARTH",
             lineWidth: 1,
             zIndex: 2,
+            visible: false,
             marker: {
               fillColor: 'blue',
               // symbol: 'circle',
@@ -514,18 +530,28 @@ function subsample(inputData) {
           },
           {
             name: "SUN",
-            visible: false,
+            visible: true,
             lineWidth: 1,
             zIndex: 1,
             marker: {
               fillColor: 'yellow',
               symbol: 'url(imgs/sun.png)',
-              height: 25,
-              width: 25,
+              height: 34,
+              width: 34,
             }
 
           },
+          {
+            name: "Sun Disc",
+            lineWidth: 1,
+            visible: false,
+            zIndex: 2,
+            color: 'rgba(0, 255, 0, 1)',
+            marker: {
+              enabled: false
+            }
 
+          },
           {
             name: "SEZ 2.0 deg",
             lineWidth: 1,
