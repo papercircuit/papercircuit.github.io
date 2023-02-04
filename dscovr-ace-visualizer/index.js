@@ -344,6 +344,12 @@ function subsample(inputData) {
         // need to fix this
         exporting: {
           enabled: true,
+          buttons: {
+            contextButton: {
+              menuItems: ['downloadPNG', 'downloadJPEG', 'downloadPDF', 'downloadSVG', 'separator', 'downloadCSV', 'downloadXLS']
+            }
+          }
+
         },
 
         title: {
