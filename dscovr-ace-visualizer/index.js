@@ -148,19 +148,6 @@ function fetchData(positionData) {
   aceData = subsample(tempAce);
   dscovrData = subsample(tempDscovr);
 
-
-  // Convert an array of coordinate objects to an array of arrays
-  // function convertTo3d(data) {
-  //   let result = [];
-  //   for (const item of data) {
-  //     // X = Y GSE
-  //     // Y = Z GSE
-  //     // Z = X GSE
-  //     result.push({ x: item.x_gse, y: item.y_gse, z: item.z_gse, custom: item.custom });
-  //   }
-  //   return result;
-  // }
-
   function prepareDscovrData(data) {
     let result = [];
     for (let i = 1; i < data.length; i++) {
@@ -192,8 +179,6 @@ function fetchData(positionData) {
     return result;
   }
 
-
-
   aceData3d = prepareAceData(aceData);
   dscovrData3d = prepareDscovrData(dscovrData);
 
@@ -216,10 +201,8 @@ function skipDuplicates(input) {
   let results = [];  // the cleaned up and reversed array to be returned
   let i;
   let last;  // used to keep the last element examined
-
   // walk through the array in reverse order
   for (i = input.length - 1; i >= 0; i--) {
-
     // is this element is not the same as the last one? (assumes that dupliates are adjacent)
     if (input[i] !== last) {
       // not the same, so keep it by assigning to the array to be returned
@@ -228,7 +211,6 @@ function skipDuplicates(input) {
     // retain this element for the next pass through the loop
     last = input[i];
   }
-
   // return the reversed array which does not contain duplicates
   return results;
 }
@@ -244,10 +226,7 @@ function subsample(inputData) {
   return outputData;
 }
 
-
-
 // HIGHCHARTS CONFIGURATION BEGINS HERE
-
 (function (H) {
   try {
     function create3DChart() {
@@ -354,7 +333,7 @@ function subsample(inputData) {
         },
         // need to fix this
         exporting: {
-          enabled: false,
+          enabled: true,
         },
 
         title: {
@@ -405,7 +384,6 @@ function subsample(inputData) {
             },
           }
         },
-
         // GSE 0 is at Earth.
         // X = Sun-Earth line
         // Y = Sun Earth ecliptic
@@ -414,7 +392,6 @@ function subsample(inputData) {
         // X = Y GSE
         // Y = Z GSE
         // Z = X GSE
-
         yAxis: {
           min: -300000,
           floor: -300000,
@@ -431,7 +408,6 @@ function subsample(inputData) {
             }
           }
         },
-
         xAxis: {
           floor: 0,
           // min: 0,
@@ -444,11 +420,10 @@ function subsample(inputData) {
           labels: {
             skew3d: true,
             style: {
-              color: 'rgba(200,200,200, 0.8)'
+              color: 'rgba(255,255,255, 0.8)'
             }
           }
         },
-
         zAxis: {
           min: -300000,
           floor: -300000,
@@ -460,11 +435,10 @@ function subsample(inputData) {
           labels: {
             skew3d: true,
             style: {
-              color: 'rgba(200,200,200, 0.8)'
+              color: 'rgba(255,255,255, 0.8)'
             }
           }
         },
-
         // Set the legend
         legend: {
           enabled: true,
@@ -472,17 +446,13 @@ function subsample(inputData) {
           verticalAlign: 'bottom',
           layout: 'horizontal',
         },
-
-
-
-
         // SERIES CONFIGURATION BEGINS HERE
         series: [
           {
 
             name: "DSCOVR",
             lineWidth: 0.2,
-            lineColor: 'rgba(255, 255, 255, 0.7)',
+            lineColor: 'rgba(255, 255, 255, 1)',
             lineZIndex: 1,
             zIndex: 3,
             tooltip: {
@@ -499,7 +469,7 @@ function subsample(inputData) {
           {
             name: "ACE",
             lineWidth: 0.2,
-            lineColor: 'rgba(255, 255, 255, 0.7)',
+            lineColor: 'rgba(255, 255, 255, 1)',
             lineZIndex: 1,
             zIndex: 3,
             tooltip: {
