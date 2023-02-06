@@ -286,8 +286,10 @@ function subsample(inputData) {
           marginLeft: 0,
           // KEEP SQUARE!
           // Get screen width from window object using jQuery. update on resize
-          width: windowWidth(),
-          height: windowWidth(),
+          // width: windowWidth(),
+          // height: windowWidth(),
+          // set responsive rules to keep chart and 3d frame square
+
           allowMutatingData: false,
           animation: true,
           // Set loading screen
@@ -307,9 +309,10 @@ function subsample(inputData) {
             alpha: 0,
             beta: -90,
             // MUST MATCH WIDTH AND HEIGHT OF CHART
-            depth: windowWidth(),
+            // depth: windowWidth(),
             viewDistance: 0,
             frame: {
+
               left: { // Camera front
                 visible: false,
               },
@@ -327,7 +330,7 @@ function subsample(inputData) {
                 visible: false,
               },
               bottom: { // Camera bottom
-                visible: false,
+                visible: true,
               }
             }
           }
@@ -351,8 +354,8 @@ function subsample(inputData) {
         },
         plotOptions: {
           scatter3d: {
-            width: 10,
-            height: 10,
+            width: 1,
+            height: 1,
             depth: 1,
             // animation on load only
             animation: true,
@@ -477,9 +480,9 @@ function subsample(inputData) {
           buttonOptions: {
             width: 120,
             text: 'Download'
-            
-            }
-          
+
+          }
+
         },
         // SERIES CONFIGURATION BEGINS HERE
         series: [
@@ -592,8 +595,8 @@ function subsample(inputData) {
         ]
       });
 
-      // Here we add the reset button using the renderer. The arguments are the text, x and y position.
-      chart.renderer.button('RESET CAMERA', 445, 80)
+      // Here we add the reset button using the renderer. The arguments are the text, x and y position. Set it 
+      chart.renderer.button('RESET CAMERA', 0, 0)
         .on('click', function () {
           chart.update({
             chart: {
@@ -612,15 +615,50 @@ function subsample(inputData) {
         .add();
     }
 
-  // Update chart width and height but KEEP SQUARE on resize using jQuery.
-    $(window).resize(function () {
-      var width = $(window).width();
-      // $('#container').css({
-      //   'width': width,
-      //   'height': width
-      // });
-      chart.setSize(width, width);
+    var wrapper = $('.wrapper'),
+      container = $('#container'),
+      wrapperHeight,
+      wrapperWidth;
+
+    var updateValues = function () {
+      wrapperHeight = wrapper.height();
+      wrapperWidth = wrapper.width();
+    };
+    var adjustContainer = function () {
+      if (wrapperHeight <= wrapperWidth) {
+        container.width(wrapperHeight);
+        container.height('100%')
+      } else {
+        container.height(wrapperWidth);
+        container.width('100%')
+      }
+    };
+
+    // update values and contaienr on load to prevent chart from rendering incorrectly
+
+    $(window).on('load', function () {
+      updateValues();
+      adjustContainer();
     });
+
+    $(window).on('resize', function () {
+
+      updateValues();
+      adjustContainer();
+      // update options3d depth
+      chart.update({
+        chart: {
+          options3d: {
+            depth: wrapperWidth
+          }
+        }
+      });
+
+    })
+    updateValues()
+    adjustContainer();
+
+
 
 
 

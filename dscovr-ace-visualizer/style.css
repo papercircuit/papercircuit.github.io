@@ -30,19 +30,9 @@ body {
 }
 
 #container {
-  display: flex;
-  flex-flow: column;
-  justify-content: center;
-  align-items: center;
   /* Must be set to fixed px. */
-  min-width: 300px;
-  min-height: 300px;
-  /* Must match chart.height and chart.width in script3.js */
   width: 100%;
-  height: 100%;
-  margin-top: 1rem;
-  margin-bottom: 1rem;
-  background-color: black;
+  height: auto;
 }
 
 .logos {
@@ -93,6 +83,15 @@ header {
 }
 
 /* Highcharts */
+
+.wrapper {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border: 1px solid black;
+  height: 100vw;
+  width: 100vw;
+}
 
 .highcharts-figure,
 .highcharts-data-table table {
