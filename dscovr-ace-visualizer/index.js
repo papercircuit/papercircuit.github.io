@@ -29,25 +29,13 @@ let dscovrData3d;
 let chart;
 let alpha = Math.atan(radiusSun / distanceToSun);
 let radiusSunAtL1 = distanceToL1 * Math.tan(alpha) * 1.6;
+let windowWidth = function () {
+  return $(window).width();
+}
+let windowHeight = function () {
+  return $(window).height();
+}
 
-// Create the reset button
-const resetButton = document.createElement("button");
-resetButton.innerHTML = "Reset Camera View";
-resetButton.style.backgroundColor = "lightgray";
-resetButton.style.padding = "10px 20px";
-resetButton.style.position = "absolute";
-resetButton.style.top = "10px";
-resetButton.style.right = "10px";
-
-// Append the reset button to the container
-document.getElementById("container").appendChild(resetButton);
-
-// Add the click event listener to the reset button
-resetButton.addEventListener("click", function () {
-  chart.options.chart.options3d.alpha = 0;
-  chart.options.chart.options3d.beta = -90;
-  chart.redraw(false);
-});
 
 // Build a circle for the SEZ2 and SEZ4 boundaries
 function buildCircle(radius, x) {
@@ -246,8 +234,9 @@ function subsample(inputData) {
           }
         },
         legend: {
+          itemMargin: 10,
           itemStyle: {
-            font: '10pt Trebuchet MS, Verdana, sans-serif',
+            font: '10pt Trebuchet MS, Verdana, sans-serif'
           },
           itemHoverStyle: {
             color: 'gray'
@@ -269,8 +258,7 @@ function subsample(inputData) {
           type: 'scatter3d',
           renderTo: 'container', // Target element id
           fitToPlot: 'true',
-          // in highcharts reflow means 
-          reflow: 'true',
+          reflow: 'false',
           zoomType: 'z',
           // Spacing effects titles and legend only
           spacingTop: 25,
@@ -280,11 +268,14 @@ function subsample(inputData) {
           // Margin effects grid and chart!
           marginTop: 0,
           marginBottom: 0,
-          marginRight: 80,
-          marginLeft: 80,
+          marginRight: 0,
+          marginLeft: 0,
           // KEEP SQUARE!
-          width: 1000,
-          height: 1000,
+          // Get screen width from window object using jQuery. update on resize
+          // width: windowWidth(),
+          // height: windowWidth(),
+          // set responsive rules to keep chart and 3d frame square
+
           allowMutatingData: false,
           animation: true,
           // Set loading screen
@@ -304,7 +295,7 @@ function subsample(inputData) {
             alpha: 0,
             beta: -90,
             // MUST MATCH WIDTH AND HEIGHT OF CHART
-            depth: 1000,
+            // depth: windowWidth(),
             viewDistance: 5,
             frame: {
               left: { // Camera front
@@ -313,7 +304,6 @@ function subsample(inputData) {
               right: { // Camera back
                 visible: false,
               },
-
               front: { // Camera right
                 visible: false,
               },
@@ -338,19 +328,17 @@ function subsample(inputData) {
             }
           }
         },
-
         title: {
           text: 'DSCOVR and ACE Orbit Visualization'
         },
-
         subtitle: {
           text: 'Click and drag the plot area to rotate in space'
         },
         plotOptions: {
           scatter3d: {
-            width: 10,
-            height: 10,
-            depth: 10,
+            width: 1,
+            height: 1,
+            depth: 1,
             // animation on load only
             animation: true,
             animationLimit: 1000,
@@ -375,7 +363,8 @@ function subsample(inputData) {
               states: {
                 hover: {
                   enabled: true,
-                  lineColor: 'rgb(100,100,100)'
+                  lineColor: 'rgb(100,100,100)',
+                  lineWidth: 1,
                 }
               }
             },
@@ -474,9 +463,9 @@ function subsample(inputData) {
           buttonOptions: {
             width: 120,
             text: 'Download'
-            
-            }
-          
+
+          }
+
         },
         // SERIES CONFIGURATION BEGINS HERE
         series: [
@@ -590,7 +579,8 @@ function subsample(inputData) {
       });
 
       // Here we add the reset button using the renderer. The arguments are the text, x and y position.
-      chart.renderer.button('RESET CAMERA', 445, 80)
+      // Get plot width and height 
+      chart.renderer.button('RESET CAMERA', 0, 16)
         .on('click', function () {
           chart.update({
             chart: {
@@ -604,10 +594,68 @@ function subsample(inputData) {
         )
         .attr({
           zIndex: 100,
-          class: 'reset-button'
+          class: 'reset-button'          
         })
         .add();
     }
+
+    // Resize chart based on responsive wrapper
+    var wrapper = $('.wrapper'),
+      container = $('#container'),
+      wrapperHeight,
+      wrapperWidth;
+
+    var updateValues = function () {
+      // add 150 to wrapper height to account for the height of the legend. 
+      wrapperHeight = wrapper.height() - 150;
+      wrapperWidth = wrapper.width();
+    };
+    // Check if wrapper is taller than it is wide, and set chart height and width accordingly
+    var adjustContainer = function () {
+      if (wrapperHeight <= wrapperWidth) {
+        container.width(wrapperHeight);
+        container.height('100%')
+      } else {
+        container.height(wrapperWidth);
+        container.width('100%')
+      }
+    };
+
+    //  Set chart depth on window load
+    $(window).on('load', function () {
+      updateValues();
+      adjustContainer();
+      // update options3d depth
+      chart.update({
+        chart: {
+          options3d: {
+            depth: wrapperWidth
+          }
+        }
+      });
+    })
+
+    // Resize chart on window resize
+    $(window).on('resize', function () {
+
+      updateValues();
+      adjustContainer();
+      // update options3d depth
+      chart.update({
+        chart: {
+          options3d: {
+            depth: wrapperWidth
+          }
+        }
+      });
+
+    })
+    updateValues()
+    adjustContainer();
+
+
+
+
 
     // Make the chart draggable
     function dragStart(eStart) {

@@ -30,19 +30,9 @@ body {
 }
 
 #container {
-  display: flex;
-  flex-flow: column;
-  justify-content: center;
-  align-items: center;
   /* Must be set to fixed px. */
-  min-width: 300px;
-  min-height: 300px;
-  /* Must match chart.height and chart.width in script3.js */
-  width: 1000px;
-  height: 1000px;
-  margin-top: 1rem;
-  margin-bottom: 1rem;
-  background-color: black;
+  width: 100%;
+  height: auto;
 }
 
 .logos {
@@ -50,7 +40,6 @@ body {
   flex-flow: row;
   justify-content: center;
   align-items: center;
-  background-color: #000000;
   padding: 1em;
   width: 100%;
   height: 90px;
@@ -74,7 +63,6 @@ header {
   min-width: 400px;
   min-height: 400px;
   color: white;
-  background-color: black;
   padding: 2rem;
 }
 
@@ -93,6 +81,15 @@ header {
 }
 
 /* Highcharts */
+
+.wrapper {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border: 1px solid black;
+  height: 100vw;
+  width: 100vw;
+}
 
 .highcharts-figure,
 .highcharts-data-table table {
@@ -138,8 +135,19 @@ header {
 }
 
 .reset-button rect {
-  fill: #ffffff;
-  color: rgb(0, 0, 0);
-  height: 30px;
-  cursor: pointer;
+  color: 'rgb(255,255,255)';
+  font-size: '15px';
+  font-weight: 'light';
+  letter-spacing: '1px';
+  height: '20px';
+  display: 'block'
+}
+
+.reset-button text {
+  color: 'rgb(255,255,255)';
+  font-size: '15px';
+  font-weight: 'light';
+  letter-spacing: '1px';
+  height: '20px';
+  display: 'block'
 }
