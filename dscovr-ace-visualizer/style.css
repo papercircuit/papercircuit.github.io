@@ -40,7 +40,6 @@ body {
   flex-flow: row;
   justify-content: center;
   align-items: center;
-  background-color: #000000;
   padding: 1em;
   width: 100%;
   height: 90px;
@@ -64,7 +63,6 @@ header {
   min-width: 400px;
   min-height: 400px;
   color: white;
-  background-color: black;
   padding: 2rem;
 }
 

@@ -31,7 +31,10 @@ let alpha = Math.atan(radiusSun / distanceToSun);
 let radiusSunAtL1 = distanceToL1 * Math.tan(alpha) * 1.6;
 let windowWidth = function () {
   return $(window).width();
-};
+}
+let windowHeight = function () {
+  return $(window).height();
+}
 
 // Create the reset button
 const resetButton = document.createElement("button");
