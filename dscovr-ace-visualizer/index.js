@@ -637,12 +637,19 @@ function subsample(inputData) {
       }
     };
 
-    // update values and contaienr on load to prevent chart from rendering incorrectly
-
+    // chart is loading narrow, fix it on load and make square
     $(window).on('load', function () {
       updateValues();
       adjustContainer();
-    });
+      // update options3d depth
+      chart.update({
+        chart: {
+          options3d: {
+            depth: wrapperWidth
+          }
+        }
+      });
+    })
 
     $(window).on('resize', function () {
 
