@@ -313,16 +313,14 @@ function subsample(inputData) {
             beta: -90,
             // MUST MATCH WIDTH AND HEIGHT OF CHART
             // depth: windowWidth(),
-            viewDistance: 0,
+            viewDistance: 5,
             frame: {
-
               left: { // Camera front
                 visible: false,
               },
               right: { // Camera back
                 visible: false,
               },
-
               front: { // Camera right
                 visible: false,
               },
@@ -333,7 +331,7 @@ function subsample(inputData) {
                 visible: false,
               },
               bottom: { // Camera bottom
-                visible: true,
+                visible: false,
               }
             }
           }
@@ -624,7 +622,8 @@ function subsample(inputData) {
       wrapperWidth;
 
     var updateValues = function () {
-      wrapperHeight = wrapper.height();
+      // add 150 to wrapper height to account for the height of the legend. 
+      wrapperHeight = wrapper.height() - 150;
       wrapperWidth = wrapper.width();
     };
     var adjustContainer = function () {
