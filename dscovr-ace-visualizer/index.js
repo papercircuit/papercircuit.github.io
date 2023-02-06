@@ -31,7 +31,10 @@ let alpha = Math.atan(radiusSun / distanceToSun);
 let radiusSunAtL1 = distanceToL1 * Math.tan(alpha) * 1.6;
 let windowWidth = function () {
   return $(window).width();
-};
+}
+let windowHeight = function () {
+  return $(window).height();
+}
 
 // Create the reset button
 const resetButton = document.createElement("button");
@@ -286,8 +289,8 @@ function subsample(inputData) {
           marginLeft: 0,
           // KEEP SQUARE!
           // Get screen width from window object using jQuery. update on resize
-          width: windowWidth(),
-          height: windowWidth(),
+          width: windowWidth() - 20,
+          height: windowWidth() - 20,
           allowMutatingData: false,
           animation: true,
           // Set loading screen
@@ -593,7 +596,7 @@ function subsample(inputData) {
       });
 
       // Here we add the reset button using the renderer. The arguments are the text, x and y position.
-      chart.renderer.button('RESET CAMERA', 445, 80)
+      chart.renderer.button('RESET CAMERA', chart.plotWidth/2, 80)
         .on('click', function () {
           chart.update({
             chart: {
@@ -615,10 +618,10 @@ function subsample(inputData) {
   // Update chart width and height but KEEP SQUARE on resize using jQuery.
     $(window).resize(function () {
       var width = $(window).width();
-      // $('#container').css({
-      //   'width': width,
-      //   'height': width
-      // });
+      $('#container').css({
+        'width': width,
+        'height': width
+      });
       chart.setSize(width, width);
     });
 
