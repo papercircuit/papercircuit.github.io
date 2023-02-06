@@ -87,8 +87,8 @@ header {
   align-items: center;
   justify-content: center;
   border: 1px solid black;
-  height: 90vw;
-  width: 90vw;
+  height: 100vw;
+  width: 100vw;
 }
 
 .highcharts-figure,
@@ -135,8 +135,19 @@ header {
 }
 
 .reset-button rect {
-  fill: #ffffff;
-  color: rgb(0, 0, 0);
-  height: 30px;
-  cursor: pointer;
+  color: 'rgb(255,255,255)';
+  font-size: '15px';
+  font-weight: 'light';
+  letter-spacing: '1px';
+  height: '20px';
+  display: 'block'
+}
+
+.reset-button text {
+  color: 'rgb(255,255,255)';
+  font-size: '15px';
+  font-weight: 'light';
+  letter-spacing: '1px';
+  height: '20px';
+  display: 'block'
 }

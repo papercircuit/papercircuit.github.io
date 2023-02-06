@@ -280,7 +280,6 @@ function subsample(inputData) {
           animation: true,
           // Set loading screen
           events: {
-
             load() {
               const chart = this;
               chart.showLoading('Fetching data from NASA...');
@@ -289,7 +288,6 @@ function subsample(inputData) {
                 chart.series[0].setData()
               }, 1700);
             }
-
           },
           options3d: {
             enabled: true,
@@ -330,11 +328,9 @@ function subsample(inputData) {
             }
           }
         },
-
         title: {
           text: 'DSCOVR and ACE Orbit Visualization'
         },
-
         subtitle: {
           text: 'Click and drag the plot area to rotate in space'
         },
@@ -367,7 +363,8 @@ function subsample(inputData) {
               states: {
                 hover: {
                   enabled: true,
-                  lineColor: 'rgb(100,100,100)'
+                  lineColor: 'rgb(100,100,100)',
+                  lineWidth: 1,
                 }
               }
             },
@@ -583,7 +580,7 @@ function subsample(inputData) {
 
       // Here we add the reset button using the renderer. The arguments are the text, x and y position.
       // Get plot width and height 
-      chart.renderer.button('RESET CAMERA', wrapperWidth/2, 0)
+      chart.renderer.button('RESET CAMERA', 0, 16)
         .on('click', function () {
           chart.update({
             chart: {
@@ -597,7 +594,7 @@ function subsample(inputData) {
         )
         .attr({
           zIndex: 100,
-          class: 'reset-button'
+          class: 'reset-button'          
         })
         .add();
     }
