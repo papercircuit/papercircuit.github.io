@@ -36,24 +36,6 @@ let windowHeight = function () {
   return $(window).height();
 }
 
-// Create the reset button
-const resetButton = document.createElement("button");
-resetButton.innerHTML = "Reset Camera View";
-resetButton.style.backgroundColor = "lightgray";
-resetButton.style.padding = "10px 20px";
-resetButton.style.position = "absolute";
-resetButton.style.top = "10px";
-resetButton.style.right = "10px";
-
-// Append the reset button to the container
-document.getElementById("container").appendChild(resetButton);
-
-// Add the click event listener to the reset button
-resetButton.addEventListener("click", function () {
-  chart.options.chart.options3d.alpha = 0;
-  chart.options.chart.options3d.beta = -90;
-  chart.redraw(false);
-});
 
 // Build a circle for the SEZ2 and SEZ4 boundaries
 function buildCircle(radius, x) {
@@ -252,8 +234,9 @@ function subsample(inputData) {
           }
         },
         legend: {
+          itemMargin: 10,
           itemStyle: {
-            font: '10pt Trebuchet MS, Verdana, sans-serif',
+            font: '10pt Trebuchet MS, Verdana, sans-serif'
           },
           itemHoverStyle: {
             color: 'gray'
@@ -297,6 +280,7 @@ function subsample(inputData) {
           animation: true,
           // Set loading screen
           events: {
+
             load() {
               const chart = this;
               chart.showLoading('Fetching data from NASA...');
@@ -305,6 +289,7 @@ function subsample(inputData) {
                 chart.series[0].setData()
               }, 1700);
             }
+
           },
           options3d: {
             enabled: true,
@@ -596,8 +581,9 @@ function subsample(inputData) {
         ]
       });
 
-      // Here we add the reset button using the renderer. The arguments are the text, x and y position. Set it 
-      chart.renderer.button('RESET CAMERA', 0, 0)
+      // Here we add the reset button using the renderer. The arguments are the text, x and y position.
+      // Get plot width and height 
+      chart.renderer.button('RESET CAMERA', wrapperWidth/2, 0)
         .on('click', function () {
           chart.update({
             chart: {
@@ -616,6 +602,7 @@ function subsample(inputData) {
         .add();
     }
 
+    // Resize chart based on responsive wrapper
     var wrapper = $('.wrapper'),
       container = $('#container'),
       wrapperHeight,
@@ -626,6 +613,7 @@ function subsample(inputData) {
       wrapperHeight = wrapper.height() - 150;
       wrapperWidth = wrapper.width();
     };
+    // Check if wrapper is taller than it is wide, and set chart height and width accordingly
     var adjustContainer = function () {
       if (wrapperHeight <= wrapperWidth) {
         container.width(wrapperHeight);
@@ -636,7 +624,7 @@ function subsample(inputData) {
       }
     };
 
-    // chart is loading narrow, fix it on load and make square
+    //  Set chart depth on window load
     $(window).on('load', function () {
       updateValues();
       adjustContainer();
@@ -650,6 +638,7 @@ function subsample(inputData) {
       });
     })
 
+    // Resize chart on window resize
     $(window).on('resize', function () {
 
       updateValues();
